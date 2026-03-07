@@ -85,12 +85,9 @@ const changePassword = async (userId: string, currentPassword: string, newPasswo
         throw new Error("Current password is incorrect");
     }
 
-    // Hash new password
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
-
-    // Update password
-    user.password = hashedPassword;
+    // Update password - let the pre("save") hook handle hashing
+    // Do NOT manually hash here, as user.save() triggers pre("save") which hashes automatically
+    user.password = newPassword;
     await user.save();
 
     return { message: "Password changed successfully" };
