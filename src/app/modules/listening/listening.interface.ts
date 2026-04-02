@@ -94,6 +94,7 @@ export interface IListeningTest {
     totalMarks: number;
     duration: number; // in minutes (30 + 10 transfer time = 40)
     difficulty: "easy" | "medium" | "hard";
+    testType: "academic" | "general-training";
 
     // Status
     isActive: boolean;
@@ -114,11 +115,13 @@ export interface ICreateListeningTestInput {
     audioDuration?: number;
     sections: IListeningSection[];
     difficulty?: "easy" | "medium" | "hard";
+    testType?: "academic" | "general-training";
 }
 
 // Filters for listing
 export interface IListeningTestFilters {
     difficulty?: string;
+    testType?: string;
     isActive?: boolean;
     searchTerm?: string;
 }

@@ -67,6 +67,11 @@ const ListeningTestSchema = new Schema<IListeningTest & Document>(
             enum: ["easy", "medium", "hard"],
             default: "medium"
         },
+        testType: {
+            type: String,
+            enum: ["academic", "general-training"],
+            default: "academic"
+        },
         isActive: { type: Boolean, default: true },
         usageCount: { type: Number, default: 0 },
         createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true }
@@ -79,6 +84,7 @@ const ListeningTestSchema = new Schema<IListeningTest & Document>(
 // Indexes
 ListeningTestSchema.index({ testNumber: 1 });
 ListeningTestSchema.index({ isActive: 1, difficulty: 1 });
+ListeningTestSchema.index({ testType: 1, isActive: 1 });
 
 // Auto-generate testId
 export const generateListeningTestId = async (): Promise<{ testId: string; testNumber: number }> => {

@@ -50,6 +50,10 @@ const getAllListeningTests = async (
         query.difficulty = filters.difficulty;
     }
 
+    if (filters.testType) {
+        query.testType = filters.testType;
+    }
+
     if (typeof filters.isActive === "boolean") {
         query.isActive = filters.isActive;
     }
@@ -301,9 +305,11 @@ const getTestSummary = async () => {
 
 // Get statistics
 const getStatistics = async () => {
-    const [total, active, totalUsage, byDifficulty] = await Promise.all([
+    const [total, active, academic, generalTraining, totalUsage, byDifficulty] = await Promise.all([
         ListeningTest.countDocuments({}),
         ListeningTest.countDocuments({ isActive: true }),
+        ListeningTest.countDocuments({ testType: "academic", isActive: true }),
+        ListeningTest.countDocuments({ testType: "general-training", isActive: true }),
         ListeningTest.aggregate([
             { $group: { _id: null, total: { $sum: "$usageCount" } } },
         ]),
@@ -315,6 +321,8 @@ const getStatistics = async () => {
     return {
         total,
         active,
+        academic,
+        generalTraining,
         totalUsage: totalUsage[0]?.total || 0,
         byDifficulty: byDifficulty.reduce((acc, curr) => {
             acc[curr._id] = curr.count;
