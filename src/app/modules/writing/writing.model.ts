@@ -42,6 +42,7 @@ const WritingTaskSchema = new Schema<IWritingTask>({
             // Task 1 Academic
             "line-graph", "bar-chart", "pie-chart", "table",
             "process-diagram", "map-comparison", "multiple-charts", "flow-chart",
+            "map", "unknown",
             // Task 1 GT
             "formal-letter", "semi-formal-letter", "informal-letter",
             // Task 2

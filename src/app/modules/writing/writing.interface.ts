@@ -25,7 +25,9 @@ export type WritingTask1AcademicType =
     | "process-diagram"
     | "map-comparison"
     | "multiple-charts"
-    | "flow-chart";
+    | "flow-chart"
+    | "map"
+    | "unknown";
 
 // Task 1 General Training subtypes
 export type WritingTask1GTType =
