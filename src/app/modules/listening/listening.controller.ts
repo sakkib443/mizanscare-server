@@ -27,13 +27,14 @@ const createListeningTest = async (req: Request, res: Response) => {
 // Get all listening tests
 const getAllListeningTests = async (req: Request, res: Response) => {
     try {
-        const { page = 1, limit = 10, difficulty, testType, isActive, searchTerm } = req.query;
+        const { page = 1, limit = 10, difficulty, testType, isActive, searchTerm, sort } = req.query;
 
         const filters = {
             difficulty: difficulty as string,
             testType: testType as string,
             isActive: isActive === "true" ? true : isActive === "false" ? false : undefined,
             searchTerm: searchTerm as string,
+            sort: sort as string,
         };
 
         const result = await ListeningService.getAllListeningTests(

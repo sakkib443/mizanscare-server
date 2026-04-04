@@ -27,13 +27,14 @@ const createReadingTest = async (req: Request, res: Response) => {
 // Get all reading tests
 const getAllReadingTests = async (req: Request, res: Response) => {
     try {
-        const { page = 1, limit = 10, testType, difficulty, isActive, searchTerm } = req.query;
+        const { page = 1, limit = 10, testType, difficulty, isActive, searchTerm, sort } = req.query;
 
         const filters = {
             testType: testType as string,
             difficulty: difficulty as string,
             isActive: isActive === "true" ? true : isActive === "false" ? false : undefined,
             searchTerm: searchTerm as string,
+            sort: sort as string,
         };
 
         const result = await ReadingService.getAllReadingTests(

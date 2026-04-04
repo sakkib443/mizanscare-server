@@ -60,10 +60,19 @@ const getAllWritingTests = async (
 
     const skip = (page - 1) * limit;
 
+    let sortOptions: Record<string, 1 | -1> = { testNumber: -1 }; // Default: Newest (by number)
+    
+    if (filters.sort) {
+        if (filters.sort === 'name_asc') sortOptions = { title: 1 };
+        else if (filters.sort === 'name_desc') sortOptions = { title: -1 };
+        else if (filters.sort === 'newest') sortOptions = { createdAt: -1 };
+        else if (filters.sort === 'oldest') sortOptions = { createdAt: 1 };
+    }
+
     const [tests, total] = await Promise.all([
         WritingTest.find(query)
             .select("-tasks.sampleAnswer -tasks.keyPoints")  // Hide sample answers in list
-            .sort({ testNumber: -1 })
+            .sort(sortOptions)
             .skip(skip)
             .limit(limit)
             .lean(),

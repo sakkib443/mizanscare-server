@@ -27,7 +27,7 @@ const createWritingTest = async (req: Request, res: Response) => {
 // Get all writing tests
 const getAllWritingTests = async (req: Request, res: Response) => {
     try {
-        const { page = 1, limit = 10, testType, difficulty, topicCategory, isActive, searchTerm } = req.query;
+        const { page = 1, limit = 10, testType, difficulty, topicCategory, isActive, searchTerm, sort } = req.query;
 
         const filters = {
             testType: testType as string,
@@ -35,6 +35,7 @@ const getAllWritingTests = async (req: Request, res: Response) => {
             topicCategory: topicCategory as string,
             isActive: isActive === "true" ? true : isActive === "false" ? false : undefined,
             searchTerm: searchTerm as string,
+            sort: sort as string,
         };
 
         const result = await WritingService.getAllWritingTests(

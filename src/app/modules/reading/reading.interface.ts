@@ -161,12 +161,12 @@ export interface ICreateReadingTestInput {
     difficulty?: "easy" | "medium" | "hard";
 }
 
-// Filters
 export interface IReadingTestFilters {
     testType?: string;
     difficulty?: string;
     isActive?: boolean;
     searchTerm?: string;
+    sort?: string;
 }
 
 // Band score conversion (IELTS Academic Reading)

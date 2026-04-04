@@ -87,6 +87,9 @@ export interface IStudent {
     // Unique exam ID (BACIELTS260001 format)
     examId: string;
 
+    // Test Type (Academic / General Training)
+    testType: "academic" | "general-training";
+
     // Personal information
     nameEnglish: string;
     nameBengali?: string;
@@ -176,6 +179,7 @@ export interface IStudent {
 
 // Create student input (from admin)
 export interface ICreateStudentInput {
+    testType: "academic" | "general-training";
     nameEnglish: string;
     nameBengali?: string;
     email: string;

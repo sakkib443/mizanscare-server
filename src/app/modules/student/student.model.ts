@@ -94,6 +94,14 @@ const studentSchema = new Schema<IStudent>(
             trim: true,
         },
 
+        // Test Type
+        testType: {
+            type: String,
+            enum: ["academic", "general-training"],
+            required: [true, "Test type is required"],
+            default: "academic",
+        },
+
         // Personal information
         nameEnglish: {
             type: String,

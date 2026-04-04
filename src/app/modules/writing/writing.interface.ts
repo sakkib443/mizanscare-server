@@ -185,6 +185,7 @@ export interface IWritingTestFilters {
     topicCategory?: string;
     isActive?: boolean;
     searchTerm?: string;
+    sort?: string;
 }
 
 // Common topic categories for IELTS Writing

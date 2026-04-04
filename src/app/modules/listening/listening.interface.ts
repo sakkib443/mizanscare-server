@@ -118,12 +118,12 @@ export interface ICreateListeningTestInput {
     testType?: "academic" | "general-training";
 }
 
-// Filters for listing
 export interface IListeningTestFilters {
     difficulty?: string;
     testType?: string;
     isActive?: boolean;
     searchTerm?: string;
+    sort?: string;
 }
 
 // Band score conversion (IELTS Listening)
