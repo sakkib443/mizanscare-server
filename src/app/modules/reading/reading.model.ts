@@ -142,6 +142,7 @@ const QuestionGroupSchema = new Schema({
     // Flowchart and Diagram Fields
     questions: [{
         questionNumber: { type: Number },
+        questionText: { type: String },
         correctAnswer: { type: String }
     }],
     markers: [{
