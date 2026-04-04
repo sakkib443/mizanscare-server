@@ -10,6 +10,14 @@ const questionGroups = [
         endQuestion: 32,
         mainInstruction: "Questions 27-32",
         subInstruction: "Complete the flow-chart below. Write NO MORE THAN THREE WORDS for each answer.",
+        questions: [
+            { questionNumber: 27, correctAnswer: "a rapid rate" },
+            { questionNumber: 28, correctAnswer: "result from" },
+            { questionNumber: 29, correctAnswer: "cause" },
+            { questionNumber: 30, correctAnswer: "water loss" },
+            { questionNumber: 31, correctAnswer: "topsoil" },
+            { questionNumber: 32, correctAnswer: "soil nutrients" }
+        ]
     },
     {
         groupType: "matching-information",
@@ -66,14 +74,8 @@ async function run() {
 
         if (doc && doc.sections && doc.sections.length > 2) {
             doc.sections[2].questionGroups = questionGroups;
-            doc.sections[2].questions = [
-                { questionNumber: 27, questionType: "custom-flowchart-1", correctAnswer: "a rapid rate", questionGroup: "qg1" },
-                { questionNumber: 28, questionType: "custom-flowchart-1", correctAnswer: "result from", questionGroup: "qg1" },
-                { questionNumber: 29, questionType: "custom-flowchart-1", correctAnswer: "cause", questionGroup: "qg1" },
-                { questionNumber: 30, questionType: "custom-flowchart-1", correctAnswer: "water loss", questionGroup: "qg1" },
-                { questionNumber: 31, questionType: "custom-flowchart-1", correctAnswer: "topsoil", questionGroup: "qg1" },
-                { questionNumber: 32, questionType: "custom-flowchart-1", correctAnswer: "soil nutrients", questionGroup: "qg1" }
-            ];
+            // Clear outer section.questions to avoid duplicates if any
+            doc.sections[2].questions = [];
             
             await doc.save();
             console.log("✅ Academic Reading Mock 01 - Part 3 GROUPS updated successfully.");

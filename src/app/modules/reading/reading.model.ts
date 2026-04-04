@@ -138,7 +138,19 @@ const QuestionGroupSchema = new Schema({
     questionType: { type: String },
     instructions: { type: String },
     headings: [{ type: String }],
-    wordList: [{ type: String }]
+    wordList: [{ type: String }],
+    // Flowchart and Diagram Fields
+    questions: [{
+        questionNumber: { type: Number },
+        correctAnswer: { type: String }
+    }],
+    markers: [{
+        id: { type: String },
+        x: { type: Number },
+        y: { type: Number },
+        questionNumber: { type: Number },
+        correctAnswer: { type: String }
+    }]
 });
 
 // Paragraph Schema
