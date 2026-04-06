@@ -104,8 +104,8 @@ const readingTest = {
                 { questionNumber: 7, questionType: "matching-headings", questionText: "Section G", correctAnswer: "ix", marks: 1 },
                 // Q8-11: Sentence Completion
                 { questionNumber: 8, questionType: "sentence-completion", questionText: "Both ___ were the first creatures to pollinate the world\u2019s plants.", correctAnswer: "flies and beetles", marks: 1 },
-                { questionNumber: 9, questionType: "sentence-completion", questionText: "Monkeys transport pollen on their ___.", correctAnswer: "furry coats", marks: 1 },
-                { questionNumber: 10, questionType: "sentence-completion", questionText: "Honeybees are favoured pollinators among bee species partly because they travel ___.", correctAnswer: "longer distances", marks: 1 },
+                { questionNumber: 9, questionType: "sentence-completion", questionText: "Monkeys transport pollen on their ___.", correctAnswer: "furry coats", acceptableAnswers: ["coats"], marks: 1 },
+                { questionNumber: 10, questionType: "sentence-completion", questionText: "Honeybees are favoured pollinators among bee species partly because they travel ___.", correctAnswer: "longer distances", acceptableAnswers: ["distances"], marks: 1 },
                 { questionNumber: 11, questionType: "sentence-completion", questionText: "A feature of CCD is often the loss of all the ___.", correctAnswer: "worker bees", marks: 1 },
                 // Q12-13: Choose Two Letters
                 { questionNumber: 12, questionType: "choose-two-letters", questionText: "Which TWO methods of combating CCD and habitat loss are mentioned?", correctAnswer: ["C", "E"], marks: 1 },
@@ -204,12 +204,12 @@ const readingTest = {
                 { questionNumber: 16, questionType: "multiple-choice-full", questionText: "What problems do scientists face in developing DNA tests for hair and eye colour?", correctAnswer: "A", marks: 1 },
                 // Q17-20: Flow Chart Completion
                 { questionNumber: 17, questionType: "sentence-completion", questionText: "Identification of genes determining eye colour in ___.", correctAnswer: "mice", marks: 1 },
-                { questionNumber: 18, questionType: "sentence-completion", questionText: "SNP mapping to find ___ between eye colour and DNA.", correctAnswer: "correlations", marks: 1 },
+                { questionNumber: 18, questionType: "sentence-completion", questionText: "SNP mapping to find ___ between eye colour and DNA.", correctAnswer: "correlations", acceptableAnswers: ["correlation"], marks: 1 },
                 { questionNumber: 19, questionType: "sentence-completion", questionText: "Identification of ___ SNPs.", correctAnswer: "50", marks: 1 },
-                { questionNumber: 20, questionType: "sentence-completion", questionText: "Identification of the ___ genes that determine eye colour.", correctAnswer: "four", marks: 1 },
+                { questionNumber: 20, questionType: "sentence-completion", questionText: "Identification of the ___ genes that determine eye colour.", correctAnswer: "four", acceptableAnswers: ["4"], marks: 1 },
                 // Q21-26: Short Answer
                 { questionNumber: 21, questionType: "short-answer", questionText: "Which American company is doing research on the genetic basis of hair and eye colour?", correctAnswer: "DNAPrint Genomics", marks: 1 },
-                { questionNumber: 22, questionType: "short-answer", questionText: "How many groups of eye colour can now be identified through SNP mapping?", correctAnswer: "three", marks: 1 },
+                { questionNumber: 22, questionType: "short-answer", questionText: "How many groups of eye colour can now be identified through SNP mapping?", correctAnswer: "three", acceptableAnswers: ["3"], marks: 1 },
                 { questionNumber: 23, questionType: "short-answer", questionText: "Which British institution unsuccessfully researched data from humans on the genetic basis of facial features?", correctAnswer: "University College London", marks: 1 },
                 { questionNumber: 24, questionType: "short-answer", questionText: "In which country is research being done on mice to find out about genes for facial features?", correctAnswer: "Germany", marks: 1 },
                 { questionNumber: 25, questionType: "short-answer", questionText: "Which association is concerned about the possible applications of the research?", correctAnswer: "Liberty", marks: 1 },
