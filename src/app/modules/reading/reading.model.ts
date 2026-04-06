@@ -107,6 +107,11 @@ const QuestionGroupSchema = new Schema({
         letter: { type: String },
         text: { type: String }
     }],
+    // For matching-headings (list of heading options like "i. Time and...", "ii. A problem...")
+    headingsList: [{
+        numeral: { type: String },
+        text: { type: String }
+    }],
     // For summary-completion
     summarySegments: [SummarySegmentSchema],
     // For choose-two-letters

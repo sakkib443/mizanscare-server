@@ -7,20 +7,18 @@ async function check() {
     const test = await ReadingTest.findOne({ testNumber: 4 });
     if (!test) { console.log("NOT FOUND"); process.exit(0); }
     
-    console.log("Title:", test.title);
-    console.log("Sections:", test.sections.length);
-    
-    test.sections.forEach((s: any, i: number) => {
-        console.log(`\n=== Section ${i+1}: ${s.title} ===`);
-        console.log("  questionGroups:", s.questionGroups?.length || 0);
-        s.questionGroups?.forEach((g: any, gi: number) => {
-            console.log(`    Group ${gi+1}: ${g.groupType} (Q${g.startQuestion}-Q${g.endQuestion})`);
-        });
-        console.log("  questions:", s.questions?.length || 0);
-        s.questions?.forEach((q: any) => {
-            console.log(`    Q${q.questionNumber} [${q.questionType}] -> ${q.correctAnswer}`);
-        });
-    });
+    // Check first 200 chars of section 1 passage raw
+    const passage = (test.sections[0] as any).passage;
+    console.log("=== RAW PASSAGE (first 300 chars) ===");
+    console.log(JSON.stringify(passage.substring(0, 300)));
+    console.log("\n=== CHARACTER CODES ===");
+    for (let i = 0; i < Math.min(passage.length, 100); i++) {
+        const char = passage[i];
+        const code = passage.charCodeAt(i);
+        if (code === 10) console.log(`  [${i}] NEWLINE (\\n)`);
+        else if (code === 13) console.log(`  [${i}] CARRIAGE_RETURN (\\r)`);
+        else if (code === 92) console.log(`  [${i}] BACKSLASH (\\)`);
+    }
     
     await mongoose.disconnect();
     process.exit(0);
