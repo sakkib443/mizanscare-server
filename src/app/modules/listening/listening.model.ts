@@ -16,6 +16,7 @@ const ListeningQuestionSchema = new Schema<IListeningQuestion>({
             "matching",
             "map-labeling",
             "diagram-labeling",
+            "plan-labeling",
             "form-completion",
             "note-completion",
             "table-completion",
