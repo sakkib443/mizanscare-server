@@ -8,7 +8,13 @@ const app: Application = express();
 
 // middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://mizansieltsmock.ftitbd.com",
+    "http://localhost:3000",
+  ],
+  credentials: true,
+}));
 
 // Ensure DB connection before processing requests (for Vercel serverless)
 app.use(async (req: Request, res: Response, next: NextFunction) => {
