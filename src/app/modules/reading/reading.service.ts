@@ -200,7 +200,12 @@ const gradeReadingAnswers = async (
 
         let isCorrect = false;
 
-        if (Array.isArray(correctData.correct)) {
+        // Check for comma-separated multi-answer (e.g. "D,E" for choose-two single question)
+        if (typeof correctData.correct === 'string' && correctData.correct.includes(',')) {
+            const correctSet = correctData.correct.split(',').map((a: string) => a.trim().toLowerCase()).sort();
+            const studentSet = studentNormalized.split(',').map((a: string) => a.trim()).sort();
+            isCorrect = correctSet.length === studentSet.length && correctSet.every((val: string, idx: number) => val === studentSet[idx]);
+        } else if (Array.isArray(correctData.correct)) {
             isCorrect = correctData.correct.some(ca =>
                 normalizeAnswer(ca) === studentNormalized
             );

@@ -95,6 +95,15 @@ const QuestionGroupSchema = new Schema({
     // For note-completion
     passage: { type: String }, // For formatted note-completion passage with blanks
     notesSections: [NotesSectionSchema],
+    // For note-completion table format (2-column: label | content/bullets)
+    notesTable: [{
+        title: { type: String },
+        rows: [{
+            label: { type: String },
+            content: { type: String },
+            bullets: [{ type: String }]
+        }]
+    }],
     // For TRUE/FALSE/NOT GIVEN and YES/NO/NOT GIVEN
     optionsExplanation: [OptionsExplanationSchema],
     statements: [StatementSchema],
@@ -111,6 +120,26 @@ const QuestionGroupSchema = new Schema({
     headingsList: [{
         numeral: { type: String },
         text: { type: String }
+    }],
+    // For matching-headings with pre-answered example (shown on top, not counted as question)
+    exampleItems: [{
+        text: { type: String },
+        answer: { type: String }
+    }],
+    // For flow-chart-completion (generic, data-driven stages with arrows between)
+    // joinSeparator: string used to combine multi-part blanks (default " and ")
+    joinSeparator: { type: String },
+    flowchartStages: [{
+        label: { type: String },
+        lines: [{
+            segments: [{
+                type: { type: String, enum: ["text", "blank"] },
+                content: { type: String },
+                questionNumber: { type: Number },
+                subIndex: { type: Number }, // 0 = primary, 1+ = secondary part of multi-blank question
+                width: { type: Number }
+            }]
+        }]
     }],
     // For summary-completion
     summarySegments: [SummarySegmentSchema],
