@@ -105,6 +105,8 @@ const readingTest12 = {
                     mainInstruction: "Complete each sentence with the correct ending, A\u2013E, below.",
                     subInstruction: "Write the correct letter, A\u2013E, in boxes 1\u20133 on your answer sheet.",
                     featureListTitle: "Sentence Endings",
+                    // paragraphOptions drives the select dropdown on exam page
+                    paragraphOptions: ["A", "B", "C", "D", "E"],
                     featureOptions: [
                         { letter: "A", text: "be very beneficial." },
                         { letter: "B", text: "never have to deal with anxiety." },
@@ -308,7 +310,7 @@ const readingTest12 = {
             instructions: "You should spend about 20 minutes on Questions 27\u201340 which are based on Reading Passage 3 below.",
             passage: passage3Text,
             questionGroups: [
-                // ── Q27-33: NOTE COMPLETION (PASSAGE FORMAT) ──
+                // ── Q27-33: NOTE COMPLETION (PASSAGE/BULLET FORMAT) ──
                 {
                     groupType: "note-completion",
                     startQuestion: 27,
@@ -316,7 +318,8 @@ const readingTest12 = {
                     mainInstruction: "Complete the notes below.",
                     subInstruction: "Write NO MORE THAN THREE WORDS for each answer. Write your answers in boxes 27\u201333 on your answer sheet.",
                     mainHeading: "An Aging Population",
-                    passage: `The longer lives of people of today must be prepared for.\n\nThe longer lives will affect economics, family life, old age care and health services.\n\nThe aging population has been caused by a drop in fertility, improvements in health and 27 __________; the former is surprisingly seen in many 28 __________.\n\nOne key area to consider is the age for retirement benefits to be paid \u2013 this has changed a lot recently in 29 __________, due to various conditions and trends.\n\nA lot of 30 __________ is required in many countries and some have already done this \u2013 usually by raising the official pension age or raising the 31 __________ of people still working.\n\nOther new financial instruments have also been launched.\n\nLonger life expectancy will also lead to different family 32 __________ living with each other more.\n\nThere has been no previous 33 __________ of such a change in family demographics.`,
+                    // Passage format: single \n lines, • bullets for notes, short lines become headings
+                    passage: `Key facts\n• Longer lives must be planned for\n• Affects economics, family life, old age care and health services\nCauses of aging population\n• Drop in fertility and improvements in health and 27 __________\n• Fertility decline surprisingly seen in many 28 __________\nRetirement & pensions\n• The age for retirement benefits has changed a lot recently in 29 __________, due to various conditions and trends\n• A lot of 30 __________ is required in many countries\n• Some countries have raised the official pension age or raised the 31 __________ of people still working\n• Other new financial instruments have also been launched\nFamily structure\n• Longer life expectancy leads to different family 32 __________ living with each other more\n• There has been no previous 33 __________ of such a change in family demographics`,
                 },
 
                 // ── Q34-39: YES/NO/NOT GIVEN ──
