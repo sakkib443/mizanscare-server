@@ -179,15 +179,6 @@ const listeningTestData = {
         },
 
         {
-          blockType: "instruction" as const,
-          content: `<div style='margin:10px 0;padding:10px;border:1px solid #d1d5db;max-width:300px'>
-<div><strong>A.</strong> &nbsp; before 1837</div>
-<div><strong>B.</strong> &nbsp; between 1837 and 1900</div>
-<div><strong>C.</strong> &nbsp; after 1900</div>
-</div>`
-        },
-
-        {
           blockType: "question" as const, questionNumber: 11, questionType: "matching" as const,
           questionText: "The East Front was added to the building.",
           options: ["A. before 1837", "B. between 1837 and 1900", "C. after 1900"],

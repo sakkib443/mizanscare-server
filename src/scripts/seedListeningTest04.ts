@@ -295,11 +295,6 @@ const listeningTestData = {
         },
 
         {
-          blockType: "instruction" as const,
-          content: "<ul><li><strong>A</strong> John</li><li><strong>B</strong> Susan</li><li><strong>C</strong> Both John and Susan</li></ul>"
-        },
-
-        {
           blockType: "question" as const, questionNumber: 25, questionType: "matching" as const,
           questionText: "We should plan a trip to Mars even though it may not happen soon.",
           options: ["A. John", "B. Susan", "C. Both John and Susan"],

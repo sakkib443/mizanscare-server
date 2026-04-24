@@ -331,17 +331,7 @@ const listeningTestData = {
 
         {
           blockType: "instruction" as const,
-          content: `<div style='border:1px solid #374151;padding:12px;max-width:300px;float:right;margin-left:16px'>
-<div style='font-weight:bold;margin-bottom:6px'>Problems</div>
-<div><strong>A</strong> too vague</div>
-<div><strong>B</strong> too factual</div>
-<div><strong>C</strong> too unreliable</div>
-<div><strong>D</strong> too noisy</div>
-<div><strong>E</strong> too long</div>
-<div><strong>F</strong> too short</div>
-<div><strong>G</strong> too complicated</div>
-<div><strong>H</strong> too simple</div>
-</div>`
+          content: "<div style='font-weight:bold;margin-bottom:6px'>Problems</div>"
         },
 
         {

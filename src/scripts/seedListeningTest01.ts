@@ -2,602 +2,105 @@ import mongoose from "mongoose";
 import config from "../app/config";
 import { ListeningTest } from "../app/modules/listening/listening.model";
 
-async function seedListeningTest01() {
-    try {
-        await mongoose.connect(config.database_url as string);
-        console.log("Connected to MongoDB");
-
-        // Check if already exists
-        const existing = await ListeningTest.findOne({ testNumber: 1 });
-        if (existing) {
-            console.log("Listening Test #1 already exists. Deleting and recreating...");
-            await ListeningTest.deleteOne({ _id: existing._id });
-        }
-
-        const db = mongoose.connection.db!;
-        const adminUser = await db.collection("users").findOne({ role: "admin" });
-        const createdBy = adminUser?._id || new mongoose.Types.ObjectId();
-
-        const listeningTest01 = {
-            testId: "LISTENING_001",
-            testNumber: 1,
-            title: "Listening Test 01",
-            description: "IELTS Academic Listening Test 01 — 4 parts, 40 questions",
-            source: "Cambridge IELTS 15",
-            mainAudioUrl: "",
-            audioDuration: 1800,
-            difficulty: "medium" as const,
-            totalQuestions: 40,
-            totalMarks: 40,
-            duration: 40,
-            isActive: true,
-            usageCount: 0,
-            createdBy: createdBy,
-            sections: [
-
-                // ═══════════════════════════════════════════════
-                // PART 1 — Bankside Recruitment Agency (Q 1–10)
-                // ═══════════════════════════════════════════════
-                {
-                    sectionNumber: 1,
-                    title: "Part 1",
-                    context: "A conversation between two people about a recruitment agency.",
-                    instructions: "Questions 1–10",
-                    audioUrl: "",
-                    questions: [
-                        // ── Instruction block ──
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Questions 1–10</strong><br/>Complete the notes below.<br/>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer."
-                        },
-
-                        // ─── Bankside Recruitment Agency ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Bankside Recruitment Agency</strong><br/><ul><li>Address of agency: 497 Eastside, Docklands</li><li>Name of agent: Becky</li><li>Phone number: 07866 510333</li></ul>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 1,
-                            questionType: "note-completion" as const,
-                            questionText: "Name of agent: Becky ________",
-                            correctAnswer: "Jamieson",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 2,
-                            questionType: "note-completion" as const,
-                            questionText: "Best to call her in the ________",
-                            correctAnswer: "afternoon",
-                            marks: 1, wordLimit: 1
-                        },
-
-                        // ─── Typical jobs ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Typical jobs</strong><br/><ul><li>Clerical and admin roles, mainly in the finance industry</li></ul>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 3,
-                            questionType: "note-completion" as const,
-                            questionText: "Must have good ________ skills",
-                            correctAnswer: "communication",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 4,
-                            questionType: "note-completion" as const,
-                            questionText: "Jobs are usually for at least one ________",
-                            correctAnswer: "week",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 5,
-                            questionType: "note-completion" as const,
-                            questionText: "Pay is usually £ ________ per hour",
-                            correctAnswer: "10",
-                            marks: 1, wordLimit: 2
-                        },
-
-                        // ─── Registration process ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Registration process</strong>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 6,
-                            questionType: "note-completion" as const,
-                            questionText: "Wear a ________ to the interview",
-                            correctAnswer: "suit",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 7,
-                            questionType: "note-completion" as const,
-                            questionText: "Must bring your ________ to the interview",
-                            correctAnswer: "passport",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 8,
-                            questionType: "note-completion" as const,
-                            questionText: "They will ask questions about each applicant's ________",
-                            correctAnswer: "personality",
-                            marks: 1, wordLimit: 1
-                        },
-
-                        // ─── Advantages ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Advantages of using an agency</strong>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 9,
-                            questionType: "note-completion" as const,
-                            questionText: "The ________ you receive at interview will benefit you",
-                            correctAnswer: "feedback",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "instruction" as const,
-                            content: "<ul><li>Will get access to vacancies which are not advertised</li></ul>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 10,
-                            questionType: "note-completion" as const,
-                            questionText: "Less ________ is involved in applying for jobs",
-                            correctAnswer: "time",
-                            marks: 1, wordLimit: 1
-                        },
-                    ]
-                },
-
-                // ═══════════════════════════════════════════════
-                // PART 2 — Matthews Island Holidays (Q 11–20)
-                // ═══════════════════════════════════════════════
-                {
-                    sectionNumber: 2,
-                    title: "Part 2",
-                    context: "A talk about Matthews Island Holidays and a timetable for Isle of Man holiday.",
-                    instructions: "Questions 11–20",
-                    audioUrl: "",
-                    questions: [
-                        // ── MCQ instruction ──
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Questions 11–14</strong><br/>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.<br/><br/><strong>Matthews Island Holidays</strong>"
-                        },
-
-                        // Q11
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 11,
-                            questionType: "multiple-choice" as const,
-                            questionText: "According to the speaker, the company",
-                            options: [
-                                "A. has been in business for longer than most of its competitors.",
-                                "B. arranges holidays to more destinations than its competitors.",
-                                "C. has more customers than its competitors."
-                            ],
-                            correctAnswer: "A",
-                            marks: 1
-                        },
-
-                        // Q12
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 12,
-                            questionType: "multiple-choice" as const,
-                            questionText: "Where can customers meet the tour manager before travelling to the Isle of Man?",
-                            options: [
-                                "A. Liverpool",
-                                "B. Heysham",
-                                "C. Luton"
-                            ],
-                            correctAnswer: "B",
-                            marks: 1
-                        },
-
-                        // Q13
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 13,
-                            questionType: "multiple-choice" as const,
-                            questionText: "How many lunches are included in the price of the holiday?",
-                            options: [
-                                "A. three",
-                                "B. four",
-                                "C. five"
-                            ],
-                            correctAnswer: "A",
-                            marks: 1
-                        },
-
-                        // Q14
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 14,
-                            questionType: "multiple-choice" as const,
-                            questionText: "Customers have to pay extra for",
-                            options: [
-                                "A. guaranteeing themselves a larger room.",
-                                "B. booking at short notice.",
-                                "C. transferring to another date."
-                            ],
-                            correctAnswer: "C",
-                            marks: 1
-                        },
-
-                        // ── Table instruction ──
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Questions 15–20</strong><br/>Complete the table below.<br/>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.<br/><br/><strong>Timetable for Isle of Man holiday</strong><br/><table border='1' style='border-collapse:collapse;width:100%;font-size:13px'><thead><tr><th style='padding:6px'>Day</th><th style='padding:6px'>Activity</th><th style='padding:6px'>Notes</th></tr></thead><tbody><tr><td style='padding:6px'>Day 1</td><td style='padding:6px'>Arrive</td><td style='padding:6px'>Introduction by manager. Hotel dining room has view of the <strong>[15]</strong></td></tr><tr><td style='padding:6px'>Day 2</td><td style='padding:6px'>Tynwald Exhibition and Peel</td><td style='padding:6px'>Tynwald may have been founded in <strong>[16]</strong>, not 979</td></tr><tr><td style='padding:6px'>Day 3</td><td style='padding:6px'>Trip to Snaefell</td><td style='padding:6px'>Travel along promenade in a tram; train to Laxey; train to the <strong>[17]</strong> of Snaefell</td></tr><tr><td style='padding:6px'>Day 4</td><td style='padding:6px'>Free day</td><td style='padding:6px'>Company provides a <strong>[18]</strong> for local transport and heritage sites</td></tr><tr><td style='padding:6px'>Day 5</td><td style='padding:6px'>Take the <strong>[19]</strong> railway train from Douglas to Port Erin</td><td style='padding:6px'>Free time, then coach to Castletown — former <strong>[20]</strong> has old castle</td></tr><tr><td style='padding:6px'>Day 6</td><td style='padding:6px'>Leave</td><td style='padding:6px'>Leave the island by ferry or plane</td></tr></tbody></table>"
-                        },
-
-                        // Q15–Q20
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 15,
-                            questionType: "table-completion" as const,
-                            questionText: "Hotel dining room has view of the ________",
-                            correctAnswer: "river",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 16,
-                            questionType: "table-completion" as const,
-                            questionText: "Tynwald may have been founded in ________",
-                            correctAnswer: "1422",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 17,
-                            questionType: "table-completion" as const,
-                            questionText: "Train to the ________ of Snaefell",
-                            correctAnswer: "top",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 18,
-                            questionType: "table-completion" as const,
-                            questionText: "Company provides a ________ for local transport and heritage sites",
-                            correctAnswer: "pass",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 19,
-                            questionType: "table-completion" as const,
-                            questionText: "Take the ________ railway train from Douglas to Port Erin",
-                            correctAnswer: "steam",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 20,
-                            questionType: "table-completion" as const,
-                            questionText: "Coach to Castletown — former ________ has old castle",
-                            correctAnswer: "capital",
-                            marks: 1, wordLimit: 1
-                        },
-                    ]
-                },
-
-                // ═══════════════════════════════════════════════
-                // PART 3 — Personality Traits (Q 21–30)
-                // ═══════════════════════════════════════════════
-                {
-                    sectionNumber: 3,
-                    title: "Part 3",
-                    context: "A conversation between two students about birth order and personality traits.",
-                    instructions: "Questions 21–30",
-                    audioUrl: "",
-                    questions: [
-
-                        // ── Q21-26: Matching instruction ──
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Questions 21–26</strong><br/>What did findings of previous research claim about the personality traits a child is likely to have because of their position in the family?<br/><br/>Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A–H</strong>, next to Questions 21–26.<br/><br/><strong>Personality Traits</strong><br/>A &nbsp; outgoing<br/>B &nbsp; selfish<br/>C &nbsp; independent<br/>D &nbsp; attention-seeking<br/>E &nbsp; introverted<br/>F &nbsp; co-operative<br/>G &nbsp; caring<br/>H &nbsp; competitive"
-                        },
-
-                        // Q21
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 21,
-                            questionType: "matching" as const,
-                            questionText: "the eldest child",
-                            options: ["A", "B", "C", "D", "E", "F", "G", "H"],
-                            correctAnswer: "G",
-                            marks: 1
-                        },
-                        // Q22
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 22,
-                            questionType: "matching" as const,
-                            questionText: "a middle child",
-                            options: ["A", "B", "C", "D", "E", "F", "G", "H"],
-                            correctAnswer: "F",
-                            marks: 1
-                        },
-                        // Q23
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 23,
-                            questionType: "matching" as const,
-                            questionText: "the youngest child",
-                            options: ["A", "B", "C", "D", "E", "F", "G", "H"],
-                            correctAnswer: "A",
-                            marks: 1
-                        },
-                        // Q24
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 24,
-                            questionType: "matching" as const,
-                            questionText: "a twin",
-                            options: ["A", "B", "C", "D", "E", "F", "G", "H"],
-                            correctAnswer: "E",
-                            marks: 1
-                        },
-                        // Q25
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 25,
-                            questionType: "matching" as const,
-                            questionText: "an only child",
-                            options: ["A", "B", "C", "D", "E", "F", "G", "H"],
-                            correctAnswer: "B",
-                            marks: 1
-                        },
-                        // Q26
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 26,
-                            questionType: "matching" as const,
-                            questionText: "a child with much older siblings",
-                            options: ["A", "B", "C", "D", "E", "F", "G", "H"],
-                            correctAnswer: "C",
-                            marks: 1
-                        },
-
-                        // ── Q27-28: Multiple Choice instruction ──
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Questions 27–28</strong><br/>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>."
-                        },
-
-                        // Q27
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 27,
-                            questionType: "multiple-choice" as const,
-                            questionText: "What do the speakers say about the evidence relating to birth order and academic success?",
-                            options: [
-                                "A. There is conflicting evidence about whether oldest children perform best in intelligence tests.",
-                                "B. There is little doubt that birth order has less influence on academic achievement than socio-economic status.",
-                                "C. Some studies have neglected to include important factors such as family size."
-                            ],
-                            correctAnswer: "C",
-                            marks: 1
-                        },
-
-                        // Q28
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 28,
-                            questionType: "multiple-choice" as const,
-                            questionText: "What does Ruth think is surprising about the difference in oldest children's academic performance?",
-                            options: [
-                                "A. It is mainly thanks to their roles as teachers for their younger siblings.",
-                                "B. The advantages they have only lead to a slightly higher level of achievement.",
-                                "C. The extra parental attention they receive at a young age makes little difference."
-                            ],
-                            correctAnswer: "A",
-                            marks: 1
-                        },
-
-                        // ── Q29-30: Choose TWO instruction ──
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Questions 29–30</strong><br/>Choose <strong>TWO</strong> letters, A–E.<br/><br/>Which <strong>TWO</strong> experiences of sibling rivalry do the speakers agree has been valuable for them?"
-                        },
-
-                        // Q29 (first of the pair)
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 29,
-                            questionType: "multiple-choice-multi" as const,
-                            questionText: "Which TWO experiences of sibling rivalry do the speakers agree has been valuable for them?",
-                            options: [
-                                "A. learning to share",
-                                "B. learning to stand up for oneself",
-                                "C. having to put up with each other",
-                                "D. finding out what is important in life",
-                                "E. learning to be a good loser"
-                            ],
-                            correctAnswer: "B",
-                            marks: 1
-                        },
-
-                        // Q30 (second of the pair)
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 30,
-                            questionType: "multiple-choice-multi" as const,
-                            questionText: "Which TWO experiences of sibling rivalry do the speakers agree has been valuable for them?",
-                            options: [
-                                "A. learning to share",
-                                "B. learning to stand up for oneself",
-                                "C. having to put up with each other",
-                                "D. finding out what is important in life",
-                                "E. learning to be a good loser"
-                            ],
-                            correctAnswer: "D",
-                            marks: 1
-                        },
-                    ]
-                },
-
-                // ═══════════════════════════════════════════════
-                // PART 4 — The Eucalyptus Tree in Australia (Q 31–40)
-                // ═══════════════════════════════════════════════
-                {
-                    sectionNumber: 4,
-                    title: "Part 4",
-                    context: "A lecture about the eucalyptus tree in Australia — its importance, diseases, and the effect of bushfires.",
-                    instructions: "Questions 31–40",
-                    audioUrl: "",
-                    questions: [
-                        // ── Main instruction ──
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Questions 31–40</strong><br/>Complete the notes below.<br/>Write <strong>ONE WORD ONLY</strong> for each answer.<br/><br/><strong>The Eucalyptus Tree in Australia</strong>"
-                        },
-
-                        // ─── Importance ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Importance</strong>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 31,
-                            questionType: "note-completion" as const,
-                            questionText: "It provides ________ and food for a wide range of species",
-                            correctAnswer: "shelter",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 32,
-                            questionType: "note-completion" as const,
-                            questionText: "Its leaves provide ________ which is used to make a disinfectant",
-                            correctAnswer: "oil",
-                            marks: 1, wordLimit: 1
-                        },
-
-                        // ─── Reasons for present decline ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>Reasons for present decline in number</strong><br/><strong>(i) 'Mundulla Yellows'</strong><ul><li>Cause – lime used for making <strong>[33]</strong> was absorbed</li><li>Trees were unable to take in necessary iron through their roots</li></ul>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 33,
-                            questionType: "note-completion" as const,
-                            questionText: "Cause – lime used for making ________ was absorbed",
-                            correctAnswer: "roads",
-                            marks: 1, wordLimit: 1
-                        },
-
-                        // ─── Bell-miner ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>(ii) 'Bell-miner Associated Die-back'</strong><ul><li>Cause – <strong>[34]</strong> feed on eucalyptus leaves</li><li>They secrete a substance containing sugar</li><li>Bell-miner birds are attracted by this and keep away other species</li></ul>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 34,
-                            questionType: "note-completion" as const,
-                            questionText: "Cause – ________ feed on eucalyptus leaves",
-                            correctAnswer: "insects",
-                            marks: 1, wordLimit: 1
-                        },
-
-                        // ─── Bushfires ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<strong>William Jackson's theory:</strong><br/><ul><li>High-frequency bushfires have impact on vegetation, resulting in the growth of <strong>[35]</strong></li><li>Mid-frequency bushfires result in the growth of eucalyptus forests, because they:</li></ul>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 35,
-                            questionType: "note-completion" as const,
-                            questionText: "High-frequency bushfires result in the growth of ________",
-                            correctAnswer: "grass",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 36,
-                            questionType: "note-completion" as const,
-                            questionText: "Make more ________ available to the trees",
-                            correctAnswer: "water",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 37,
-                            questionType: "note-completion" as const,
-                            questionText: "Maintain the quality of the ________",
-                            correctAnswer: "soil",
-                            marks: 1, wordLimit: 1
-                        },
-
-                        // ─── Low-frequency bushfires ───
-                        {
-                            blockType: "instruction" as const,
-                            content: "<ul><li>Low-frequency bushfires result in the growth of <strong>[38]</strong> rainforest, which is:</li></ul>"
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 38,
-                            questionType: "note-completion" as const,
-                            questionText: "Low-frequency bushfires result in the growth of ________ rainforest",
-                            correctAnswer: "dry",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 39,
-                            questionType: "note-completion" as const,
-                            questionText: "A ________ ecosystem",
-                            correctAnswer: "simple",
-                            marks: 1, wordLimit: 1
-                        },
-                        {
-                            blockType: "question" as const,
-                            questionNumber: 40,
-                            questionType: "note-completion" as const,
-                            questionText: "An ideal environment for the ________ of the bell-miner",
-                            correctAnswer: "nest",
-                            marks: 1, wordLimit: 1
-                        },
-                    ]
-                },
-            ]
-        };
-
-        const newTest = await ListeningTest.create(listeningTest01);
-        console.log("\n✅ Listening Test 01 created successfully!");
-        console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        console.log("Test ID   :", newTest.testId);
-        console.log("Test No.  :", newTest.testNumber);
-        console.log("Title     :", newTest.title);
-        console.log("Sections  :", newTest.sections?.length);
-        console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        console.log("\n✅ All 40 correct answers are pre-filled (Cambridge IELTS 15 Test 1).");
-
-        await mongoose.disconnect();
-        console.log("\nDisconnected from MongoDB. Done!");
-
-    } catch (error) {
-        console.error("Error:", error);
-        process.exit(1);
-    }
+async function seed() {
+  try {
+    await mongoose.connect(config.database_url as string); console.log("Connected to MongoDB");
+    const existing = await ListeningTest.findOne({ testNumber: 1 });
+    if (existing) { await ListeningTest.findByIdAndUpdate(existing._id, data, { runValidators: false }); console.log("\u2705 Test 01 updated!"); }
+    else { const db = mongoose.connection.db!; const admin = await db.collection("users").findOne({ role: "admin" }); await ListeningTest.create({ ...data, createdBy: admin?._id || new mongoose.Types.ObjectId() }); console.log("\u2705 Test 01 created!"); }
+    const t = await ListeningTest.findOne({ testNumber: 1 });
+    if (t) { console.log(`\n\uD83D\uDCDD ${t.title}`); (t.sections as any[]).forEach((s,i) => { const qs = s.questions.filter((q:any) => q.blockType==="question"); console.log(`  Part ${i+1}: ${qs.length} questions`); }); }
+    await mongoose.disconnect(); process.exit(0);
+  } catch (e) { console.error("\u274C",e); process.exit(1); }
 }
 
-seedListeningTest01();
+const data = {
+  testId: "LISTENING_001", testNumber: 1,
+  title: "Listening Mock Test 01 \u2013 Academic",
+  description: "IELTS Academic Listening Test 01 \u2014 4 parts, 40 questions.",
+  source: "Mizanscare Mock 10001", mainAudioUrl: "", audioDuration: 1800,
+  difficulty: "medium" as const, totalQuestions: 40, totalMarks: 40, duration: 40, isActive: true, usageCount: 0,
+  sections: [
+    // PART 1 — Tardigrades: Water Bears in Space (Q1-10)
+    { sectionNumber: 1, title: "Part 1", context: "A lecture about tardigrades (water bears) and their ability to survive extreme conditions.", instructions: "Questions 1\u201310", audioUrl: "", questions: [
+      { blockType: "instruction" as const, content: "<strong>Questions 1\u201310</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer." },
+      { blockType: "instruction" as const, content: "<div style='text-align:center;font-weight:bold;margin:10px 0'>Tardigrades: Water Bears in Space</div>" },
+      { blockType: "instruction" as const, content: "<ul><li>Name of scientist: Dr Thomas Boothby</li></ul>" },
+      { blockType: "question" as const, questionNumber: 1, questionType: "note-completion" as const, questionText: "~Experiment site: International ________ Station", correctAnswer: "Space", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 2, questionType: "note-completion" as const, questionText: "~Work began in ________", correctAnswer: "2015", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 3, questionType: "note-completion" as const, questionText: "~Tardigrades have been featured in a television program called ________ on Animal Planet", correctAnswer: "The Most Extreme", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<ul><li>Also called water bears</li><li>Ability to adapt to extreme conditions</li></ul>" },
+      { blockType: "question" as const, questionNumber: 4, questionType: "note-completion" as const, questionText: "~Tiny ________ organisms", correctAnswer: "microscopic", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 5, questionType: "note-completion" as const, questionText: "~Can survive in extreme heat, extreme cold, excessive radiation, and without ________", correctAnswer: "oxygen", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<ul><li>Only known organism that can survive in outer space</li><li>Look like gummy bear candies</li></ul>" },
+      { blockType: "question" as const, questionNumber: 6, questionType: "note-completion" as const, questionText: "~Number of legs: ________", correctAnswer: "eight", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 7, questionType: "note-completion" as const, questionText: "~Many tardigrades have ________ bodies, so light passes through them", correctAnswer: "transparent", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<ul><li>Some look like tanks</li></ul>" },
+      { blockType: "question" as const, questionNumber: 8, questionType: "note-completion" as const, questionText: "~Huge morphological ________ within tardigrades", correctAnswer: "diversity", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<strong>Places tardigrades have been found in:</strong>" },
+      { blockType: "question" as const, questionNumber: 9, questionType: "note-completion" as const, questionText: "~tops of ________ like the Himalayas", correctAnswer: "mountains", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<ul><li>oceans</li><li>volcanoes</li></ul>" },
+      { blockType: "question" as const, questionNumber: 10, questionType: "note-completion" as const, questionText: "~________ rainforests", correctAnswer: "tropical", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<ul><li>Antarctica</li></ul>" },
+    ]},
+    // PART 2 — Benzodiazepine addiction (Q11-20)
+    { sectionNumber: 2, title: "Part 2", context: "A talk about benzodiazepine addiction and life struggles.", instructions: "Questions 11\u201320", audioUrl: "", questions: [
+      { blockType: "instruction" as const, content: "<strong>Questions 11\u201320</strong><br/>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>." },
+      { blockType: "instruction" as const, content: "<div style='text-align:center;font-weight:bold;margin:10px 0'>Benzodiazepine addiction and life struggles</div>" },
+      { blockType: "question" as const, questionNumber: 11, questionType: "multiple-choice" as const, questionText: "What did the speaker use benzodiazepines for?", options: ["A. insomnia","B. seizure","C. anxiety"], correctAnswer: "C", marks: 1 },
+      { blockType: "question" as const, questionNumber: 12, questionType: "multiple-choice" as const, questionText: "The speaker went to hospitals in", options: ["A. USA and Russia.","B. Canada, Russia, and Serbia.","C. USA, Canada, Russia, and Serbia."], correctAnswer: "C", marks: 1 },
+      { blockType: "question" as const, questionNumber: 13, questionType: "multiple-choice" as const, questionText: "How did the speaker start using benzodiazepines?", options: ["A. They were prescribed to him.","B. He saw an internet article about them.","C. His family members recommended the drug."], correctAnswer: "A", marks: 1 },
+      { blockType: "question" as const, questionNumber: 14, questionType: "multiple-choice" as const, questionText: "Who accompanied the speaker to Russia and Serbia?", options: ["A. Tammy","B. Julian","C. Mikhaila and Andre"], correctAnswer: "C", marks: 1 },
+      { blockType: "question" as const, questionNumber: 15, questionType: "multiple-choice" as const, questionText: "Who does the speaker thank for helping him during his illness?", options: ["A. The government","B. Extended family and friends","C. Colleagues"], correctAnswer: "B", marks: 1 },
+      { blockType: "question" as const, questionNumber: 16, questionType: "multiple-choice" as const, questionText: "What helped the speaker sustain himself throughout his illness?", options: ["A. movies","B. work","C. sports"], correctAnswer: "B", marks: 1 },
+      { blockType: "question" as const, questionNumber: 17, questionType: "multiple-choice" as const, questionText: "The speaker hopes to", options: ["A. return to normal life.","B. start career in teaching.","C. travel abroad for further treatment."], correctAnswer: "A", marks: 1 },
+      { blockType: "question" as const, questionNumber: 18, questionType: "multiple-choice" as const, questionText: "In which year did the speaker complete the biblical series devoted to Genesis?", options: ["A. 2017","B. 2018","C. 2019"], correctAnswer: "A", marks: 1 },
+      { blockType: "question" as const, questionNumber: 19, questionType: "multiple-choice" as const, questionText: "In the short term, the speaker plans to make videos dedicated to", options: ["A. Exodus.","B. New Testament.","C. Book of Proverbs."], correctAnswer: "C", marks: 1 },
+      { blockType: "question" as const, questionNumber: 20, questionType: "multiple-choice" as const, questionText: "Since his illness, the speaker has", options: ["A. lost many subscribers on YouTube.","B. gained more followers on social media.","C. bought many books in multiple languages."], correctAnswer: "B", marks: 1 },
+    ]},
+    // PART 3 — Increment Training Integrator (Q21-30)
+    { sectionNumber: 3, title: "Part 3", context: "Gary discusses the role of an increment training integrator with Alicia and Crystal.", instructions: "Questions 21\u201330", audioUrl: "", questions: [
+      { blockType: "instruction" as const, content: "<strong>Questions 21\u201325</strong><br/>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>." },
+      { blockType: "question" as const, questionNumber: 21, questionType: "multiple-choice" as const, questionText: "Why were Gary\u2019s colleagues interested in hearing from Alicia and Crystal?", options: ["A. They wanted to find out the details of Alicia\u2019s and Crystal\u2019s jobs.","B. They wanted to work with Alicia and Crystal.","C. They wanted to hire Alicia and Crystal for project management."], correctAnswer: "A", marks: 1 },
+      { blockType: "question" as const, questionNumber: 22, questionType: "multiple-choice" as const, questionText: "Gary and Alicia agree that the job of an increment training integrator is similar to", options: ["A. becoming a project manager for someone\u2019s life.","B. training crew members.","C. teaching toddlers."], correctAnswer: "A", marks: 1 },
+      { blockType: "question" as const, questionNumber: 23, questionType: "multiple-choice" as const, questionText: "What did Alicia learn from her degree in criminology that helps her in her current job?", options: ["A. taking her job seriously","B. long-term planning","C. negotiation skills"], correctAnswer: "C", marks: 1 },
+      { blockType: "question" as const, questionNumber: 24, questionType: "multiple-choice" as const, questionText: "What did Crystal do immediately after graduating in aerospace engineering?", options: ["A. became a mom","B. worked at Johnson Space Center","C. transferred to the crew office"], correctAnswer: "B", marks: 1 },
+      { blockType: "question" as const, questionNumber: 25, questionType: "multiple-choice" as const, questionText: "Which experience of motherhood does Crystal bring to her job?", options: ["A. changing plans","B. cooking","C. multitasking"], correctAnswer: "C", marks: 1 },
+      { blockType: "instruction" as const, content: "<strong>Questions 26\u201330</strong><br/>Choose <strong>FIVE</strong> letters, <strong>A\u2013H</strong>.<br/>According to Crystal, which <strong>FIVE</strong> of the following are the roles of an increment training integrator?" },
+      { blockType: "question" as const, questionNumber: 26, questionType: "multiple-choice-multi" as const, questionText: "Role of an increment training integrator", options: ["A. conduct equipment test","B. develop a weekly calendar","C. collect inputs from various locations","D. ensure astronauts finish training before launch","E. create diet plans","F. schedule international trips","G. design uniforms","H. arrange language training"], correctAnswer: "B", marks: 1 },
+      { blockType: "question" as const, questionNumber: 27, questionType: "multiple-choice-multi" as const, questionText: "Role of an increment training integrator", options: ["A. conduct equipment test","B. develop a weekly calendar","C. collect inputs from various locations","D. ensure astronauts finish training before launch","E. create diet plans","F. schedule international trips","G. design uniforms","H. arrange language training"], correctAnswer: "C", marks: 1 },
+      { blockType: "question" as const, questionNumber: 28, questionType: "multiple-choice-multi" as const, questionText: "Role of an increment training integrator", options: ["A. conduct equipment test","B. develop a weekly calendar","C. collect inputs from various locations","D. ensure astronauts finish training before launch","E. create diet plans","F. schedule international trips","G. design uniforms","H. arrange language training"], correctAnswer: "D", marks: 1 },
+      { blockType: "question" as const, questionNumber: 29, questionType: "multiple-choice-multi" as const, questionText: "Role of an increment training integrator", options: ["A. conduct equipment test","B. develop a weekly calendar","C. collect inputs from various locations","D. ensure astronauts finish training before launch","E. create diet plans","F. schedule international trips","G. design uniforms","H. arrange language training"], correctAnswer: "F", marks: 1 },
+      { blockType: "question" as const, questionNumber: 30, questionType: "multiple-choice-multi" as const, questionText: "Role of an increment training integrator", options: ["A. conduct equipment test","B. develop a weekly calendar","C. collect inputs from various locations","D. ensure astronauts finish training before launch","E. create diet plans","F. schedule international trips","G. design uniforms","H. arrange language training"], correctAnswer: "H", marks: 1 },
+    ]},
+    // PART 4 — From fixed to adjustable reactions (Q31-40)
+    { sectionNumber: 4, title: "Part 4", context: "A lecture about fixed vs adjustable physiological reactions.", instructions: "Questions 31\u201340", audioUrl: "", questions: [
+      { blockType: "instruction" as const, content: "<strong>Questions 31\u201340</strong><br/>Complete the notes below.<br/>Write <strong>ONE WORD ONLY</strong> for each answer." },
+      { blockType: "instruction" as const, content: "<div style='text-align:center;font-weight:bold;margin:10px 0'>From fixed to adjustable reactions</div>" },
+      { blockType: "question" as const, questionNumber: 31, questionType: "note-completion" as const, questionText: "~some physiological processes have high sensitivity to environmental change, e.g., glucose metabolism, ________ pressure", correctAnswer: "blood", marks: 1, wordLimit: 1 },
+      { blockType: "question" as const, questionNumber: 32, questionType: "note-completion" as const, questionText: "~other processes are insensitive, e.g., DNA ________, purine metabolism", correctAnswer: "replication", marks: 1, wordLimit: 1 },
+      { blockType: "instruction" as const, content: "<ul><li>sensitive reactions evolve to be adjustable</li><li>insensitive reactions evolve to be fixed</li></ul>" },
+      { blockType: "question" as const, questionNumber: 33, questionType: "note-completion" as const, questionText: "~adjustable reactions can be vulnerable to diseases, e.g., insulin ________", correctAnswer: "resistance", marks: 1, wordLimit: 1 },
+      { blockType: "question" as const, questionNumber: 34, questionType: "note-completion" as const, questionText: "~insensitive reactions are vulnerable to genetic ________", correctAnswer: "defect", marks: 1, wordLimit: 1 },
+      { blockType: "instruction" as const, content: "<div style='font-weight:bold;margin:10px 0'>Fixed vs adjustable reactions</div>" },
+      { blockType: "instruction" as const, content: `<table border='1' style='border-collapse:collapse;width:100%'>
+<thead><tr>
+<th style='padding:8px;background:#f3f4f6'>Fixed reactions</th>
+<th style='padding:8px;background:#f3f4f6'>Adjustable reactions</th>
+</tr></thead>
+<tbody>
+<tr><td style='padding:8px'>operate the same way in any environment</td><td style='padding:8px'>function depends on specific environment</td></tr>
+<tr><td style='padding:8px'>control core <strong>[35]</strong> processes</td><td style='padding:8px'>control physiological adaptation</td></tr>
+<tr><td style='padding:8px'>affected by <strong>[36]</strong> gene mutations and can cause cystic fibrosis, progeria, SCID, etc.</td><td style='padding:8px'>disrupted by many genes and can increase the risk of obesity, type-2 <strong>[37]</strong>, asthma, etc.</td></tr>
+</tbody></table>` },
+      { blockType: "question" as const, questionNumber: 35, questionType: "table-completion" as const, questionText: "~Fixed reactions: control core ________ processes", correctAnswer: "biological", marks: 1, wordLimit: 1 },
+      { blockType: "question" as const, questionNumber: 36, questionType: "table-completion" as const, questionText: "~Fixed reactions: affected by ________ gene mutations", correctAnswer: "single", marks: 1, wordLimit: 1 },
+      { blockType: "question" as const, questionNumber: 37, questionType: "table-completion" as const, questionText: "~Adjustable reactions: risk of obesity, type-2 ________, asthma", correctAnswer: "diabetes", marks: 1, wordLimit: 1 },
+      { blockType: "instruction" as const, content: "<div style='font-weight:bold;margin:10px 0'>Characteristics of fixed processes</div><ul><li>core biological processes are fixed</li></ul>" },
+      { blockType: "question" as const, questionNumber: 38, questionType: "note-completion" as const, questionText: "~major physiological features are fixed, such as number of heads, ________, arms, digits", correctAnswer: "legs", marks: 1, wordLimit: 1 },
+      { blockType: "question" as const, questionNumber: 39, questionType: "note-completion" as const, questionText: "~such as number of heads, legs, arms, digits, and ________", correctAnswer: "eyes", marks: 1, wordLimit: 1 },
+      { blockType: "question" as const, questionNumber: 40, questionType: "note-completion" as const, questionText: "~mutations can alter physiological features and cause ________ defects", correctAnswer: "birth", marks: 1, wordLimit: 1 },
+    ]},
+  ]
+};
+seed();

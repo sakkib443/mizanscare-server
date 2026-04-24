@@ -15,6 +15,72 @@
 6. **Question blocks**: Use `questionNumber`, `questionType`, `correctAnswer`, `questionText`
 7. **Upsert logic**: Always check `testNumber` to avoid duplicates
 8. **Answer in questionText**: Include the full sentence with `________` where the blank is
+9. **NEVER duplicate the options list in instruction HTML for `matching`/`map-labeling`** — see below ⬇
+
+---
+
+## 🚨 RULE 9 (DETAIL) — No Duplicate Options List
+
+### The bug
+The frontend (`mizanscare-client/src/app/exam/[examId]/listening/page.jsx` ~line 1145) **auto-renders** the options list for `matching`, `map-labeling`, and `diagram-labeling` questions whenever ANY option string is longer than 4 characters:
+
+```js
+const hasLongOpts = (firstB.options || []).some(o => (o || '').length > 4);
+```
+
+So when options look like `"A. Louise Bagshaw"` (length > 4), the frontend already draws the full option box. If the seed also includes an instruction block listing those same options, the user sees them **twice**.
+
+### ❌ WRONG — Options duplicated in instruction block
+```typescript
+{ blockType: "instruction" as const,
+  content: "<ul><li><strong>A</strong> John</li><li><strong>B</strong> Susan</li><li><strong>C</strong> Both</li></ul>" },
+
+{ blockType: "question" as const, questionNumber: 25, questionType: "matching" as const,
+  questionText: "We should plan a trip to Mars.",
+  options: ["A. John", "B. Susan", "C. Both John and Susan"],  // <-- length > 4
+  correctAnswer: "B", marks: 1 },
+```
+
+Renders as:
+```
+A  John           ← from instruction block
+B  Susan
+C  Both
+A  John           ← from auto-rendered hasLongOpts box
+B  Susan
+C  Both John and Susan
+[25] We should plan a trip to Mars. [▾]
+```
+
+### ✅ CORRECT — Let the frontend render the options
+```typescript
+{ blockType: "instruction" as const,
+  content: "<strong>Questions 25-30</strong><br/>Who expresses the following opinions?" },
+
+{ blockType: "question" as const, questionNumber: 25, questionType: "matching" as const,
+  questionText: "We should plan a trip to Mars.",
+  options: ["A. John", "B. Susan", "C. Both John and Susan"],
+  correctAnswer: "B", marks: 1 },
+```
+
+### When listing options IS allowed
+You MAY include the option text inside instructions ONLY when the options array holds just bare letters (length ≤ 2), e.g.:
+```typescript
+options: ["A", "B", "C", "D", "E"]   // length 1 → hasLongOpts is FALSE
+```
+In that case the frontend does NOT auto-render, so your instruction HTML is the only source and must list them.
+
+### Detection / auto-scan
+Run this anytime you add or edit a listening seed — it flags every instruction block that would collide with an auto-rendered options box:
+
+```bash
+npx ts-node src/scripts/detectDuplicateOptions.ts
+```
+
+Output is empty when clean:
+```
+✅ No duplicate-options issues detected.
+```
 
 ---
 
@@ -155,8 +221,24 @@ Same pattern as note-completion with respective `questionType`.
 
 ### 8. `matching` (Match items from a list)
 
+**⚠ See Rule 9 above — never put an option list in the instruction block when `options[]` contains strings with text (length > 4). The frontend auto-renders them.**
+
+#### Case A — Options are descriptive (length > 4) — preferred
 ```typescript
-// Instruction with options listed
+// Instruction: HEADER ONLY, no options listing
+{ blockType: "instruction",
+  content: "<strong>Questions 25-30</strong><br/>Who expresses the following opinions?<br/>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>." },
+
+// Each matching question — options array carries the full text
+{ blockType: "question", questionNumber: 25, questionType: "matching",
+  questionText: "We should plan a trip to Mars.",
+  options: ["A. John", "B. Susan", "C. Both John and Susan"],
+  correctAnswer: "B", marks: 1 },
+```
+
+#### Case B — Options are bare letters (length ≤ 2) — list them in instructions
+```typescript
+// Instruction lists the options (frontend will NOT auto-render)
 { blockType: "instruction",
   content: `<strong>Questions 21-26</strong><br/>Choose SIX answers from the box.<br/><br/>
     <strong>Personality Traits</strong><br/>
@@ -164,20 +246,14 @@ Same pattern as note-completion with respective `questionType`.
     D &nbsp; attention-seeking<br/>E &nbsp; introverted<br/>F &nbsp; co-operative<br/>
     G &nbsp; caring<br/>H &nbsp; competitive` },
 
-// Each matching question
+// Options are JUST letters
 { blockType: "question", questionNumber: 21, questionType: "matching",
   questionText: "the eldest child",
   options: ["A", "B", "C", "D", "E", "F", "G", "H"],
   correctAnswer: "G", marks: 1 },
-
-{ blockType: "question", questionNumber: 22, questionType: "matching",
-  questionText: "the
-
-
- middle child",
-  options: ["A", "B", "C", "D", "E", "F", "G", "H"],
-  correctAnswer: "E", marks: 1 },
 ```
+
+**Pick ONE case per question group — never mix.**
 
 ### 9. `map-labeling` / `diagram-labeling`
 
@@ -402,3 +478,5 @@ Before running seed script, verify:
 - [ ] `wordLimit` set correctly for completion types
 - [ ] No duplicate question numbers
 - [ ] ALL context lines from photo included as instruction blocks (don't skip any!)
+- [ ] For `matching`/`map-labeling` with descriptive options (length > 4): NO options list in instruction block (see Rule 9)
+- [ ] Ran `npx ts-node src/scripts/detectDuplicateOptions.ts` — output is "✅ No duplicate-options issues detected."
