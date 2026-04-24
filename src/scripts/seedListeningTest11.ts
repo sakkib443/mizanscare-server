@@ -218,14 +218,6 @@ const listeningTestData = {
           blockType: "instruction" as const,
           content: "<strong>Questions 25\u201330</strong><br/>Which country do the following statements apply to?<br/>Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>."
         },
-        {
-          blockType: "instruction" as const,
-          content: `<div style='margin:10px 0;padding:12px;border:1px solid #d1d5db;max-width:250px'>
-<div><strong>A</strong> &nbsp; Japan</div>
-<div><strong>B</strong> &nbsp; China</div>
-<div><strong>C</strong> &nbsp; Thailand</div>
-</div>`
-        },
         { blockType: "question" as const, questionNumber: 25, questionType: "matching" as const, questionText: "They grow the most rice in the world.", options: ["A. Japan", "B. China", "C. Thailand"], correctAnswer: "TBD", marks: 1 },
         { blockType: "question" as const, questionNumber: 26, questionType: "matching" as const, questionText: "They export the most rice in the world.", options: ["A. Japan", "B. China", "C. Thailand"], correctAnswer: "TBD", marks: 1 },
         { blockType: "question" as const, questionNumber: 27, questionType: "matching" as const, questionText: "They aim to increase the nutritional value of rice.", options: ["A. Japan", "B. China", "C. Thailand"], correctAnswer: "TBD", marks: 1 },

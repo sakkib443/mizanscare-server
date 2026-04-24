@@ -374,19 +374,6 @@ const listeningTestData = {
 
         {
           blockType: "instruction" as const,
-          content: `<div style='margin:10px 0;padding:12px;border:1px solid #d1d5db;max-width:250px'>
-<div><strong>A</strong> &nbsp; beginning</div>
-<div><strong>B</strong> &nbsp; choices</div>
-<div><strong>C</strong> &nbsp; document</div>
-<div><strong>D</strong> &nbsp; document</div>
-<div><strong>E</strong> &nbsp; opening</div>
-<div><strong>F</strong> &nbsp; questions</div>
-<div><strong>G</strong> &nbsp; scales</div>
-</div>`
-        },
-
-        {
-          blockType: "instruction" as const,
           content: "<strong>How to write a questionnaire</strong>"
         },
 

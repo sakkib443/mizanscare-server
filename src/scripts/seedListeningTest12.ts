@@ -114,14 +114,6 @@ const listeningTestData = {
           blockType: "instruction" as const,
           content: "<strong>Questions 11\u201314</strong><br/>Which counsellor should you see? Write the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>, next to questions 11\u201314."
         },
-        {
-          blockType: "instruction" as const,
-          content: `<div style='margin:10px 0;padding:12px;border:1px solid #d1d5db;max-width:250px'>
-<div><strong>A</strong> &nbsp; Louise Bagshaw</div>
-<div><strong>B</strong> &nbsp; Tony Denby</div>
-<div><strong>C</strong> &nbsp; Naomi Flynn</div>
-</div>`
-        },
         { blockType: "question" as const, questionNumber: 11, questionType: "matching" as const, questionText: "If it is your first time seeing a counsellor", options: ["A. Louise Bagshaw", "B. Tony Denby", "C. Naomi Flynn"], correctAnswer: "TBD", marks: 1 },
         { blockType: "question" as const, questionNumber: 12, questionType: "matching" as const, questionText: "If you are unable to use a counsellor during normal office hours", options: ["A. Louise Bagshaw", "B. Tony Denby", "C. Naomi Flynn"], correctAnswer: "TBD", marks: 1 },
         { blockType: "question" as const, questionNumber: 13, questionType: "matching" as const, questionText: "If you do not have an appointment", options: ["A. Louise Bagshaw", "B. Tony Denby", "C. Naomi Flynn"], correctAnswer: "TBD", marks: 1 },

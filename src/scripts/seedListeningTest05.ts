@@ -177,20 +177,6 @@ const listeningTestData = {
 
         {
           blockType: "instruction" as const,
-          content: `<div style='margin:10px 0;padding:12px;border:1px solid #d1d5db;max-width:350px'>
-<div style='text-align:center;font-weight:bold;margin-bottom:8px;text-transform:uppercase;font-style:italic'>List of Features</div>
-<div style='display:flex;gap:12px'><strong>A</strong><span>cleaning included</span></div>
-<div style='display:flex;gap:12px'><strong>B</strong><span>all meals included</span></div>
-<div style='display:flex;gap:12px'><strong>C</strong><span>private showers</span></div>
-<div style='display:flex;gap:12px'><strong>D</strong><span>modern building</span></div>
-<div style='display:flex;gap:12px'><strong>E</strong><span>parking spaces</span></div>
-<div style='display:flex;gap:12px'><strong>F</strong><span>single sex</span></div>
-<div style='display:flex;gap:12px'><strong>G</strong><span>sports facilities</span></div>
-</div>`
-        },
-
-        {
-          blockType: "instruction" as const,
           content: "<strong>HALLS OF RESIDENCE</strong>"
         },
 
@@ -420,16 +406,6 @@ const listeningTestData = {
         {
           blockType: "instruction" as const,
           content: "<strong>Questions 31\u201335</strong><br/>Of which US news source is each of the following statements true?<br/>Write the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong> next to Questions 31\u201335."
-        },
-
-        {
-          blockType: "instruction" as const,
-          content: `<div style='margin:10px 0;padding:12px;border:1px solid #d1d5db;max-width:300px;text-align:center'>
-<div style='font-weight:bold;margin-bottom:8px;text-transform:uppercase'>News Sources</div>
-<div style='display:flex;gap:16px;justify-content:center'><strong>A</strong><span>television</span></div>
-<div style='display:flex;gap:16px;justify-content:center'><strong>B</strong><span>internet</span></div>
-<div style='display:flex;gap:16px;justify-content:center'><strong>C</strong><span>the press</span></div>
-</div>`
         },
 
         {
