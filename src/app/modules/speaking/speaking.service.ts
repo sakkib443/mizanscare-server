@@ -175,16 +175,16 @@ const updateSpeakingTest = async (
     return updatedTest;
 };
 
-// Delete speaking test (soft delete)
+// Delete speaking test
 const deleteSpeakingTest = async (id: string) => {
     const test = await SpeakingTest.findById(id);
     if (!test) {
         throw new Error("Speaking test not found");
     }
 
-    await SpeakingTest.findByIdAndUpdate(id, { isActive: false });
+    await SpeakingTest.findByIdAndDelete(id);
 
-    return { message: "Speaking test deactivated successfully" };
+    return { message: "Speaking test deleted successfully" };
 };
 
 // Toggle active status

@@ -274,16 +274,16 @@ const updateListeningTest = async (
     return updatedTest;
 };
 
-// Delete listening test (soft delete)
+// Delete listening test
 const deleteListeningTest = async (id: string) => {
     const test = await ListeningTest.findById(id);
     if (!test) {
         throw new Error("Listening test not found");
     }
 
-    await ListeningTest.findByIdAndUpdate(id, { isActive: false });
+    await ListeningTest.findByIdAndDelete(id);
 
-    return { message: "Listening test deactivated successfully" };
+    return { message: "Listening test deleted successfully" };
 };
 
 // Toggle active status

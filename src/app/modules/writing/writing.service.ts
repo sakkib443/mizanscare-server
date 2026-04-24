@@ -258,9 +258,9 @@ const deleteWritingTest = async (id: string) => {
         throw new Error("Writing test not found");
     }
 
-    await WritingTest.findByIdAndUpdate(id, { isActive: false });
+    await WritingTest.findByIdAndDelete(id);
 
-    return { message: "Writing test deactivated successfully" };
+    return { message: "Writing test deleted successfully" };
 };
 
 // Toggle active

@@ -278,9 +278,9 @@ const deleteReadingTest = async (id: string) => {
         throw new Error("Reading test not found");
     }
 
-    await ReadingTest.findByIdAndUpdate(id, { isActive: false });
+    await ReadingTest.findByIdAndDelete(id);
 
-    return { message: "Reading test deactivated successfully" };
+    return { message: "Reading test deleted successfully" };
 };
 
 // Toggle active
