@@ -88,7 +88,14 @@ Step 4: Test & Verify
 passage: `A In Old Slavonic, a language that precedes Russian...\n\nB Because red is a long-wave colour...\n\nC Russians love red...`
 ```
 
-**কিভাবে render হয়:** Exam page automatically detect করে — paragraph "A ", "B " ইত্যাদি দিয়ে শুরু হলে label টাকে **bold + বড় font (20px)** এ দেখায়। কোনো extra কিছু করতে হয় না।
+**কিভাবে render হয়:** Exam page **sequential detection** ব্যবহার করে — paragraph গুলো A, B, C, D... অনুক্রমে শুরু হলে label গুলো **bold + বড় font (20px)** এ render হয়। কোনো extra কিছু করতে হয় না।
+
+**⚠️ নিয়ম (গুরুত্বপূর্ণ):**
+- Label গুলো অবশ্যই **sequential** হতে হবে — A দিয়ে শুরু, তারপর B, C, D... ধারাবাহিক ভাবে
+- কমপক্ষে **৩টা sequential label (A, B, C)** থাকলে তবেই bold render হবে
+- এই sequential check এর কারণে যেসব passage article "A" (যেমন "A company was founded...") দিয়ে শুরু হয় সেগুলো ভুল করে bold হয় না
+- ❌ DON'T: `B.\n`, `C.\n` (period + newline format) — এটা ভেঙে যায়
+- ✅ DO: `A text...`, `B text...`, `C text...` (letter + space, inline)
 
 ### Without Labels (Continuous text)
 
