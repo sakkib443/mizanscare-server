@@ -4,11 +4,12 @@ import { User } from "../app/modules/user/user.model";
 import config from "../app/config";
 
 const readingTest = {
-    testId: "READING_TEST_03",
-    testNumber: 3,
-    title: "Reading Test 03",
-    description: "IELTS Academic Reading Test featuring passages on the London underground railway, stadiums through history, and the hunt for King Charles II",
-    source: "IELTS Practice Test",
+    testId: "READING_AC_003",
+    testNumber: 103,
+    title: "Reading Mock Test 03 - Academic",
+    description: "IELTS Academic Reading Test featuring passages on How to Spot a Liar, Being Left-handed in a Right-handed World, and What is a dinosaur?",
+    source: "IELTS Academic Practice",
+    testType: "academic" as const,
     difficulty: "medium" as const,
     isActive: true,
     duration: 60,
@@ -16,392 +17,362 @@ const readingTest = {
     totalMarks: 40,
     sections: [
         // ═══════════════════════════════════════════
-        // SECTION 1: The development of the London underground railway
-        // Questions 1-13
+        // SECTION 1: How to Spot a Liar (Q1-13)
         // ═══════════════════════════════════════════
         {
             sectionNumber: 1,
-            title: "The development of the London underground railway",
-            passage: `In the first half of the 1800s, London's population grew at an astonishing rate, and the central area became increasingly congested. In addition, the expansion of the overground railway network resulted in more and more passengers arriving in the capital. However, in 1846, a Royal Commission decided that the railways should not be allowed to enter the City, the capital's historic and business centre. The result was that the overground railway stations formed a ring around the City. The area within consisted of poorly built, overcrowded slums and the streets were full of horse-drawn traffic. Crossing the City became a nightmare. It could take an hour and a half to travel 8 km by horse-drawn carriage or bus. Numerous schemes were proposed to resolve these problems, but few succeeded.
+            title: "How to Spot a Liar",
+            passage: `However much we may abhor it, deception comes naturally to all living things. Birds do it by feigning injury to lead hungry predators away from nesting young. Spider crabs do it by disguise: adorning themselves with strips of kelp and other debris, they pretend to be something they are not \u2013 and so escape their enemies. Nature amply rewards successful deceivers by allowing them to survive long enough to mate and reproduce. So it may come as no surprise to learn that human beings \u2013 who, according to psychologist Gerald Johnson of the University of South California, lie about 200 times a day, roughly one untruth every 5 minutes \u2013 often deceive for exactly the same reasons: to save their own skins or to get something they can\u2019t get by other means.
 
-Amongst the most vocal advocates for a solution to London's traffic problems was Charles Pearson, who worked as a solicitor for the City of London. He saw both social and economic advantages in building an underground railway that would link the overground railway stations together and clear London slums at the same time. His idea was to relocate the poor workers who lived in the inner-city slums to newly constructed suburbs, and to provide cheap rail travel for them to get to work. Pearson's ideas gained support amongst some businessmen and in 1851 he submitted a plan to Parliament. It was rejected, but coincided with a proposal from another group for an underground connecting line, which Parliament passed.
+But knowing how to catch deceit can be just as important a survival skill as knowing how to tell a lie and get away with it. A person able to spot falsehood quickly is unlikely to be swindled by an unscrupulous business associate or hoodwinked by a devious spouse. Luckily, nature provides more than enough clues to trap dissemblers in their own tangled webs \u2013 if you know where to look. By closely observing facial expressions, body language and tone of voice, practically anyone can recognise the tell-tale signs of lying. Researchers are even programming computers \u2013 like those used on Lie Detector \u2013 to get at the truth by analysing the same physical cues available to the naked eye and ear. \u201cWith the proper training, many people can learn to reliably detect lies,\u201d says Paul Ekman, professor of psychology at the University of California, San Francisco, who has spent the past 15 years studying the secret art of deception.
 
-The two groups merged and established the Metropolitan Railway Company in August 1854. The company's plan was to construct an underground railway line from the Great Western Railway's (GWR) station at Paddington to the edge of the City at Farringdon Street \u2013 a distance of almost 5 km. The organisation had difficulty in raising the funding for such a radical and expensive scheme, not least because of the critical articles printed by the press. Objectors argued that the tunnels would collapse under the weight of traffic overhead, buildings would be shaken and passengers would be poisoned by the emissions from the train engines. However, Pearson and his partners persisted.
+In order to know what kind of lies work best, successful liars need to accurately assess other people\u2019s emotional states. Ekman\u2019s research shows that this same emotional intelligence is essential for good lie detectors, too. The emotional state to watch out for is stress, the conflict most liars feel between the truth and what they actually say and do.
 
-The GWR, aware that the new line would finally enable them to run trains into the heart of the City, invested almost \u00a3250,000 in the scheme. Eventually, over a five-year period, \u00a31m was raised. The chosen route ran beneath existing main roads to minimise the expense of demolishing buildings. Originally scheduled to be completed in 21 months, the construction of the underground line took three years. It was built just below street level using a technique known as \u2018cut and cover\u2019. A trench about ten metres wide and six metres deep was dug, and the sides temporarily held up with timber beams. Brick walls were then constructed, and finally a brick arch was added to create a tunnel. A two-metre-deep layer of soil was laid on top of the tunnel and the road above rebuilt.
+Even high-tech lie detectors don\u2019t detect lies as such; they merely detect the physical cues of emotions, which may or may not correspond to what the person being tested is saying. Polygraphs, for instance, measure respiration, heart rate and skin conductivity, which tend to increase when people are nervous \u2013 as they usually are when lying. Nervous people typically perspire, and the salts contained in perspiration conduct electricity. That\u2019s why a sudden leap in skin conductivity indicates nervousness \u2013 about getting caught, perhaps \u2013 which may, in turn, suggest that someone is being economical with the truth. On the other hand, it might also mean that the lights in the television studio are too hot \u2013 which is one reason polygraph tests are inadmissible in court. \u201cGood lie detectors don\u2019t rely on a single thing,\u201d says Ekman, \u201cbut interpret clusters of verbal and non-verbal clues that suggest someone might be lying.\u201d
 
-The Metropolitan line, which opened on 10 January 1863, was the world's first underground railway. On its first day, almost 40,000 passengers were carried between Paddington and Farringdon, the journey taking about 18 minutes. By the end of the Metropolitan's first year of operation, 9.5 million journeys had been made.
+The clues are written all over the face. Because the musculature of the face is directly connected to the areas of the brain that process emotion, the countenance can be a window to the soul. Neurological studies even suggest that genuine emotions travel different pathways through the brain than insincere ones. If a patient paralysed by stroke on one side of the face, for example, is asked to smile deliberately, only the mobile side of the mouth is raised. But tell that same person a funny joke, and the patient breaks into a full and spontaneous smile. Very few people \u2013 most notably, actors and politicians \u2013 are able to consciously control all of their facial expressions. Lies can often be caught when the liars\u2019 true feelings briefly leak through the mask of deception. \u201cWe don\u2019t think before we feel,\u201d Ekman says. \u201cExpressions tend to show up on the face before we\u2019re even conscious of experiencing an emotion.\u201d
 
-Even as the Metropolitan began operation, the first extensions to the line were being authorised; these were built over the next five years, reaching Moorgate in the east of London and Hammersmith in the west. The original plan was to pull the trains with steam locomotives, using firebricks in the boilers to provide steam, but these engines were never introduced. Instead, the line used specially designed locomotives that were fitted with water tanks in which steam could be condensed. However, smoke and fumes remained a problem, even though ventilation shafts were added to the tunnels.
+One of the most difficult facial expressions to fake \u2013 or conceal, if it\u2019s genuinely felt \u2013 is sadness. When someone is truly sad, the forehead wrinkles with grief and the inner corners of the eyebrows are pulled up. Fewer than 15% of the people Ekman tested were able to produce this eyebrow movement voluntarily. By contrast, the lowering of the eyebrows associated with an angry scowl can be replicated at will by almost everybody. \u201cIf someone claims they are sad and the inner corners of their eyebrows don\u2019t go up,\u201d Ekman says, \u201cthe sadness is probably false.\u201d
 
-Despite the extension of the underground railway, by the 1880s, congestion on London's streets had become worse. The problem was partly that the existing underground lines formed a circuit around the centre of London and extended to the suburbs, but did not cross the capital's centre. The \u2018cut and cover\u2019 method of construction was not an option in this part of the capital. The only alternative was to tunnel deep underground.
-
-Although the technology to create these tunnels existed, steam locomotives could not be used in such a confined space. It wasn't until the development of a reliable electric motor, and a means of transferring power from the generator to a moving train, that the world's first deep-level electric railway, the City & South London, became possible. The line opened in 1890, and ran from the City to Stockwell, south of the River Thames. The trains were made up of three carriages and driven by electric engines. The carriages were narrow and had tiny windows just below the roof because it was thought that passengers would not want to look out at the tunnel walls. The line was not without its problems, mainly caused by an unreliable power supply. Although the City & South London Railway was a great technical achievement, it did not make a profit. Then, in 1900, the Central London Railway, known as the \u2018Tuppenny Tube\u2019, began operation using new electric locomotives. It was very popular and soon afterwards new railways and extensions were added to the growing tube network. By 1907, the heart of today's Underground system was in place.`,
-            passageSource: "IELTS Practice Test",
-            instructions: "Questions 1-13",
+The smile, on the other hand, is one of the easiest facial expressions to counterfeit. It takes just two muscles \u2013 the zygomaticus major muscles that extend from the cheekbones to the corners of the lips \u2013 to produce a grin. But there\u2019s a catch. A genuine smile affects not only the corners of the lips but also the orbicularis oculi, the muscle around the eye that produces the distinctive \u201ccrow\u2019s feet\u201d associated with people who laugh a lot. A counterfeit grin can be unmasked if the corners of the lips go up, the eyes crinkle, but the inner corners of the eyebrows are not lowered, a movement controlled by the orbicularis oculi that is difficult to fake. The absence of lowered eyebrows is one reason why a false smile looks so strained and stiff.`,
+            passageSource: "IELTS Academic Practice",
+            instructions: "You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1.",
             questionGroups: [
-                // Questions 1-6: Note Completion
+                // Questions 1-5: Yes/No/Not Given
                 {
-                    groupType: "note-completion",
+                    groupType: "yes-no-not-given",
                     startQuestion: 1,
-                    endQuestion: 6,
-                    mainInstruction: "Complete the notes below.",
-                    subInstruction: "Choose ONE WORD ONLY from the passage for each answer.",
-                    mainHeading: "The London underground railway",
-                    passage: `The problem
-
-The 1 __________ of London increased rapidly between 1800 and 1850
-The streets were full of horse-drawn vehicles
-
-The proposed solution
-
-Charles Pearson, a solicitor, suggested building an underground railway
-Building the railway would make it possible to move people to better housing in the 2 __________
-A number of 3 __________ agreed with Pearson's idea
-The company initially had problems getting the 4 __________ needed for the project
-Negative articles about the project appeared in the 5 __________
-
-The construction
-
-The chosen route did not require many buildings to be pulled down
-The 'cut and cover' method was used to construct the tunnels
-With the completion of the brick arch, the tunnel was covered with 6 __________`,
-                    notesSections: [
-                        {
-                            subHeading: "The problem",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 1, textBefore: "The", textAfter: "of London increased rapidly between 1800 and 1850", correctAnswer: "population" },
-                            ],
-                        },
-                        {
-                            subHeading: "The proposed solution",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 2, textBefore: "Building the railway would make it possible to move people to better housing in the", textAfter: "", correctAnswer: "suburbs" },
-                                { type: "question" as const, questionNumber: 3, textBefore: "A number of", textAfter: "agreed with Pearson's idea", correctAnswer: "businessmen" },
-                                { type: "question" as const, questionNumber: 4, textBefore: "The company initially had problems getting the", textAfter: "needed for the project", correctAnswer: "funding" },
-                                { type: "question" as const, questionNumber: 5, textBefore: "Negative articles about the project appeared in the", textAfter: "", correctAnswer: "press" },
-                            ],
-                        },
-                        {
-                            subHeading: "The construction",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 6, textBefore: "With the completion of the brick arch, the tunnel was covered with", textAfter: "", correctAnswer: "soil" },
-                            ],
-                        },
-                    ],
-                },
-                // Questions 7-13: True/False/Not Given
-                {
-                    groupType: "true-false-not-given",
-                    startQuestion: 7,
-                    endQuestion: 13,
-                    mainInstruction: "Do the following statements agree with the information given in the passage?",
-                    subInstruction: "In boxes on your answer sheet, write",
+                    endQuestion: 5,
+                    mainInstruction: "Do the following statements agree with the information given in Reading Passage 1?",
+                    subInstruction: "In boxes 1-5 on your answer sheet, write",
                     optionsExplanation: [
-                        { option: "TRUE", explanation: "if the statement agrees with the information" },
-                        { option: "FALSE", explanation: "if the statement contradicts the information" },
+                        { option: "YES", explanation: "if the statement agrees with the information" },
+                        { option: "NO", explanation: "if the statement contradicts the information" },
                         { option: "NOT GIVEN", explanation: "if there is no information on this" },
                     ],
                     statements: [
-                        { questionNumber: 7, text: "Other countries had built underground railways before the Metropolitan line opened.", correctAnswer: "FALSE" },
-                        { questionNumber: 8, text: "More people than predicted travelled on the Metropolitan line on the first day.", correctAnswer: "NOT GIVEN" },
-                        { questionNumber: 9, text: "The use of ventilation shafts failed to prevent pollution in the tunnels.", correctAnswer: "TRUE" },
-                        { questionNumber: 10, text: "A different approach from the 'cut and cover' technique was required in London's central area.", correctAnswer: "TRUE" },
-                        { questionNumber: 11, text: "The windows on City & South London trains were at eye level.", correctAnswer: "FALSE" },
-                        { questionNumber: 12, text: "The City & South London Railway was a financial success.", correctAnswer: "FALSE" },
-                        { questionNumber: 13, text: "Trains on the 'Tuppenny Tube' nearly always ran on time.", correctAnswer: "NOT GIVEN" },
+                        { questionNumber: 1, text: "All living animals can lie.", correctAnswer: "NO" },
+                        { questionNumber: 2, text: "Some people tell lies for self-preservation.", correctAnswer: "YES" },
+                        { questionNumber: 3, text: "Scientists have used computers to analyse which part of the brain is responsible for telling lies.", correctAnswer: "NOT GIVEN" },
+                        { questionNumber: 4, text: "Lying as a survival skill is more important than detecting a lie.", correctAnswer: "NOT GIVEN" },
+                        { questionNumber: 5, text: "To be a good liar, one has to understand other people\u2019s emotions.", correctAnswer: "YES" },
                     ],
                 },
-            ],
-            questions: [
-                // Q1-6: Note Completion
-                { questionNumber: 1, questionType: "note-completion", questionText: "The __________ of London increased rapidly between 1800 and 1850", correctAnswer: "population", acceptableAnswers: ["population"], marks: 1, wordLimit: 1 },
-                { questionNumber: 2, questionType: "note-completion", questionText: "move people to better housing in the __________", correctAnswer: "suburbs", acceptableAnswers: ["suburbs"], marks: 1, wordLimit: 1 },
-                { questionNumber: 3, questionType: "note-completion", questionText: "A number of __________ agreed with Pearson's idea", correctAnswer: "businessmen", acceptableAnswers: ["businessmen"], marks: 1, wordLimit: 1 },
-                { questionNumber: 4, questionType: "note-completion", questionText: "problems getting the __________ needed for the project", correctAnswer: "funding", acceptableAnswers: ["funding"], marks: 1, wordLimit: 1 },
-                { questionNumber: 5, questionType: "note-completion", questionText: "Negative articles appeared in the __________", correctAnswer: "press", acceptableAnswers: ["press"], marks: 1, wordLimit: 1 },
-                { questionNumber: 6, questionType: "note-completion", questionText: "the tunnel was covered with __________", correctAnswer: "soil", acceptableAnswers: ["soil"], marks: 1, wordLimit: 1 },
-                // Q7-13: True/False/Not Given
-                { questionNumber: 7, questionType: "true-false-not-given", questionText: "Other countries had built underground railways before the Metropolitan line opened.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "FALSE", marks: 1 },
-                { questionNumber: 8, questionType: "true-false-not-given", questionText: "More people than predicted travelled on the Metropolitan line on the first day.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
-                { questionNumber: 9, questionType: "true-false-not-given", questionText: "The use of ventilation shafts failed to prevent pollution in the tunnels.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "TRUE", marks: 1 },
-                { questionNumber: 10, questionType: "true-false-not-given", questionText: "A different approach from the 'cut and cover' technique was required in London's central area.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "TRUE", marks: 1 },
-                { questionNumber: 11, questionType: "true-false-not-given", questionText: "The windows on City & South London trains were at eye level.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "FALSE", marks: 1 },
-                { questionNumber: 12, questionType: "true-false-not-given", questionText: "The City & South London Railway was a financial success.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "FALSE", marks: 1 },
-                { questionNumber: 13, questionType: "true-false-not-given", questionText: "Trains on the 'Tuppenny Tube' nearly always ran on time.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
-            ],
-        },
-        // ═══════════════════════════════════════════
-        // SECTION 2: Stadiums: past, present and future
-        // Questions 14-26
-        // ═══════════════════════════════════════════
-        {
-            sectionNumber: 2,
-            title: "Stadiums: past, present and future",
-            passage: `A.\nStadiums are among the oldest forms of urban architecture: vast stadiums where the public could watch sporting events were at the centre of western city life as far back as the ancient Greek and Roman Empires, well before the construction of the great medieval cathedrals and the grand 19th- and 20th-century railway stations which dominated urban skylines in later eras.\n\nToday, however, stadiums are regarded with growing scepticism. Construction costs can soar above \u00a31 billion, and stadiums finished for major events such as the Olympic Games or the FIFA World Cup have notably fallen into disuse and disrepair.\n\nBut this need not be the case. History shows that stadiums can drive urban development and adapt to the culture of every age. Even today, architects and planners are finding new ways to adapt the mono-functional sports arenas which became emblematic of modernisation during the 20th century.\n\nB.\nThe amphitheatre of Arles in southwest France, with a capacity of 25,000 spectators, is perhaps the best example of just how versatile stadiums can be. Built by the Romans in 90 AD, it became a fortress with four towers after the fifth century, and was then transformed into a village containing more than 200 houses. With the growing interest in conservation during the 19th century, it was converted back into an arena for the staging of bullfights, thereby returning the structure to its original use as a venue for public spectacles.\n\nAnother example is the imposing arena of Verona in northern Italy, with space for 30,000 spectators, which was built 60 years before the Arles amphitheatre and 40 years before Rome's famous Colosseum. It has endured the centuries and is currently considered one of the world's prime sites for opera, thanks to its outstanding acoustics.\n\nC.\nThe area in the centre of the Italian town of Lucca, known as the Piazza dell'Anfiteatro, is yet another impressive example of an amphitheatre becoming absorbed into the fabric of the city. The site evolved in a similar way to Arles and was progressively filled with buildings from the Middle Ages until the 19th century, variously used as houses, a salt depot and a prison. But rather than reverting to an arena, it became a market square, designed by Romanticist architect Lorenzo Nottolini. Today, the ruins of the amphitheatre remain embedded in the various shops and residences surrounding the public square.\n\nD.\nThere are many similarities between modern stadiums and the ancient amphitheatres intended for games. But some of the flexibility was lost at the beginning of the 20th century, as stadiums were developed using new products such as steel and reinforced concrete, and made use of bright lights for night-time matches.\n\nMany such stadiums are situated in suburban areas, designed for sporting use only and surrounded by parking lots. These factors mean that they may not be as accessible to the general public, require more energy to run and contribute to urban heat.\n\nE.\nBut many of today's most innovative architects see scope for the stadium to help improve the city. Among the current strategies, two seem to be having particular success: the stadium as an urban hub, and as a power plant.\n\nThere's a growing trend for stadiums to be equipped with public spaces and services that serve a function beyond sport, such as hotels, retail outlets, conference centres, restaurants and bars, children's playgrounds and green space. Creating mixed-use developments such as this reinforces compactness and multi-functionality, making more efficient use of land and helping to regenerate urban spaces.\n\nThis opens the space up to families and a wider cross-section of society, instead of catering only to sportspeople and supporters. There have been many examples of this in the UK: the mixed-use facilities at Wembley and Old Trafford have become a blueprint for many other stadiums in the world.\n\nF.\nThe phenomenon of stadiums as power stations has arisen from the idea that energy problems can be overcome by integrating interconnected buildings by means of a smart grid, which is an electricity supply network that uses digital communications technology to detect and react to local changes in usage, without significant energy losses. Stadiums are ideal for these purposes, because their canopies have a large surface area for fitting photovoltaic panels and rise high enough (more than 40 metres) to make use of micro wind turbines.\n\nFreiburg Mage Solar Stadium in Germany is the first of a new wave of stadiums as power plants, which also includes the Amsterdam Arena and the Kaohsiung Stadium. The latter, inaugurated in 2009, has 8,844 photovoltaic panels producing up to 1.14 GWh of electricity annually. This reduces the annual output of carbon dioxide by 660 tons and supplies up to 80 percent of the surrounding area when the stadium is not in use. This is proof that a stadium can serve its city, and have a decidedly positive impact in terms of reduction of CO2 emissions.\n\nG.\nSporting arenas have always been central to the life and culture of cities. In every era, the stadium has acquired new value and uses: from military fortress to residential village, public space to theatre and most recently a field for experimentation in advanced engineering. The stadium of today now brings together multiple functions, thus helping cities to create a sustainable future.`,
-            passageSource: "IELTS Practice Test",
-            instructions: "Questions 14-26",
-            questionGroups: [
-                // Questions 14-17: Matching Information
-                {
-                    groupType: "matching-information",
-                    startQuestion: 14,
-                    endQuestion: 17,
-                    mainInstruction: "The passage has seven paragraphs, A-G. Which section contains the following information?",
-                    subInstruction: "NB You may use any letter more than once.",
-                    featureListTitle: "Paragraphs",
-                    featureOptions: [
-                        { letter: "A", text: "Paragraph A" },
-                        { letter: "B", text: "Paragraph B" },
-                        { letter: "C", text: "Paragraph C" },
-                        { letter: "D", text: "Paragraph D" },
-                        { letter: "E", text: "Paragraph E" },
-                        { letter: "F", text: "Paragraph F" },
-                        { letter: "G", text: "Paragraph G" },
-                    ],
-                    paragraphOptions: ["A", "B", "C", "D", "E", "F", "G"],
-                    matchingItems: [
-                        { questionNumber: 14, text: "a mention of negative attitudes towards stadium building projects", correctAnswer: "A" },
-                        { questionNumber: 15, text: "figures demonstrating the environmental benefits of a certain stadium", correctAnswer: "F" },
-                        { questionNumber: 16, text: "examples of the wide range of facilities available at some new stadiums", correctAnswer: "E" },
-                        { questionNumber: 17, text: "reference to the disadvantages of the stadiums built during a certain era", correctAnswer: "D" },
-                    ],
-                },
-                // Questions 18-22: Note Completion (Summary Completion)
-                {
-                    groupType: "note-completion",
-                    startQuestion: 18,
-                    endQuestion: 22,
-                    mainInstruction: "Complete the summary below.",
-                    subInstruction: "Choose ONE WORD ONLY from the passage for each answer.",
-                    mainHeading: "Roman amphitheatres",
-                    passage: `The Roman stadium of Europe have proved very versatile. The amphitheatre of Arles, for example, was converted first into a 18 __________, then into a residential area and finally into an arena where spectators could watch 19 __________. Meanwhile, the arena in Verona, one of the oldest Roman amphitheatres, is famous today as a venue where 20 __________ is performed. The site of Lucca's amphitheatre has also been used for many purposes over the centuries, including the storage of 21 __________. It is now a market square with 22 __________ and homes incorporated into the remains of the Roman amphitheatre.`,
-                    notesSections: [
-                        {
-                            subHeading: "",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 18, textBefore: "The amphitheatre of Arles was converted first into a", textAfter: ", then into a residential area", correctAnswer: "fortress" },
-                                { type: "question" as const, questionNumber: 19, textBefore: "finally into an arena where spectators could watch", textAfter: "", correctAnswer: "bullfights" },
-                                { type: "question" as const, questionNumber: 20, textBefore: "the arena in Verona is famous today as a venue where", textAfter: "is performed", correctAnswer: "opera" },
-                                { type: "question" as const, questionNumber: 21, textBefore: "Lucca's amphitheatre has also been used including the storage of", textAfter: "", correctAnswer: "salt" },
-                                { type: "question" as const, questionNumber: 22, textBefore: "It is now a market square with", textAfter: "and homes incorporated into the remains", correctAnswer: "shops" },
-                            ],
-                        },
-                    ],
-                },
-                // Questions 23-26: Choose Two Letters (2 sets)
-                {
-                    groupType: "choose-two-letters",
-                    startQuestion: 23,
-                    endQuestion: 26,
-                    mainInstruction: "Choose TWO letters, A-E.",
-                    questionSets: [
-                        {
-                            questionNumbers: [23, 24],
-                            questionText: "When comparing twentieth-century stadiums to ancient amphitheatres in Section D, which TWO negative features does the writer mention?",
-                            options: [
-                                { letter: "A", text: "They are less imaginatively designed." },
-                                { letter: "B", text: "They are less spacious." },
-                                { letter: "C", text: "They are in less convenient locations." },
-                                { letter: "D", text: "They are less versatile." },
-                                { letter: "E", text: "They are made of less durable materials." },
-                            ],
-                            correctAnswers: ["C", "D"],
-                        },
-                        {
-                            questionNumbers: [25, 26],
-                            questionText: "Which TWO advantages of modern stadium design does the writer mention?",
-                            options: [
-                                { letter: "A", text: "offering improved amenities for the enjoyment of sports events" },
-                                { letter: "B", text: "bringing community life back into the city environment" },
-                                { letter: "C", text: "facilitating research into solar and wind energy solutions" },
-                                { letter: "D", text: "enabling local residents to reduce their consumption of electricity" },
-                                { letter: "E", text: "providing a suitable site for the installation of renewable power generators" },
-                            ],
-                            correctAnswers: ["B", "E"],
-                        },
-                    ],
-                },
-            ],
-            questions: [
-                // Q14-17: Matching Information
-                { questionNumber: 14, questionType: "matching-information", questionText: "a mention of negative attitudes towards stadium building projects", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "A", marks: 1 },
-                { questionNumber: 15, questionType: "matching-information", questionText: "figures demonstrating the environmental benefits of a certain stadium", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "F", marks: 1 },
-                { questionNumber: 16, questionType: "matching-information", questionText: "examples of the wide range of facilities available at some new stadiums", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "E", marks: 1 },
-                { questionNumber: 17, questionType: "matching-information", questionText: "reference to the disadvantages of the stadiums built during a certain era", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "D", marks: 1 },
-                // Q18-22: Note Completion
-                { questionNumber: 18, questionType: "note-completion", questionText: "The amphitheatre of Arles was converted first into a __________", correctAnswer: "fortress", acceptableAnswers: ["fortress"], marks: 1, wordLimit: 1 },
-                { questionNumber: 19, questionType: "note-completion", questionText: "an arena where spectators could watch __________", correctAnswer: "bullfights", acceptableAnswers: ["bullfights"], marks: 1, wordLimit: 1 },
-                { questionNumber: 20, questionType: "note-completion", questionText: "a venue where __________ is performed", correctAnswer: "opera", acceptableAnswers: ["opera"], marks: 1, wordLimit: 1 },
-                { questionNumber: 21, questionType: "note-completion", questionText: "including the storage of __________", correctAnswer: "salt", acceptableAnswers: ["salt"], marks: 1, wordLimit: 1 },
-                { questionNumber: 22, questionType: "note-completion", questionText: "a market square with __________ and homes", correctAnswer: "shops", acceptableAnswers: ["shops"], marks: 1, wordLimit: 1 },
-                // Q23-26: Choose Two Letters
-                { questionNumber: 23, questionType: "choose-two-letters", questionText: "Which TWO negative features does the writer mention about twentieth-century stadiums?", correctAnswer: "C", marks: 1 },
-                { questionNumber: 24, questionType: "choose-two-letters", questionText: "Which TWO negative features does the writer mention about twentieth-century stadiums?", correctAnswer: "D", marks: 1 },
-                { questionNumber: 25, questionType: "choose-two-letters", questionText: "Which TWO advantages of modern stadium design does the writer mention?", correctAnswer: "B", marks: 1 },
-                { questionNumber: 26, questionType: "choose-two-letters", questionText: "Which TWO advantages of modern stadium design does the writer mention?", correctAnswer: "E", marks: 1 },
-            ],
-        },
-        // ═══════════════════════════════════════════
-        // SECTION 3: To catch a king
-        // Questions 27-40
-        // ═══════════════════════════════════════════
-        {
-            sectionNumber: 3,
-            title: "To catch a king",
-            passage: `Anna Keay reviews Charles Spencer\u2019s book about the hunt for King Charles II during the English Civil War of the seventeenth century
-
-Charles Spencer\u2019s latest book, To Catch a King, tells us the story of the hunt for King Charles II in the six weeks after his resounding defeat at the Battle of Worcester in September 1651. And what a story it is. After his father was executed by the Parliamentarians in 1649, the young Charles II sacrificed one of the very principles his father had died for and did a deal with the Scots, thereby accepting Presbyterianism as the national religion in return for being crowned King of Scots. His arrival in Edinburgh prompted the English Parliamentary army to invade Scotland in a pre-emptive strike. This was followed by a Scottish invasion of England. The two sides finally faced one another at Worcester in the west of England in 1651. After being comprehensively defeated on the meadows outside the city by the Parliamentarian army, the 21-year-old king found himself the subject of a national manhunt, with a huge sum offered for his capture. Over the following six weeks he managed, through a series of heart-poundingly close escapes, to evade the Parliamentarians before seeking refuge in France. For the next nine years, the penniless and defeated Charles wandered around Europe with only a small group of loyal supporters.
-
-Years later, after his restoration as king, the 50-year-old Charles II requested a meeting with the writer and diarist Samuel Pepys. His intention when asking Pepys to commit his story to paper was to ensure that this most extraordinary episode was never forgotten. Over two three-hour sittings, the king related to him in great detail his personal recollections of the six weeks he had spent as a fugitive. As the king and secretary settled down (a scene that is surely a gift for a future scriptwriter), Charles commenced his story: \u2018After the battle was so absolutely lost as to be beyond hope of recovery, I began to think of the best way of saving myself.\u2019
-
-One of the joys of Spencer\u2019s book, a result not least of its use of Charles II\u2019s own narrative as well as those of his supporters, is just how close the reader gets to the action. The day-by-day retelling of the fugitives\u2019 doings provides delicious details: the cutting of the king\u2019s long hair with agricultural shears, the use of walnut leaves to dye his pale skin, and the day Charles spent lying on a branch of the great oak tree in Boscobel Wood as the Parliamentary soldiers scoured the forest floor below. Spencer draws out both the humour \u2013 such as the preposterous refusal of Charles\u2019s friend Henry Wilmot to adopt disguise on the grounds that it was beneath his dignity \u2013 and the emotional tension when the secret of the king\u2019s presence was cautiously revealed to his supporters.
-
-Charles\u2019s adventures after losing the Battle of Worcester hide the uncomfortable truth that whilst almost everyone in England had been appalled by the execution of his father, they had not welcomed the arrival of his son with the Scots army, but had instead firmly bolted their doors. This was partly because he rode at the head of what looked like a foreign invasion force and partly because, after almost a decade of civil war, people were desperate to avoid it beginning again. This makes it all the more interesting that Charles II himself loved the story so much ever after. As well as retelling it to anyone who would listen, causing eye-rolling among courtiers, he set in train a series of initiatives to memorialise it. There was to be a new order of chivalry, the Knights of the Royal Oak. A series of enormous oil paintings depicting the episode were produced, including a two-metre-wide canvas of Boscobel Wood and a set of six similarly enormous paintings of the king on the run. In 1660, Charles II commissioned the artist John Michael Wright to paint a flying squadron of cherubs carrying an oak tree to the heavens on the ceiling of his bedchamber. It is hard to imagine many other kings marking the lowest point in their life so enthusiastically, or indeed pulling off such an escape in the first place.
-
-Charles Spencer is the perfect person to pass the story on to a new generation. His pacey, readable prose steers deftly clear of modern idioms and elegantly brings to life the details of the great tale. He has even-handed sympathy for both the fugitive king and the fierce republican regime that hunted him, and he succeeds in his desire to explore far more of the background of the story than previous books on the subject have done. Indeed, the opening third of the book is about how Charles II found himself at Worcester in the first place, which for some will be reason alone to read To Catch a King.
-
-The tantalising question left, in the end, is that of what it all meant. Would Charles II have been a different king had these six weeks never happened? The days and nights spent in hiding must have affected him in some way. Did the need to assume disguises, to survive on wit and charm alone, to use trickery and subterfuge to escape from tight corners help form him? This is the one area where the book doesn\u2019t quite hit the mark. Instead its depiction of Charles II in his final years as an ineffective, pleasure-loving monarch doesn\u2019t do justice to the man (neither is it accurate), or to the complexity of his character. But this one niggle aside, To Catch a King is an excellent read, and those who come to it knowing little of the famous tale will find they have a treat in store.`,
-            passageSource: "IELTS Practice Test",
-            instructions: "Questions 27-40",
-            questionGroups: [
-                // Questions 27-31: Summary with Options
-                {
-                    groupType: "summary-with-options",
-                    startQuestion: 27,
-                    endQuestion: 31,
-                    mainInstruction: "Complete the summary using the list of phrases, A-J, below.",
-                    subInstruction: "Write the correct letter, A-J, in boxes on your answer sheet.",
-                    mainHeading: "The story behind the hunt for Charles II",
-                    phraseList: [
-                        { letter: "A", text: "military innovation" },
-                        { letter: "B", text: "large reward" },
-                        { letter: "C", text: "widespread conspiracy" },
-                        { letter: "D", text: "relative safety" },
-                        { letter: "E", text: "new government" },
-                        { letter: "F", text: "decisive victory" },
-                        { letter: "G", text: "political debate" },
-                        { letter: "H", text: "strategic alliance" },
-                        { letter: "I", text: "popular solution" },
-                        { letter: "J", text: "religious conviction" },
-                    ],
-                    summarySegments: [
-                        { type: "text" as const, content: "Charles II\u2019s father was executed by the Parliamentarian forces in 1649. Charles II then formed a" },
-                        { type: "blank" as const, questionNumber: 27, correctAnswer: "H" },
-                        { type: "text" as const, content: "with the Scots, and in order to become King of Scots, he abandoned an important" },
-                        { type: "blank" as const, questionNumber: 28, correctAnswer: "J" },
-                        { type: "text" as const, content: "that was held by his father and had contributed to his father\u2019s death. The opposing sides then met outside Worcester in 1651. The battle led to a" },
-                        { type: "blank" as const, questionNumber: 29, correctAnswer: "F" },
-                        { type: "text" as const, content: "for the Parliamentarians and Charles had to flee for his life. A" },
-                        { type: "blank" as const, questionNumber: 30, correctAnswer: "B" },
-                        { type: "text" as const, content: "was offered for Charles\u2019s capture, but after six weeks spent in hiding, he eventually managed to reach the" },
-                        { type: "blank" as const, questionNumber: 31, correctAnswer: "D" },
-                        { type: "text" as const, content: "of continental Europe." },
-                    ],
-                },
-                // Questions 32-35: Yes/No/Not Given
-                {
-                    groupType: "yes-no-not-given",
-                    startQuestion: 32,
-                    endQuestion: 35,
-                    mainInstruction: "Do the following statements agree with the claims of the writer in the passage?",
-                    subInstruction: "In boxes on your answer sheet, write",
-                    optionsExplanation: [
-                        { option: "YES", explanation: "if the statement agrees with the claims of the writer" },
-                        { option: "NO", explanation: "if the statement contradicts the claims of the writer" },
-                        { option: "NOT GIVEN", explanation: "if it is impossible to say what the writer thinks about this" },
-                    ],
-                    statements: [
-                        { questionNumber: 32, text: "Charles chose Pepys for the task because he considered him to be trustworthy.", correctAnswer: "NOT GIVEN" },
-                        { questionNumber: 33, text: "Charles\u2019s personal recollection of the escape lacked sufficient detail.", correctAnswer: "NO" },
-                        { questionNumber: 34, text: "Charles indicated to Pepys that he had planned his escape before the battle.", correctAnswer: "NO" },
-                        { questionNumber: 35, text: "The inclusion of Charles\u2019s account is a positive aspect of the book.", correctAnswer: "YES" },
-                    ],
-                },
-                // Questions 36-40: Multiple Choice Full
+                // Questions 6-9: Multiple Choice Full
                 {
                     groupType: "multiple-choice-full",
-                    startQuestion: 36,
-                    endQuestion: 40,
+                    startQuestion: 6,
+                    endQuestion: 9,
                     mainInstruction: "Choose the correct letter, A, B, C or D.",
-                    subInstruction: "Write the correct letter in boxes on your answer sheet.",
+                    subInstruction: "Write your answers in boxes 6-9 on your answer sheet.",
                     mcQuestions: [
                         {
-                            questionNumber: 36,
-                            questionText: "What is the reviewer\u2019s main purpose in the first paragraph?",
+                            questionNumber: 6,
+                            questionText: "How does the lie detector work?",
                             options: [
-                                { letter: "A", text: "to describe what happened during the Battle of Worcester" },
-                                { letter: "B", text: "to give an account of the circumstances leading to Charles II\u2019s escape" },
-                                { letter: "C", text: "to provide details of the Parliamentarians\u2019 political views" },
-                                { letter: "D", text: "to compare Charles II\u2019s beliefs with those of his father" },
-                            ],
-                            correctAnswer: "B",
-                        },
-                        {
-                            questionNumber: 37,
-                            questionText: "Why does the reviewer include examples of the fugitives\u2019 behaviour in the third paragraph?",
-                            options: [
-                                { letter: "A", text: "to explain how close Charles II came to losing his life" },
-                                { letter: "B", text: "to suggest that Charles II\u2019s supporters were badly prepared" },
-                                { letter: "C", text: "to illustrate how the events of the six weeks are brought to life" },
-                                { letter: "D", text: "to argue that certain aspects are not as well known as they should be" },
+                                { letter: "A", text: "It detects whether one\u2019s emotional state is stable." },
+                                { letter: "B", text: "It detects one\u2019s brain activity level." },
+                                { letter: "C", text: "It detects body behaviour during one\u2019s verbal response." },
+                                { letter: "D", text: "It analyses one\u2019s verbal response word by word." },
                             ],
                             correctAnswer: "C",
                         },
                         {
-                            questionNumber: 38,
-                            questionText: "What point does the reviewer make about Charles II in the fourth paragraph?",
+                            questionNumber: 7,
+                            questionText: "Lie detectors can\u2019t be used as evidence in a court of law because",
                             options: [
-                                { letter: "A", text: "He chose to celebrate what was essentially a defeat." },
-                                { letter: "B", text: "He misunderstood the motives of his opponents." },
-                                { letter: "C", text: "He aimed to restore people\u2019s faith in the monarchy." },
-                                { letter: "D", text: "He was driven by a desire to be popular." },
+                                { letter: "A", text: "lights often cause lie detectors to malfunction." },
+                                { letter: "B", text: "they are based on too many verbal and non-verbal clues." },
+                                { letter: "C", text: "polygraph tests are often inaccurate." },
+                                { letter: "D", text: "there may be many causes of certain body behaviour." },
                             ],
-                            correctAnswer: "A",
+                            correctAnswer: "D",
                         },
                         {
-                            questionNumber: 39,
-                            questionText: "What does the reviewer say about Charles Spencer in the fifth paragraph?",
+                            questionNumber: 8,
+                            questionText: "Why does the author mention the paralysed patients?",
                             options: [
-                                { letter: "A", text: "His decision to write the book comes as a surprise." },
-                                { letter: "B", text: "He takes an unbiased approach to the subject matter." },
-                                { letter: "C", text: "His descriptions of events would be better if they included more detail." },
-                                { letter: "D", text: "He chooses language that is suitable for a twenty-first-century audience." },
+                                { letter: "A", text: "To demonstrate how a paralysed patient smiles." },
+                                { letter: "B", text: "To show the relation between true emotions and body behaviour." },
+                                { letter: "C", text: "To examine how they were paralysed." },
+                                { letter: "D", text: "To show the importance of happiness from recovery." },
                             ],
                             correctAnswer: "B",
                         },
                         {
-                            questionNumber: 40,
-                            questionText: "When the reviewer says the book \u2018doesn\u2019t quite hit the mark\u2019, she is making the point that",
+                            questionNumber: 9,
+                            questionText: "The author uses politicians to exemplify that they can",
                             options: [
-                                { letter: "A", text: "it overlooks the impact of events on ordinary people." },
-                                { letter: "B", text: "it lacks an analysis of prevalent views on monarchy." },
-                                { letter: "C", text: "it omits any references to the deceit practised by Charles II during his time in hiding." },
-                                { letter: "D", text: "it fails to address whether Charles II\u2019s experiences had a lasting influence on him." },
+                                { letter: "A", text: "have emotions." },
+                                { letter: "B", text: "imitate actors." },
+                                { letter: "C", text: "detect other people\u2019s lies." },
+                                { letter: "D", text: "mask their true feelings." },
                             ],
                             correctAnswer: "D",
                         },
                     ],
                 },
+                // Questions 10-13: Matching Features (classify facial traits)
+                {
+                    groupType: "matching-features",
+                    startQuestion: 10,
+                    endQuestion: 13,
+                    mainInstruction: "Classify the following facial traits as referring to",
+                    subInstruction: "Write the correct letter A, B or C in boxes 10-13 on your answer sheet.",
+                    featureListTitle: "Emotions",
+                    featureOptions: [
+                        { letter: "A", text: "sadness" },
+                        { letter: "B", text: "anger" },
+                        { letter: "C", text: "happiness" },
+                    ],
+                    matchingItems: [
+                        { questionNumber: 10, text: "Inner corners of eyebrows raised", correctAnswer: "A" },
+                        { questionNumber: 11, text: "The whole eyebrows lowered", correctAnswer: "B" },
+                        { questionNumber: 12, text: "Lines formed around the eyes", correctAnswer: "C" },
+                        { questionNumber: 13, text: "Lines form above the eyebrows", correctAnswer: "A" },
+                    ],
+                },
             ],
             questions: [
-                // Q27-31: Summary with Options
-                { questionNumber: 27, questionType: "summary-with-options", questionText: "Charles II then formed a ___ with the Scots", correctAnswer: "H", marks: 1 },
-                { questionNumber: 28, questionType: "summary-with-options", questionText: "he abandoned an important ___ that was held by his father", correctAnswer: "J", marks: 1 },
-                { questionNumber: 29, questionType: "summary-with-options", questionText: "The battle led to a ___ for the Parliamentarians", correctAnswer: "F", marks: 1 },
-                { questionNumber: 30, questionType: "summary-with-options", questionText: "A ___ was offered for Charles's capture", correctAnswer: "B", marks: 1 },
-                { questionNumber: 31, questionType: "summary-with-options", questionText: "he eventually managed to reach the ___ of continental Europe", correctAnswer: "D", marks: 1 },
-                // Q32-35: Yes/No/Not Given
-                { questionNumber: 32, questionType: "yes-no-not-given", questionText: "Charles chose Pepys for the task because he considered him to be trustworthy.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
-                { questionNumber: 33, questionType: "yes-no-not-given", questionText: "Charles\u2019s personal recollection of the escape lacked sufficient detail.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NO", marks: 1 },
-                { questionNumber: 34, questionType: "yes-no-not-given", questionText: "Charles indicated to Pepys that he had planned his escape before the battle.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NO", marks: 1 },
-                { questionNumber: 35, questionType: "yes-no-not-given", questionText: "The inclusion of Charles\u2019s account is a positive aspect of the book.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "YES", marks: 1 },
-                // Q36-40: Multiple Choice Full
-                { questionNumber: 36, questionType: "multiple-choice-full", questionText: "What is the reviewer\u2019s main purpose in the first paragraph?", correctAnswer: "B", marks: 1 },
-                { questionNumber: 37, questionType: "multiple-choice-full", questionText: "Why does the reviewer include examples of the fugitives\u2019 behaviour in the third paragraph?", correctAnswer: "C", marks: 1 },
-                { questionNumber: 38, questionType: "multiple-choice-full", questionText: "What point does the reviewer make about Charles II in the fourth paragraph?", correctAnswer: "A", marks: 1 },
-                { questionNumber: 39, questionType: "multiple-choice-full", questionText: "What does the reviewer say about Charles Spencer in the fifth paragraph?", correctAnswer: "B", marks: 1 },
-                { questionNumber: 40, questionType: "multiple-choice-full", questionText: "When the reviewer says the book 'doesn't quite hit the mark', she is making the point that", correctAnswer: "D", marks: 1 },
+                // Q1-5: Yes/No/Not Given
+                { questionNumber: 1, questionType: "yes-no-not-given", questionText: "All living animals can lie.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NO", marks: 1 },
+                { questionNumber: 2, questionType: "yes-no-not-given", questionText: "Some people tell lies for self-preservation.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "YES", marks: 1 },
+                { questionNumber: 3, questionType: "yes-no-not-given", questionText: "Scientists have used computers to analyse which part of the brain is responsible for telling lies.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
+                { questionNumber: 4, questionType: "yes-no-not-given", questionText: "Lying as a survival skill is more important than detecting a lie.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
+                { questionNumber: 5, questionType: "yes-no-not-given", questionText: "To be a good liar, one has to understand other people\u2019s emotions.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "YES", marks: 1 },
+                // Q6-9: Multiple Choice Full
+                { questionNumber: 6, questionType: "multiple-choice-full", questionText: "How does the lie detector work?", correctAnswer: "C", marks: 1 },
+                { questionNumber: 7, questionType: "multiple-choice-full", questionText: "Lie detectors can\u2019t be used as evidence in a court of law because", correctAnswer: "D", marks: 1 },
+                { questionNumber: 8, questionType: "multiple-choice-full", questionText: "Why does the author mention the paralysed patients?", correctAnswer: "B", marks: 1 },
+                { questionNumber: 9, questionType: "multiple-choice-full", questionText: "The author uses politicians to exemplify that they can", correctAnswer: "D", marks: 1 },
+                // Q10-13: Matching Features
+                { questionNumber: 10, questionType: "matching-features", questionText: "Inner corners of eyebrows raised", options: ["A", "B", "C"], correctAnswer: "A", marks: 1 },
+                { questionNumber: 11, questionType: "matching-features", questionText: "The whole eyebrows lowered", options: ["A", "B", "C"], correctAnswer: "B", marks: 1 },
+                { questionNumber: 12, questionType: "matching-features", questionText: "Lines formed around the eyes", options: ["A", "B", "C"], correctAnswer: "C", marks: 1 },
+                { questionNumber: 13, questionType: "matching-features", questionText: "Lines form above the eyebrows", options: ["A", "B", "C"], correctAnswer: "A", marks: 1 },
+            ],
+        },
+        // ═══════════════════════════════════════════
+        // SECTION 2: Being Left-handed in a Right-handed World (Q14-26)
+        // ═══════════════════════════════════════════
+        {
+            sectionNumber: 2,
+            title: "Being Left-handed in a Right-handed World",
+            passage: `The world is designed for right-handed people. Why does a tenth of the population prefer the left?
+
+A The probability that two right-handed people would have a left-handed child is only about 9.5 percent. The chance rises to 19.5 percent if one parent is a lefty and 26 percent if both parents are left-handed. The preference, however, could also stem from an infant\u2019s imitation of his parents. To test genetic influence, starting in the 1970s British biologist Marian Annett of the University of Leicester hypothesised that no single gene determines handedness. Rather, during fetal development, a certain molecular factor helps to strengthen the brain\u2019s left hemisphere, which increases the probability that the right hand will be dominant, because the left side of the brain controls the right side of the body, and vice versa. Among the minority of people who lack this factor, handedness develops entirely by chance. Research conducted on twins complicates the theory, however. One in five sets of identical twins involves one right-handed and one left-handed person, despite the fact that their genetic material is the same. Genes, therefore, are not solely responsible for handedness.
+
+B Genetic theory is also undermined by results from Peter Hepper and his team at Queen\u2019s University in Belfast, Ireland. In 2004 the psychologists used ultrasound to show that by the 15th week of pregnancy, fetuses already have a preference as to which thumb they suck. In most cases, the preference continued after birth. At 15 weeks, though, the brain does not yet have control over the body\u2019s limbs. Hepper speculates that fetuses tend to prefer whichever side of the body is developing quicker and that their movements, in turn, influence the brain\u2019s development. Whether this early preference is temporary or holds up throughout development and infancy is unknown. Genetic predetermination is also contradicted by the widespread observation that children do not settle on either their right or left hand until they are two or three years old.
+
+C But even if these correlations were true, they did not explain what actually causes left-handedness. Furthermore, specialisation on either side of the body is common among animals. Cats will favour one paw over another when fishing toys out from under the couch. Horses stomp more frequently with one hoof than the other. Certain crabs motion predominantly with the left or right claw. In evolutionary terms, focusing power and dexterity in one limb is more efficient than having to train two, four or even eight limbs equally. Yet for most animals, the preference for one side or the other is seemingly random. The overwhelming dominance of the right hand is associated only with humans. That fact directs attention toward the brain\u2019s two hemispheres and perhaps toward language.
+
+D Interest in hemispheres dates back to at least 1836. That year, at a medical conference, French physician Marc Dax reported on an unusual commonality among his patients. During his many years as a country doctor, Dax had encountered more than 40 men and women for whom speech was difficult, the result of some kind of brain damage. What was unique was that every individual suffered damage to the left side of the brain. At the conference, Dax elaborated on his theory, stating that each half of the brain was responsible for certain functions and that the left hemisphere controlled speech. Other experts showed little interest in the Frenchman\u2019s ideas. Over time, however, scientists found more and more evidence of people experiencing speech difficulties following injury to the left brain. Patients with damage to the right hemisphere most often displayed disruptions in perception or concentration. Major advancements in understanding the brain\u2019s asymmetry were made in the 1960s as a result of so-called split-brain surgery, developed to help patients with epilepsy. During this operation, doctors severed the corpus callosum \u2013 the nerve bundle that connects the two hemispheres. The surgical cut also stopped almost all normal communication between the two hemispheres, which offered researchers the opportunity to investigate each side\u2019s activity.
+
+E In 1949 neurosurgeon Juhn Wada devised the first test to provide access to the brain\u2019s functional organisation of language. By injecting an anaesthetic into the right or left carotid artery, Wada temporarily paralysed one side of a healthy brain, enabling him to more closely study the other side\u2019s capabilities. Based on this approach, Brenda Milner and the late Theodore Rasmussen of the Montreal Neurological Institute published a major study in 1975 that confirmed the theory that country doctor Dax had formulated nearly 140 years earlier: in 96 percent of right-handed people, language is processed much more intensely in the left hemisphere. The correlation is not as clear in lefties, however. For two-thirds of them, the left hemisphere is still the most active language processor. But for the remaining third, either the right side is dominant or both sides work equally, controlling different language functions. That last statistic has slowed acceptance of the notion that the predominance of right-handedness is driven by left-hemisphere dominance in language processing. It is not at all clear why language control should somehow have dragged the control of body movement with it. Some experts think one reason the left hemisphere reigns over language is because the organs of speech processing \u2013 the larynx and tongue \u2013 are positioned on the body\u2019s symmetry axis. Because these structures were centred, it may have been unclear, in evolutionary terms, which side of the brain should control them, and it seems unlikely that shared operation would result in smooth motor activity. Language and handedness could have developed preferentially for very different reasons as well. For example, some researchers, including evolutionary psychologist Michael C. Corballis of the University of Auckland in New Zealand, think that the origin of human speech lies in gestures. Gestures predated words and helped language emerge. If the left hemisphere began to dominate speech, it would have dominated gestures, too, and because the left brain controls the right side of the body, the right hand developed more strongly.
+
+F Perhaps we will know more soon. In the meantime, we can revel in what, if any, differences handedness brings to our human talents. Popular wisdom says right-handed, left-brained people excel at logical, analytical thinking. Left-handed, right-brained individuals are thought to possess more creative skills and may be better at combining the functional features emergent in both sides of the brain. Yet some neuroscientists see such claims as pure speculation. Fewer scientists are ready to claim that left-handedness means greater creative potential. Yet lefties are prevalent among artists, composers and the generally acknowledged great political thinkers. Possibly if these individuals are among the lefties whose language abilities are evenly distributed between hemispheres, the intense interplay required could lead to unusual mental capabilities.
+
+G Or perhaps some lefties become highly creative simply because they must be more clever to get by in our right-handed world. This battle, which begins during the very early stages of childhood, may lay the groundwork for exceptional achievements.`,
+            passageSource: "IELTS Academic Practice",
+            instructions: "You should spend about 20 minutes on Questions 14-26, which are based on Reading Passage 2.",
+            questionGroups: [
+                // Questions 14-18: Matching Information
+                {
+                    groupType: "matching-information",
+                    startQuestion: 14,
+                    endQuestion: 18,
+                    mainInstruction: "Reading Passage 2 has seven sections A-G. Which section contains the following information?",
+                    subInstruction: "Write the correct letter A-G in boxes 14-18 on your answer sheet.",
+                    paragraphOptions: ["A", "B", "C", "D", "E", "F", "G"],
+                    matchingItems: [
+                        { questionNumber: 14, text: "Preference of using one side of the body in animal species.", correctAnswer: "C" },
+                        { questionNumber: 15, text: "How likely one-handedness is born.", correctAnswer: "A" },
+                        { questionNumber: 16, text: "The age when the preference of using one hand is settled.", correctAnswer: "B" },
+                        { questionNumber: 17, text: "Occupations usually found in left-handed population.", correctAnswer: "F" },
+                        { questionNumber: 18, text: "A reference to an early discovery of each hemisphere\u2019s function.", correctAnswer: "D" },
+                    ],
+                },
+                // Questions 19-22: Matching Features (researchers → findings)
+                {
+                    groupType: "matching-features",
+                    startQuestion: 19,
+                    endQuestion: 22,
+                    mainInstruction: "Look at the following researchers (Questions 19-22) and the list of findings below. Match each researcher with the correct finding.",
+                    subInstruction: "Write the correct letter A-G in boxes 19-22 on your answer sheet.",
+                    featureListTitle: "List of Findings",
+                    featureOptions: [
+                        { letter: "A", text: "Early language evolution is correlated to body movement and thus affecting the preference of use of one hand." },
+                        { letter: "B", text: "No single biological component determines the handedness of a child." },
+                        { letter: "C", text: "Each hemisphere of the brain is in charge of different body functions." },
+                        { letter: "D", text: "Language process is mainly centered in the left-hemisphere of the brain." },
+                        { letter: "E", text: "Speech difficulties are often caused by brain damage." },
+                        { letter: "F", text: "The rate of development of one side of the body has influence on hemisphere preference in fetus." },
+                        { letter: "G", text: "Brain function already matures by the end of the fetal stage." },
+                    ],
+                    matchingItems: [
+                        { questionNumber: 19, text: "Marian Annett", correctAnswer: "B" },
+                        { questionNumber: 20, text: "Peter Hepper", correctAnswer: "F" },
+                        { questionNumber: 21, text: "Brenda Milner & Theodore Rasmussen", correctAnswer: "D" },
+                        { questionNumber: 22, text: "Michael Corballis", correctAnswer: "A" },
+                    ],
+                },
+                // Questions 23-26: Yes/No/Not Given
+                {
+                    groupType: "yes-no-not-given",
+                    startQuestion: 23,
+                    endQuestion: 26,
+                    mainInstruction: "Do the following statements agree with the information given in Reading Passage 2?",
+                    subInstruction: "In boxes 23-26 on your answer sheet, write",
+                    optionsExplanation: [
+                        { option: "YES", explanation: "if the statement agrees with the information" },
+                        { option: "NO", explanation: "if the statement contradicts the information" },
+                        { option: "NOT GIVEN", explanation: "if there is no information on this" },
+                    ],
+                    statements: [
+                        { questionNumber: 23, text: "The study of twins shows that genetic determination is not the only factor for left-handedness.", correctAnswer: "YES" },
+                        { questionNumber: 24, text: "Marc Dax\u2019s report was widely accepted in his time.", correctAnswer: "NO" },
+                        { questionNumber: 25, text: "Juhn Wada based his findings on his research of people with language problems.", correctAnswer: "NO" },
+                        { questionNumber: 26, text: "There tend to be more men with left-handedness than women.", correctAnswer: "NOT GIVEN" },
+                    ],
+                },
+            ],
+            questions: [
+                // Q14-18: Matching Information
+                { questionNumber: 14, questionType: "matching-information", questionText: "Preference of using one side of the body in animal species.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "C", marks: 1 },
+                { questionNumber: 15, questionType: "matching-information", questionText: "How likely one-handedness is born.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "A", marks: 1 },
+                { questionNumber: 16, questionType: "matching-information", questionText: "The age when the preference of using one hand is settled.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "B", marks: 1 },
+                { questionNumber: 17, questionType: "matching-information", questionText: "Occupations usually found in left-handed population.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "F", marks: 1 },
+                { questionNumber: 18, questionType: "matching-information", questionText: "A reference to an early discovery of each hemisphere\u2019s function.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "D", marks: 1 },
+                // Q19-22: Matching Features
+                { questionNumber: 19, questionType: "matching-features", questionText: "Marian Annett", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "B", marks: 1 },
+                { questionNumber: 20, questionType: "matching-features", questionText: "Peter Hepper", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "F", marks: 1 },
+                { questionNumber: 21, questionType: "matching-features", questionText: "Brenda Milner & Theodore Rasmussen", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "D", marks: 1 },
+                { questionNumber: 22, questionType: "matching-features", questionText: "Michael Corballis", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "A", marks: 1 },
+                // Q23-26: Yes/No/Not Given
+                { questionNumber: 23, questionType: "yes-no-not-given", questionText: "The study of twins shows that genetic determination is not the only factor for left-handedness.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "YES", marks: 1 },
+                { questionNumber: 24, questionType: "yes-no-not-given", questionText: "Marc Dax\u2019s report was widely accepted in his time.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NO", marks: 1 },
+                { questionNumber: 25, questionType: "yes-no-not-given", questionText: "Juhn Wada based his findings on his research of people with language problems.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NO", marks: 1 },
+                { questionNumber: 26, questionType: "yes-no-not-given", questionText: "There tend to be more men with left-handedness than women.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
+            ],
+        },
+        // ═══════════════════════════════════════════
+        // SECTION 3: What is a dinosaur? (Q27-40)
+        // ═══════════════════════════════════════════
+        {
+            sectionNumber: 3,
+            title: "What is a dinosaur?",
+            passage: `A Although the name dinosaur is derived from the Greek for \u201cterrible lizard\u201d, dinosaurs were not, in fact, lizards at all. Like lizards, dinosaurs are included in the class Reptilia, or reptiles, one of the five main classes of Vertebrata, animals with backbones. However, at the next level of classification, within reptiles, significant differences in the skeletal anatomy of lizards and dinosaurs have led scientists to place these groups of animals into two different superorders: Lepidosauria, or lepidosaurs, and Archosauria, or archosaurs.
+
+B Classified as lepidosaurs are lizards and snakes and their prehistoric ancestors. Included among the archosaurs, or \u201cruling reptiles\u201d, are prehistoric and modern crocodiles, and the now extinct thecodonts, pterosaurs and dinosaurs. Palaeontologists believe that both dinosaurs and crocodiles evolved, in the later years of the Triassic Period (c. 248-208 million years ago), from creatures called pseudosuchian thecodonts. Lizards, snakes and different types of thecodont are believed to have evolved earlier in the Triassic Period from reptiles known as eosuchians.
+
+C The most important skeletal differences between dinosaurs and other archosaurs are in the bones of the skull, pelvis and limbs. Dinosaur skulls are found in a great range of shapes and sizes, reflecting the different eating habits and lifestyles of a large and varied group of animals that dominated life on Earth for an extraordinary 165 million years. However, unlike the skulls of any other known animals, the skulls of dinosaurs had two long bones known as vomers. These bones extended on either side of the head, from the front of the snout to the level of the holes on the skull known as the antorbital fenestra, situated in front of the dinosaur\u2019s orbits or eye sockets.
+
+D All dinosaurs, whether large or small, quadrupedal or bipedal, fleet-footed or slow-moving, shared a common body plan. Identification of this plan makes it possible to differentiate dinosaurs from any other types of animal, even other archosaurs. Most significantly, in dinosaurs, the pelvis and femur had evolved so that the hind limbs were held vertically beneath the body, rather than sprawling out to the sides like the limbs of a lizard. The femur of a dinosaur had a sharply in-turned neck and a ball-shaped head, which slotted into a fully open acetabulum or hip socket. A supra-acetabular crest helped prevent dislocation of the femur. The position of the knee joint, aligned below the acetabulum, made it possible for the whole hind limb to swing backwards and forwards. This unique combination of features gave dinosaurs what is known as a \u201cfully improved gait\u201d. Evolution of this highly efficient method of walking also developed in mammals, but among reptiles, it occurred only in dinosaurs.
+
+E For the purpose of further classification, dinosaurs are divided into two orders: Saurischia, or saurischian dinosaurs, and Ornithischia, or ornithischian dinosaurs. This division is made on the basis of their pelvic anatomy. All dinosaurs had a pelvic girdle with each side comprised of three bones: the pubis, ilium and ischium. However, the orientation of these bones follows one of two patterns. In saurischian dinosaurs, also known as lizard-hipped dinosaurs, the pubis points forwards, as is usual in most types of reptile. By contrast, in ornithischian, or bird-hipped, dinosaurs, the pubis points backwards towards the rear of the animal, which is also true of birds.
+
+F Of the two orders of dinosaurs, the Saurischia was the larger and the first to evolve. It is divided into two suborders: Therapoda, or therapods, and Sauropodomorpha, or sauropodomorphs. The therapods, or \u201cbeast feet\u201d, were bipedal, predatory carnivores. They ranged in size from the mighty Tyrannosaurus rex, 12m long, 5.6m tall and weighing an estimated 6.4 tonnes, to the smallest known dinosaur, Compsognathus, a mere 1.4m long and estimated 3kg in weight when fully grown. The sauropodomorphs, or \u201clizard feet forms\u201d, included both bipedal and quadrupedal dinosaurs. Some sauropodomorphs were carnivorous or omnivorous but later species were typically herbivorous. They included some of the largest and best-known of all dinosaurs, such as Diplodocus, a huge quadruped with an elephant-like body, a long, thin tail and neck that gave it a total length of 27m, and a tiny head.
+
+G Ornithischian dinosaurs were bipedal or quadrupedal herbivores. They are now usually divided into three suborders: Ornithipoda, Thyreophora and Marginocephalia. The ornithopods, or \u201cbird feet\u201d, both large and small, could walk or run on their long hind legs, balancing their body by holding their tails stiffly off the ground behind them. An example is Iguanodon, up to 9m long, 5m tall and weighing 4.5 tonnes. The thyreophorans, or \u201cshield bearers\u201d, also known as armoured dinosaurs, were quadrupeds with rows of protective bony spikes, studs, or plates along their backs and tails. They included Stegosaurus, 9m long and weighing 2 tonnes.
+
+H The marginocephalians, or \u201cmargined heads\u201d, were bipedal or quadrupedal ornithischians with a deep bony frill or narrow shelf at the back of the skull. An example is Triceratops, a rhinoceros-like dinosaur, 9m long, weighing 5.4 tonnes and bearing a prominent neck frill and three large horns.`,
+            passageSource: "IELTS Academic Practice",
+            instructions: "You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3.",
+            questionGroups: [
+                // Questions 27-33: Matching Headings (with example Paragraph H → x)
+                {
+                    groupType: "matching-headings",
+                    startQuestion: 27,
+                    endQuestion: 33,
+                    mainInstruction: "Reading Passage 3 has 8 paragraphs (A-H). Choose the most suitable heading for each paragraph from the List of Headings below.",
+                    subInstruction: "Write the appropriate numbers (i-xiii) in boxes 27-33 on your answer sheet. NB There are more headings than paragraphs, so you will not use all of them.",
+                    featureListTitle: "List of Headings",
+                    headingsList: [
+                        { numeral: "i", text: "165 million years" },
+                        { numeral: "ii", text: "The body plan of archosaurs" },
+                        { numeral: "iii", text: "Dinosaurs \u2013 terrible lizards" },
+                        { numeral: "iv", text: "Classification according to pelvic anatomy" },
+                        { numeral: "v", text: "The suborders of Saurischia" },
+                        { numeral: "vi", text: "Lizards and dinosaurs \u2013 two distinct superorders" },
+                        { numeral: "vii", text: "Unique body plan helps identify dinosaurs from other animals" },
+                        { numeral: "viii", text: "Herbivore dinosaurs" },
+                        { numeral: "ix", text: "Lepidosaurs" },
+                        { numeral: "x", text: "Frills and shelves" },
+                        { numeral: "xi", text: "The origins of dinosaurs and lizards" },
+                        { numeral: "xii", text: "Bird-hipped dinosaurs" },
+                        { numeral: "xiii", text: "Skull bones distinguish dinosaurs from other archosaurs" },
+                    ],
+                    paragraphOptions: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"],
+                    exampleItems: [
+                        { text: "Paragraph H", answer: "x" },
+                    ],
+                    matchingItems: [
+                        { questionNumber: 27, text: "Paragraph A", correctAnswer: "vi" },
+                        { questionNumber: 28, text: "Paragraph B", correctAnswer: "xi" },
+                        { questionNumber: 29, text: "Paragraph C", correctAnswer: "xiii" },
+                        { questionNumber: 30, text: "Paragraph D", correctAnswer: "vii" },
+                        { questionNumber: 31, text: "Paragraph E", correctAnswer: "iv" },
+                        { questionNumber: 32, text: "Paragraph F", correctAnswer: "v" },
+                        { questionNumber: 33, text: "Paragraph G", correctAnswer: "viii" },
+                    ],
+                },
+                // Questions 34-36: Sentence Completion
+                {
+                    groupType: "sentence-completion",
+                    startQuestion: 34,
+                    endQuestion: 36,
+                    mainInstruction: "Complete the sentences below.",
+                    subInstruction: "Use NO MORE THAN THREE WORDS from the passage for each blank space. Write your answers in boxes 34-36 on your answer sheet.",
+                    statements: [
+                        { questionNumber: 34, text: "Lizards and dinosaurs are classified into two different superorders because of the difference in their __________.", correctAnswer: "skeletal anatomy" },
+                        { questionNumber: 35, text: "In the Triassic Period, __________ evolved into thecodonts, for example, lizards and snakes.", correctAnswer: "eosuchians" },
+                        { questionNumber: 36, text: "Dinosaur skulls differed from those of any other known animals because of the presence of vomers __________.", correctAnswer: "on either side" },
+                    ],
+                },
+                // Questions 37-40: Matching Features (Dinosaurs → features)
+                {
+                    groupType: "matching-features",
+                    startQuestion: 37,
+                    endQuestion: 40,
+                    mainInstruction: "Choose one phrase (A-H) from the List of Features to match with the Dinosaurs listed below.",
+                    subInstruction: "Write the appropriate letters (A-H) in boxes 37-40 on your answer sheet. NB There are more phrases than sentences, so you will not need to use them all. You may use each phrase once only.",
+                    featureListTitle: "List of Features",
+                    featureOptions: [
+                        { letter: "A", text: "are both divided into two orders." },
+                        { letter: "B", text: "the former had a \u201cfully improved gait\u201d." },
+                        { letter: "C", text: "were not usually very heavy." },
+                        { letter: "D", text: "could walk or run on their back legs." },
+                        { letter: "E", text: "their hind limbs sprawled out to the side." },
+                        { letter: "F", text: "walked or ran on four legs, rather than two." },
+                        { letter: "G", text: "both had a pelvic girdle comprising six bones." },
+                        { letter: "H", text: "did not always eat meat." },
+                    ],
+                    matchingItems: [
+                        { questionNumber: 37, text: "Dinosaurs differed from lizards, because", correctAnswer: "B" },
+                        { questionNumber: 38, text: "Saurischian and ornithischian dinosaurs", correctAnswer: "G" },
+                        { questionNumber: 39, text: "Unlike therapods, sauropodomorphs", correctAnswer: "H" },
+                        { questionNumber: 40, text: "Some dinosaurs used their tails to balance, others", correctAnswer: "F" },
+                    ],
+                },
+            ],
+            questions: [
+                // Q27-33: Matching Headings
+                { questionNumber: 27, questionType: "matching-headings", questionText: "Paragraph A", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"], correctAnswer: "vi", marks: 1 },
+                { questionNumber: 28, questionType: "matching-headings", questionText: "Paragraph B", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"], correctAnswer: "xi", marks: 1 },
+                { questionNumber: 29, questionType: "matching-headings", questionText: "Paragraph C", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"], correctAnswer: "xiii", marks: 1 },
+                { questionNumber: 30, questionType: "matching-headings", questionText: "Paragraph D", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"], correctAnswer: "vii", marks: 1 },
+                { questionNumber: 31, questionType: "matching-headings", questionText: "Paragraph E", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"], correctAnswer: "iv", marks: 1 },
+                { questionNumber: 32, questionType: "matching-headings", questionText: "Paragraph F", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"], correctAnswer: "v", marks: 1 },
+                { questionNumber: 33, questionType: "matching-headings", questionText: "Paragraph G", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii"], correctAnswer: "viii", marks: 1 },
+                // Q34-36: Sentence Completion
+                { questionNumber: 34, questionType: "sentence-completion", questionText: "Lizards and dinosaurs are classified into two different superorders because of the difference in their __________.", correctAnswer: "skeletal anatomy", acceptableAnswers: ["skeletal anatomy"], marks: 1, wordLimit: 3 },
+                { questionNumber: 35, questionType: "sentence-completion", questionText: "In the Triassic Period, __________ evolved into thecodonts, for example, lizards and snakes.", correctAnswer: "eosuchians", acceptableAnswers: ["eosuchians"], marks: 1, wordLimit: 3 },
+                { questionNumber: 36, questionType: "sentence-completion", questionText: "Dinosaur skulls differed from those of any other known animals because of the presence of vomers __________.", correctAnswer: "on either side", acceptableAnswers: ["on either side", "on either side of the head"], marks: 1, wordLimit: 3 },
+                // Q37-40: Matching Features
+                { questionNumber: 37, questionType: "matching-features", questionText: "Dinosaurs differed from lizards, because", options: ["A", "B", "C", "D", "E", "F", "G", "H"], correctAnswer: "B", marks: 1 },
+                { questionNumber: 38, questionType: "matching-features", questionText: "Saurischian and ornithischian dinosaurs", options: ["A", "B", "C", "D", "E", "F", "G", "H"], correctAnswer: "G", marks: 1 },
+                { questionNumber: 39, questionType: "matching-features", questionText: "Unlike therapods, sauropodomorphs", options: ["A", "B", "C", "D", "E", "F", "G", "H"], correctAnswer: "H", marks: 1 },
+                { questionNumber: 40, questionType: "matching-features", questionText: "Some dinosaurs used their tails to balance, others", options: ["A", "B", "C", "D", "E", "F", "G", "H"], correctAnswer: "F", marks: 1 },
             ],
         },
     ],
@@ -415,33 +386,35 @@ async function seedTest() {
         const existing = await ReadingTest.findOne({ testId: readingTest.testId });
         if (existing) {
             await ReadingTest.findByIdAndUpdate(existing._id, readingTest);
-            console.log("✅ Reading Test 03 updated successfully!");
+            console.log(`\u2705 Reading Mock Test 03 (${readingTest.testId}) UPDATED successfully!`);
         } else {
             const admin = await User.findOne({ role: "admin" });
             if (!admin) {
-                console.log("❌ Admin user not found. Please create an admin user first.");
+                console.log("\u274c Admin user not found. Please create an admin user first.");
                 process.exit(1);
             }
             await ReadingTest.create({ ...readingTest, createdBy: admin._id });
-            console.log("✅ Reading Test 03 created successfully!");
+            console.log(`\u2705 Reading Mock Test 03 (${readingTest.testId}) CREATED successfully!`);
         }
 
-        console.log(`
-📝 Test Details:
-   Title: ${readingTest.title}
-   Test ID: ${readingTest.testId}
-   Test Number: ${readingTest.testNumber}
-   Total Questions: ${readingTest.totalQuestions}
-   Sections:
-     1. ${readingTest.sections[0].title} (Q1-13)
-     2. ${readingTest.sections[1].title} (Q14-26)
-     3. ${readingTest.sections[2].title} (Q27-40)
-        `);
+        const verify = await ReadingTest.findOne({ testId: readingTest.testId });
+        if (verify) {
+            const sections = (verify as any).sections || [];
+            console.log(`\n\ud83d\udcca Verification:`);
+            console.log(`   Title: ${(verify as any).title}`);
+            console.log(`   Test ID: ${(verify as any).testId}`);
+            console.log(`   Test Number: ${(verify as any).testNumber}`);
+            console.log(`   isActive: ${(verify as any).isActive}`);
+            console.log(`   Total Questions: ${(verify as any).totalQuestions}`);
+            sections.forEach((s: any, i: number) => {
+                console.log(`   Section ${i + 1}: "${s.title}" | Groups: ${s.questionGroups?.length || 0} | Qs: ${s.questions?.length || 0}`);
+            });
+        }
 
         await mongoose.disconnect();
         process.exit(0);
     } catch (error) {
-        console.error("❌ Error:", error);
+        console.error("\u274c Error:", error);
         process.exit(1);
     }
 }
