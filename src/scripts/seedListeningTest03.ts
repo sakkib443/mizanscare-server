@@ -60,15 +60,6 @@ const data = {
       { blockType: "question" as const, questionNumber: 14, questionType: "map-labeling" as const, questionText: "Shopping Mall", options: ["A","B","C","D","E"], correctAnswer: "TBD", marks: 1 },
       { blockType: "question" as const, questionNumber: 15, questionType: "map-labeling" as const, questionText: "Primary School", options: ["A","B","C","D","E"], correctAnswer: "TBD", marks: 1 },
       { blockType: "instruction" as const, content: "<strong>Questions 16\u201320</strong><br/>What is the improvement of each main point of interest in the area?<br/>Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A\u2013G</strong>, next to questions 16\u201320." },
-      { blockType: "instruction" as const, content: `<div style='margin:10px 0;padding:12px;border:1px solid #d1d5db;max-width:280px'>
-<div><strong>A</strong> &nbsp; New entrance</div>
-<div><strong>B</strong> &nbsp; Free lunch provided</div>
-<div><strong>C</strong> &nbsp; Free information provided</div>
-<div><strong>D</strong> &nbsp; Increase in size</div>
-<div><strong>E</strong> &nbsp; Additional signs</div>
-<div><strong>F</strong> &nbsp; New exhibitions</div>
-<div><strong>G</strong> &nbsp; New structure</div>
-</div>` },
       { blockType: "question" as const, questionNumber: 16, questionType: "matching" as const, questionText: "Car Park", options: ["A. New entrance","B. Free lunch provided","C. Free information provided","D. Increase in size","E. Additional signs","F. New exhibitions","G. New structure"], correctAnswer: "TBD", marks: 1 },
       { blockType: "question" as const, questionNumber: 17, questionType: "matching" as const, questionText: "Primary School", options: ["A. New entrance","B. Free lunch provided","C. Free information provided","D. Increase in size","E. Additional signs","F. New exhibitions","G. New structure"], correctAnswer: "TBD", marks: 1 },
       { blockType: "question" as const, questionNumber: 18, questionType: "matching" as const, questionText: "Science Museum", options: ["A. New entrance","B. Free lunch provided","C. Free information provided","D. Increase in size","E. Additional signs","F. New exhibitions","G. New structure"], correctAnswer: "TBD", marks: 1 },
