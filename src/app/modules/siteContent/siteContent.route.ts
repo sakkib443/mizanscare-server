@@ -14,21 +14,21 @@ router.get("/category/:category", SiteContentController.getByCategory);
 router.get("/key/:key", SiteContentController.getByKey);
 
 // ============ ADMIN ROUTES ============
-router.get("/", auth, authorize("admin"), SiteContentController.getAll);
-router.put("/key/:key", auth, authorize("admin"), SiteContentController.updateByKey);
+router.get("/", auth, authorize("admin", "mentor"), SiteContentController.getAll);
+router.put("/key/:key", auth, authorize("admin", "mentor"), SiteContentController.updateByKey);
 
 // Upload endpoints (file expected as 'video' field)
 router.post(
     "/upload-cloudinary/:key",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     upload.single("video"),
     SiteContentController.uploadCloudinaryVideo
 );
 router.post(
     "/upload-local/:key",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     upload.single("video"),
     SiteContentController.uploadLocalVideo
 );

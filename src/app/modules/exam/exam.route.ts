@@ -14,7 +14,7 @@ router.get("/:examId", ExamController.getExamById);
 router.post(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     validateRequest(createExamValidation),
     ExamController.createExam
 );
@@ -22,7 +22,7 @@ router.post(
 router.put(
     "/:examId",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     validateRequest(updateExamValidation),
     ExamController.updateExam
 );
@@ -30,7 +30,7 @@ router.put(
 router.delete(
     "/:examId",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ExamController.deleteExam
 );
 

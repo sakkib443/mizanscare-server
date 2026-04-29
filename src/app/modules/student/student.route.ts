@@ -84,7 +84,7 @@ router.get("/exam/:examId", auth, StudentController.getStudentByExamId);
 router.get(
     "/statistics",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.getStatistics
 );
 
@@ -92,7 +92,7 @@ router.get(
 router.get(
     "/all-results",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.getAllResults
 );
 
@@ -100,34 +100,34 @@ router.get(
 router.post(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     validateRequest(StudentValidation.createStudentSchema),
     StudentController.createStudent
 );
 
 // Get all students (admin)
-router.get("/", auth, authorize("admin"), StudentController.getAllStudents);
+router.get("/", auth, authorize("admin", "mentor"), StudentController.getAllStudents);
 
 // Get student by ID (admin)
-router.get("/:id", auth, authorize("admin"), StudentController.getStudentById);
+router.get("/:id", auth, authorize("admin", "mentor"), StudentController.getStudentById);
 
 // Update student (admin)
 router.patch(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     validateRequest(StudentValidation.updateStudentSchema),
     StudentController.updateStudent
 );
 
 // Delete student (admin)
-router.delete("/:id", auth, authorize("admin"), StudentController.deleteStudent);
+router.delete("/:id", auth, authorize("admin", "mentor"), StudentController.deleteStudent);
 
 // Reset exam for student (admin)
 router.post(
     "/reset/:examId",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.resetExam
 );
 
@@ -135,7 +135,7 @@ router.post(
 router.patch(
     "/:id/update-score",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.updateScore
 );
 
@@ -143,7 +143,7 @@ router.patch(
 router.get(
     "/:id/answer-sheet/:module",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.getAnswerSheet
 );
 
@@ -151,7 +151,7 @@ router.get(
 router.patch(
     "/:id/update-all-scores",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.updateAllScores
 );
 
@@ -159,7 +159,7 @@ router.patch(
 router.post(
     "/:id/publish-results",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.publishResults
 );
 
@@ -167,7 +167,7 @@ router.post(
 router.post(
     "/:id/reset-module",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     StudentController.resetModule
 );
 

@@ -46,7 +46,7 @@ const createUser = async (req: Request, res: Response) => {
         }
 
         // Create user with specified or default role (only "user" or "admin")
-        const validRoles = ["user", "admin"];
+        const validRoles = ["user", "admin", "mentor"];
         const userRole = validRoles.includes(role) ? role : "admin";
 
         const user = await User.create({
@@ -57,9 +57,10 @@ const createUser = async (req: Request, res: Response) => {
             role: userRole,
         });
 
+        const roleLabel = userRole === "admin" ? "Admin" : userRole === "mentor" ? "Mentor" : "User";
         res.status(201).json({
             success: true,
-            message: `${userRole === "admin" ? "Admin" : "User"} created successfully`,
+            message: `${roleLabel} created successfully`,
             data: {
                 _id: user._id,
                 name: user.name,
@@ -128,11 +129,11 @@ const updateRole = async (req: Request, res: Response) => {
             });
         }
 
-        const validRoles = ["user", "admin"];
+        const validRoles = ["user", "admin", "mentor"];
         if (!validRoles.includes(role)) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid role. Must be: user or admin",
+                message: "Invalid role. Must be: user, admin, or mentor",
             });
         }
 

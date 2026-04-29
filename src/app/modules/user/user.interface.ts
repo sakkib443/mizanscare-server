@@ -4,7 +4,7 @@ export interface IUser {
     phone: string;
     nid?: string;
     password: string;
-    role: "user" | "admin";
+    role: "user" | "admin" | "mentor";
     createdAt?: Date;
     updatedAt?: Date;
 }

@@ -18,7 +18,7 @@ router.get(
 router.get(
     "/statistics",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.getStatistics
 );
 
@@ -26,7 +26,7 @@ router.get(
 router.get(
     "/summary",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.getTestSummary
 );
 
@@ -34,7 +34,7 @@ router.get(
 router.post(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.createSpeakingTest
 );
 
@@ -42,7 +42,7 @@ router.post(
 router.get(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.getAllSpeakingTests
 );
 
@@ -50,7 +50,7 @@ router.get(
 router.get(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.getSpeakingTestById
 );
 
@@ -58,7 +58,7 @@ router.get(
 router.patch(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.updateSpeakingTest
 );
 
@@ -66,7 +66,7 @@ router.patch(
 router.patch(
     "/:id/toggle-active",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.toggleActive
 );
 
@@ -74,7 +74,7 @@ router.patch(
 router.delete(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     SpeakingController.deleteSpeakingTest
 );
 

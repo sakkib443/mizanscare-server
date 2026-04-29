@@ -24,7 +24,7 @@ router.post(
 router.get(
     "/statistics",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.getStatistics
 );
 
@@ -32,7 +32,7 @@ router.get(
 router.get(
     "/summary",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.getTestSummary
 );
 
@@ -40,7 +40,7 @@ router.get(
 router.get(
     "/submissions/pending",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.getPendingSubmissions
 );
 
@@ -48,7 +48,7 @@ router.get(
 router.patch(
     "/submissions/:id/mark",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.markWritingSubmission
 );
 
@@ -56,7 +56,7 @@ router.patch(
 router.post(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.createWritingTest
 );
 
@@ -64,7 +64,7 @@ router.post(
 router.get(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.getAllWritingTests
 );
 
@@ -72,7 +72,7 @@ router.get(
 router.get(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.getWritingTestById
 );
 
@@ -80,7 +80,7 @@ router.get(
 router.patch(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.updateWritingTest
 );
 
@@ -88,7 +88,7 @@ router.patch(
 router.patch(
     "/:id/toggle-active",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.toggleActive
 );
 
@@ -96,7 +96,7 @@ router.patch(
 router.delete(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     WritingController.deleteWritingTest
 );
 

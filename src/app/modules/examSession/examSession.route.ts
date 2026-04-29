@@ -27,12 +27,12 @@ router.post(
 router.get("/:sessionId/result", ExamSessionController.getResult);
 
 // Admin routes
-router.get("/", auth, authorize("admin"), ExamSessionController.getAllSessions);
+router.get("/", auth, authorize("admin", "mentor"), ExamSessionController.getAllSessions);
 
 router.patch(
     "/:sessionId/writing-scores",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ExamSessionController.updateWritingScores
 );
 

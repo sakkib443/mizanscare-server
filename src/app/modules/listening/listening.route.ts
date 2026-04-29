@@ -24,7 +24,7 @@ router.post(
 router.get(
     "/statistics",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.getStatistics
 );
 
@@ -32,7 +32,7 @@ router.get(
 router.get(
     "/summary",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.getTestSummary
 );
 
@@ -40,7 +40,7 @@ router.get(
 router.post(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.createListeningTest
 );
 
@@ -48,7 +48,7 @@ router.post(
 router.get(
     "/",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.getAllListeningTests
 );
 
@@ -56,7 +56,7 @@ router.get(
 router.get(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.getListeningTestById
 );
 
@@ -64,7 +64,7 @@ router.get(
 router.patch(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.updateListeningTest
 );
 
@@ -72,7 +72,7 @@ router.patch(
 router.patch(
     "/:id/toggle-active",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.toggleActive
 );
 
@@ -80,7 +80,7 @@ router.patch(
 router.delete(
     "/:id",
     auth,
-    authorize("admin"),
+    authorize("admin", "mentor"),
     ListeningController.deleteListeningTest
 );
 

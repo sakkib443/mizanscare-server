@@ -12,7 +12,7 @@ router.post("/speaking-recording", upload.single("video"), UploadController.uplo
 // ============ ADMIN ROUTES ============
 // All routes below require admin authentication
 router.use(auth);
-router.use(authorize("admin"));
+router.use(authorize("admin", "mentor"));
 
 // Upload single audio file
 router.post("/audio", upload.single("audio"), UploadController.uploadAudio);
