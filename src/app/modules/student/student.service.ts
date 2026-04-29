@@ -123,6 +123,9 @@ const createStudent = async (
         email: data.email,
         password: autoPassword,
         examDate: student.examDate,
+        speakingExamDate: data.speakingExamDate ? new Date(data.speakingExamDate as any) : undefined,
+        speakingExamTime: data.speakingExamTime,
+        speakingMeetingLink: data.speakingMeetingLink,
     }).catch(err => console.error("Failed to send registration email:", err));
 
     return {

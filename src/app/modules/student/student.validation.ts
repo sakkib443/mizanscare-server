@@ -56,6 +56,10 @@ const createStudentSchema = z.object({
         writingSetNumbers: z.array(z.number().int().min(1).max(10000)).optional(),
         speakingSetNumber: z.number().int().min(1).max(10000).optional(),
         speakingSetNumbers: z.array(z.number().int().min(1).max(10000)).optional(),
+        // Speaking exam schedule
+        speakingExamDate: z.string().datetime().optional(),
+        speakingExamTime: z.string().max(20).optional(),
+        speakingMeetingLink: z.string().url("Meeting link must be a valid URL").optional(),
     }),
 });
 
@@ -96,6 +100,10 @@ const updateStudentSchema = z.object({
         speakingSetNumbers: z.array(z.number().int().min(1).max(10000)).optional(),
         isActive: z.boolean().optional(),
         canRetake: z.boolean().optional(),
+        // Speaking exam schedule
+        speakingExamDate: z.string().datetime().optional(),
+        speakingExamTime: z.string().max(20).optional(),
+        speakingMeetingLink: z.string().url("Meeting link must be a valid URL").optional(),
     }),
 });
 

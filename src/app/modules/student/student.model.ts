@@ -170,7 +170,10 @@ const studentSchema = new Schema<IStudent>(
             default: {},
         },
 
-        // Exam session tracking
+        // Speaking exam schedule
+        speakingExamDate: { type: Date },
+        speakingExamTime: { type: String },
+        speakingMeetingLink: { type: String },
         examStatus: {
             type: String,
             enum: ["not-started", "in-progress", "completed", "terminated", "expired"],

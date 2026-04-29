@@ -19,6 +19,9 @@ const getStudentRegistrationTemplate = (data: {
     password: string;
     examDate: string;
     loginUrl: string;
+    speakingExamDate?: string;
+    speakingExamTime?: string;
+    speakingMeetingLink?: string;
 }) => {
     return `
 <!DOCTYPE html>
@@ -82,6 +85,34 @@ const getStudentRegistrationTemplate = (data: {
                             </table>
                         </td>
                     </tr>
+
+                    <!-- Speaking Exam Schedule (conditional) -->
+                    ${data.speakingExamDate ? `
+                    <tr>
+                        <td style="padding: 20px 30px 0 30px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-radius: 12px; border: 2px solid #7c3aed;">
+                                <tr>
+                                    <td style="padding: 25px;">
+                                        <h3 style="color: #6d28d9; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #7c3aed; padding-bottom: 8px;">🎤 Speaking Exam Schedule</h3>
+                                        <table width="100%" cellpadding="8" cellspacing="0">
+                                            <tr>
+                                                <td style="color: #1f2937; font-weight: 600; width: 140px;">Speaking Date:</td>
+                                                <td style="color: #6d28d9; font-weight: 700;">${data.speakingExamDate}</td>
+                                            </tr>
+                                            ${data.speakingExamTime ? `<tr>
+                                                <td style="color: #1f2937; font-weight: 600;">Speaking Time:</td>
+                                                <td style="color: #6d28d9; font-weight: 700;">${data.speakingExamTime}</td>
+                                            </tr>` : ''}
+                                            ${data.speakingMeetingLink ? `<tr>
+                                                <td style="color: #1f2937; font-weight: 600;">Meeting Link:</td>
+                                                <td><a href="${data.speakingMeetingLink}" style="color: #7c3aed; font-weight: 600; text-decoration: underline;">Join Meeting 🔗</a></td>
+                                            </tr>` : ''}
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>` : ''}
                     
                     <!-- Login Button -->
                     <tr>
@@ -271,6 +302,9 @@ export const sendStudentRegistrationEmail = async (data: {
     email: string;
     password: string;
     examDate: Date;
+    speakingExamDate?: Date;
+    speakingExamTime?: string;
+    speakingMeetingLink?: string;
 }) => {
     try {
         const transporter = createTransporter();
@@ -291,6 +325,15 @@ export const sendStudentRegistrationEmail = async (data: {
                     day: "numeric",
                 }),
                 loginUrl: `${loginUrl}/login`,
+                speakingExamDate: data.speakingExamDate
+                    ? new Date(data.speakingExamDate).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                    })
+                    : undefined,
+                speakingExamTime: data.speakingExamTime,
+                speakingMeetingLink: data.speakingMeetingLink,
             }),
         };
 
