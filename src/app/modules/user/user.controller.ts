@@ -3,7 +3,7 @@ import { User } from "./user.model";
 import bcrypt from "bcrypt";
 import config from "../../config";
 
-// Get all users (admin + super-admin accounts)
+// Get all users (admin accounts)
 const getAllUsers = async (req: Request, res: Response) => {
     try {
         const users = await User.find({})
@@ -24,12 +24,11 @@ const getAllUsers = async (req: Request, res: Response) => {
     }
 };
 
-// Create a new user (admin or super-admin)
+// Create a new user (admin)
 const createUser = async (req: Request, res: Response) => {
     try {
         const { name, email, phone, password, role } = req.body;
 
-        // Only super-admin can create users
         if (!name || !email || !phone || !password) {
             return res.status(400).json({
                 success: false,
@@ -46,8 +45,8 @@ const createUser = async (req: Request, res: Response) => {
             });
         }
 
-        // Create user with specified or default role
-        const validRoles = ["user", "admin", "super-admin"];
+        // Create user with specified or default role (only "user" or "admin")
+        const validRoles = ["user", "admin"];
         const userRole = validRoles.includes(role) ? role : "admin";
 
         const user = await User.create({
@@ -60,7 +59,7 @@ const createUser = async (req: Request, res: Response) => {
 
         res.status(201).json({
             success: true,
-            message: `${userRole === "super-admin" ? "Super Admin" : "Admin"} created successfully`,
+            message: `${userRole === "admin" ? "Admin" : "User"} created successfully`,
             data: {
                 _id: user._id,
                 name: user.name,
@@ -129,11 +128,11 @@ const updateRole = async (req: Request, res: Response) => {
             });
         }
 
-        const validRoles = ["user", "admin", "super-admin"];
+        const validRoles = ["user", "admin"];
         if (!validRoles.includes(role)) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid role. Must be: user, admin, or super-admin",
+                message: "Invalid role. Must be: user or admin",
             });
         }
 
