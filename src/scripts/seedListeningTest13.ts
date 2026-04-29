@@ -67,20 +67,27 @@ const listeningTestData = {
         },
         {
           blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
+          content: `<style>
+.ct-wide{table-layout:fixed!important;font-size:13px!important}
+.ct-wide th,.ct-wide td{padding:6px!important;word-break:break-word;overflow-wrap:break-word;vertical-align:top}
+.ct-wide .embedded-q-input{min-width:40px!important;max-width:100%;width:90%}
+.ct-wide .embedded-q-wrapper{white-space:normal!important;display:inline-flex;margin:0 2px}
+</style>
+<table border='1' class='ct-wide' style='border-collapse:collapse;width:100%'>
+<colgroup><col style='width:26%'/><col style='width:22%'/><col style='width:28%'/><col style='width:24%'/></colgroup>
 <thead><tr>
-<th style='padding:8px;background:#f3f4f6'>Address</th>
-<th style='padding:8px;background:#f3f4f6'>Open Hours</th>
-<th style='padding:8px;background:#f3f4f6'>Days</th>
-<th style='padding:8px;background:#f3f4f6'>Tube Station</th>
+<th style='background:#f3f4f6'>Address</th>
+<th style='background:#f3f4f6'>Open Hours</th>
+<th style='background:#f3f4f6'>Days</th>
+<th style='background:#f3f4f6'>Tube Station</th>
 </tr></thead>
 <tbody>
-<tr style='background:#f9fafb'><td style='padding:8px'>East Street SE17</td><td style='padding:8px'>8 a.m.\u20135 p.m.</td><td style='padding:8px'>Sat & Tue.</td><td style='padding:8px'>Castle</td></tr>
-<tr><td style='padding:8px'>Leather Lane WC1</td><td style='padding:8px'>lunch times</td><td style='padding:8px'><strong>[1]</strong></td><td style='padding:8px'>Chancery Lane</td></tr>
-<tr><td style='padding:8px'><strong>[2]</strong> Lane E1</td><td style='padding:8px'>9 a.m.\u201312 noon</td><td style='padding:8px'>Sunday mornings</td><td style='padding:8px'><strong>[3]</strong></td></tr>
-<tr><td style='padding:8px'>Walthamstow E17</td><td style='padding:8px'><strong>[4]</strong></td><td style='padding:8px'>Mon.\u2013Sat. Except Wed & Sun.</td><td style='padding:8px'><strong>[5]</strong></td></tr>
-<tr><td style='padding:8px'>Brixton SW9</td><td style='padding:8px'>9 a.m.\u20136 p.m.</td><td style='padding:8px'>Mon.\u2013Sun. Half day on Wed.</td><td style='padding:8px'><strong>[6]</strong></td></tr>
-<tr><td style='padding:8px'>Camden High St. NW1</td><td style='padding:8px'>8 a.m.\u20135 p.m.</td><td style='padding:8px'><strong>[7]</strong></td><td style='padding:8px'>Chalk Farm, Camden Town</td></tr>
+<tr style='background:#f9fafb'><td>East Street SE17</td><td>8 a.m.\u20135 p.m.</td><td>Sat & Tue.</td><td>Castle</td></tr>
+<tr><td>Leather Lane WC1</td><td>lunch times</td><td><strong>[1]</strong></td><td>Chancery Lane</td></tr>
+<tr><td><strong>[2]</strong> Lane E1</td><td>9 a.m.\u201312 noon</td><td>Sunday mornings</td><td><strong>[3]</strong></td></tr>
+<tr><td>Walthamstow E17</td><td><strong>[4]</strong></td><td>Mon.\u2013Sat. Except Wed & Sun.</td><td><strong>[5]</strong></td></tr>
+<tr><td>Brixton SW9</td><td>9 a.m.\u20136 p.m.</td><td>Mon.\u2013Sun. Half day on Wed.</td><td><strong>[6]</strong></td></tr>
+<tr><td>Camden High St. NW1</td><td>8 a.m.\u20135 p.m.</td><td><strong>[7]</strong></td><td>Chalk Farm, Camden Town</td></tr>
 </tbody></table>`
         },
         { blockType: "question" as const, questionNumber: 1, questionType: "table-completion" as const, questionText: "~Leather Lane WC1 \u2013 Days: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
@@ -117,21 +124,22 @@ const listeningTestData = {
         },
         {
           blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
+          content: `<table border='1' class='ct-wide' style='border-collapse:collapse;width:100%'>
+<colgroup><col style='width:20%'/><col style='width:20%'/><col style='width:20%'/><col style='width:20%'/><col style='width:20%'/></colgroup>
 <thead><tr>
-<th style='padding:8px;background:#f3f4f6'></th>
-<th style='padding:8px;background:#f3f4f6'>Radio South</th>
-<th style='padding:8px;background:#f3f4f6'>Radio Soap</th>
-<th style='padding:8px;background:#f3f4f6'>new Wake-up</th>
-<th style='padding:8px;background:#f3f4f6'><strong>[15]</strong></th>
+<th style='background:#f3f4f6'></th>
+<th style='background:#f3f4f6'>Radio South</th>
+<th style='background:#f3f4f6'>Radio Soap</th>
+<th style='background:#f3f4f6'>new Wake-up</th>
+<th style='background:#f3f4f6'><strong>[15]</strong></th>
 </tr></thead>
 <tbody>
-<tr><td style='padding:8px;font-weight:bold'>Approval rating</td><td style='padding:8px'><strong>[11]</strong>%</td><td style='padding:8px'>17%</td><td style='padding:8px'>87%</td><td style='padding:8px'>15%</td></tr>
-<tr><td style='padding:8px;font-weight:bold'>Disapproval rating</td><td style='padding:8px'><strong>[12]</strong>%</td><td style='padding:8px'>64%</td><td style='padding:8px'><strong>[13]</strong>%</td><td style='padding:8px'>25%</td></tr>
-<tr><td style='padding:8px;font-weight:bold'>Don\u2019t know</td><td style='padding:8px'>not mentioned</td><td style='padding:8px'>19%</td><td style='padding:8px'>not mentioned</td><td style='padding:8px'>60%</td></tr>
-<tr><td style='padding:8px;font-weight:bold'>Listeners\u2019 comments</td><td style='padding:8px'>excellent</td><td style='padding:8px'>vulgar and puerile</td><td style='padding:8px'><strong>[14]</strong></td><td style='padding:8px'><strong>[16]</strong></td></tr>
+<tr><td style='font-weight:bold'>Approval rating</td><td><strong>[11]</strong>%</td><td>17%</td><td>87%</td><td>15%</td></tr>
+<tr><td style='font-weight:bold'>Disapproval rating</td><td><strong>[12]</strong>%</td><td>64%</td><td><strong>[13]</strong>%</td><td>25%</td></tr>
+<tr><td style='font-weight:bold'>Don\u2019t know</td><td>not mentioned</td><td>19%</td><td>not mentioned</td><td>60%</td></tr>
+<tr><td style='font-weight:bold'>Listeners\u2019 comments</td><td>excellent</td><td>vulgar and puerile</td><td><strong>[14]</strong></td><td><strong>[16]</strong></td></tr>
 </tbody></table>
-<div style='margin-top:6px;font-style:italic'>Number of participants in the survey: 4373</div>`
+<div style='margin-top:6px;font-style:italic;font-size:13px'>Number of participants in the survey: 4373</div>`
         },
         { blockType: "question" as const, questionNumber: 11, questionType: "table-completion" as const, questionText: "~Radio South approval rating: ________%", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
         { blockType: "question" as const, questionNumber: 12, questionType: "table-completion" as const, questionText: "~Radio South disapproval rating: ________%", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
@@ -143,7 +151,7 @@ const listeningTestData = {
         // Q17-20: MCQ (circle correct answer = 4 options)
         {
           blockType: "instruction" as const,
-          content: "<strong>Questions 17\u201320</strong><br/>Choose the correct answer."
+          content: "<strong>Questions 17\u201320</strong><br/>Circle the correct answer."
         },
         {
           blockType: "question" as const, questionNumber: 17, questionType: "multiple-choice" as const,
@@ -206,54 +214,61 @@ const listeningTestData = {
         },
         {
           blockType: "instruction" as const,
-          content: "<strong>OUTLINE OF BOOK REVIEW</strong>"
-        },
+          content: `<div style='border:1px solid #333;margin:10px 0;font-size:14px;box-sizing:border-box;overflow:hidden'>
 
-        {
-          blockType: "instruction" as const,
-          content: "<strong>Introduction</strong>"
+<div style='padding:10px 14px;border-bottom:1px solid #333'>
+<div style='font-weight:bold;margin-bottom:6px'>OUTLINE OF BOOK REVIEW &nbsp; Introduction</div>
+<table style='border:none;border-collapse:collapse'>
+<tr><td style='padding:3px 20px 3px 20px'>\u2022 &nbsp; Title</td><td style='padding:3px 10px'><strong>[21]</strong></td></tr>
+<tr><td style='padding:3px 20px 3px 20px'>\u2022 &nbsp; Author</td><td style='padding:3px 10px'>Robert Winston</td></tr>
+<tr><td style='padding:3px 20px 3px 20px'>\u2022 &nbsp; Category</td><td style='padding:3px 10px'><strong>[22]</strong></td></tr>
+<tr><td style='padding:3px 20px 3px 20px'>\u2022 &nbsp; Subject area</td><td style='padding:3px 10px'>brain</td></tr>
+<tr><td style='padding:3px 20px 3px 20px'>\u2022 &nbsp; Intended readers</td><td style='padding:3px 10px'><strong>[23]</strong></td></tr>
+</table>
+</div>
+
+<div style='padding:10px 14px;border-bottom:1px solid #333'>
+<div style='font-weight:bold;margin-bottom:6px'>Overview</div>
+<div style='padding-left:20px;line-height:1.9'>
+\u2022 &nbsp; Author\u2019s purpose:&nbsp; to inform and advise on maximizing use of the brain<br/>
+\u2022 &nbsp; Main topics: history of <strong>[24]</strong> about brain<br/>
+\u2022 &nbsp; what enables brain to <strong>[25]</strong><br/>
+\u2022 &nbsp; brain\u2019s contribution to development of <strong>[26]</strong><br/>
+\u2022 &nbsp; how to increase intelligence
+</div>
+</div>
+
+<div style='padding:10px 14px;border-bottom:1px solid #333'>
+<div style='font-weight:bold;margin-bottom:6px'>Analysis and evaluation</div>
+<div style='padding-left:20px;line-height:1.9'>
+\u2022 &nbsp; Writer\u2019s qualifications: professor at the University of London<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;who carries out <strong>[27]</strong> research<br/>
+\u2022 &nbsp; Strengths:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;readable, particularly through use of <strong>[28]</strong> contains a useful <strong>[29]</strong><br/>
+\u2022 &nbsp; Weaknesses &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; none
+</div>
+</div>
+
+<div style='padding:10px 14px'>
+<div style='font-weight:bold;margin-bottom:6px'>Conclusion</div>
+<div style='line-height:1.9'>
+Overall response: a very interesting book that aims high and achieves its <strong>[30]</strong>
+</div>
+</div>
+
+</div>`
         },
+        // Grading-only blocks (UI already rendered above via [N] placeholders)
         { blockType: "question" as const, questionNumber: 21, questionType: "note-completion" as const, questionText: "~Title: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        {
-          blockType: "instruction" as const,
-          content: "\u2022 Author: Robert Winston"
-        },
         { blockType: "question" as const, questionNumber: 22, questionType: "note-completion" as const, questionText: "~Category: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        {
-          blockType: "instruction" as const,
-          content: "\u2022 Subject area: brain"
-        },
         { blockType: "question" as const, questionNumber: 23, questionType: "note-completion" as const, questionText: "~Intended readers: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-
-        {
-          blockType: "instruction" as const,
-          content: "<strong>Overview</strong><br/>\u2022 Author\u2019s purpose: to inform and advise on maximizing use of the brain"
-        },
-        { blockType: "question" as const, questionNumber: 24, questionType: "note-completion" as const, questionText: "Main topics: history of ________ about brain", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 25, questionType: "note-completion" as const, questionText: "what enables brain to ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 26, questionType: "note-completion" as const, questionText: "brain\u2019s contribution to development of ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        {
-          blockType: "instruction" as const,
-          content: "\u2022 how to increase intelligence"
-        },
-
-        {
-          blockType: "instruction" as const,
-          content: "<strong>Analysis and evaluation</strong>"
-        },
-        { blockType: "question" as const, questionNumber: 27, questionType: "note-completion" as const, questionText: "~Writer\u2019s qualifications: professor at the University of London who carries out ________ research", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 28, questionType: "note-completion" as const, questionText: "Strengths: readable, particularly through use of ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 29, questionType: "note-completion" as const, questionText: "contains a useful ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        {
-          blockType: "instruction" as const,
-          content: "\u2022 Weaknesses: none"
-        },
-
-        {
-          blockType: "instruction" as const,
-          content: "<strong>Conclusion</strong>"
-        },
-        { blockType: "question" as const, questionNumber: 30, questionType: "note-completion" as const, questionText: "~Overall response: a very interesting book that aims high and achieves its ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 24, questionType: "note-completion" as const, questionText: "~Main topics: history of ________ about brain", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 25, questionType: "note-completion" as const, questionText: "~what enables brain to ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 26, questionType: "note-completion" as const, questionText: "~brain\u2019s contribution to development of ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 27, questionType: "note-completion" as const, questionText: "~Writer\u2019s qualifications: who carries out ________ research", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 28, questionType: "note-completion" as const, questionText: "~Strengths: readable, particularly through use of ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 29, questionType: "note-completion" as const, questionText: "~contains a useful ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 30, questionType: "note-completion" as const, questionText: "~Overall response: achieves its ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       ]
     },
 
@@ -276,17 +291,18 @@ const listeningTestData = {
         },
         {
           blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
+          content: `<table border='1' class='ct-wide' style='border-collapse:collapse;width:100%'>
+<colgroup><col style='width:22%'/><col style='width:28%'/><col style='width:26%'/><col style='width:24%'/></colgroup>
 <thead><tr>
-<th style='padding:8px;background:#f3f4f6'>Bridge type</th>
-<th style='padding:8px;background:#f3f4f6'>Material(s) used</th>
-<th style='padding:8px;background:#f3f4f6'>First examples date from</th>
-<th style='padding:8px;background:#f3f4f6'>Region</th>
+<th style='background:#f3f4f6'>Bridge type</th>
+<th style='background:#f3f4f6'>Material(s) used</th>
+<th style='background:#f3f4f6'>First examples date from</th>
+<th style='background:#f3f4f6'>Region</th>
 </tr></thead>
 <tbody>
-<tr><td style='padding:8px'>Arch</td><td style='padding:8px'>Stone or brick</td><td style='padding:8px'><strong>[31]</strong> BC</td><td style='padding:8px'>Middle East</td></tr>
-<tr><td style='padding:8px'>Suspension</td><td style='padding:8px'><strong>[32]</strong></td><td style='padding:8px'>A.D. 550</td><td style='padding:8px'><strong>[33]</strong></td></tr>
-<tr><td style='padding:8px'>Iron suspension</td><td style='padding:8px'>iron</td><td style='padding:8px'>1826</td><td style='padding:8px'>Wales (UK)</td></tr>
+<tr><td>Arch</td><td>Stone or brick</td><td><strong>[31]</strong> BC</td><td>Middle East</td></tr>
+<tr><td>Suspension</td><td><strong>[32]</strong></td><td>A.D. 550</td><td><strong>[33]</strong></td></tr>
+<tr><td>Iron suspension</td><td>iron</td><td>1826</td><td>Wales (UK)</td></tr>
 </tbody></table>`
         },
         { blockType: "question" as const, questionNumber: 31, questionType: "table-completion" as const, questionText: "~Arch bridge \u2013 date: ________ BC", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
@@ -331,17 +347,18 @@ const listeningTestData = {
         },
         {
           blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
+          content: `<table border='1' class='ct-wide' style='border-collapse:collapse;width:100%'>
+<colgroup><col style='width:26%'/><col style='width:18%'/><col style='width:28%'/><col style='width:28%'/></colgroup>
 <thead><tr>
-<th style='padding:8px;background:#f3f4f6'>Location</th>
-<th style='padding:8px;background:#f3f4f6'>Distance</th>
-<th style='padding:8px;background:#f3f4f6'>Main Difficulty</th>
-<th style='padding:8px;background:#f3f4f6'>Effect</th>
+<th style='background:#f3f4f6'>Location</th>
+<th style='background:#f3f4f6'>Distance</th>
+<th style='background:#f3f4f6'>Main Difficulty</th>
+<th style='background:#f3f4f6'>Effect</th>
 </tr></thead>
 <tbody>
-<tr><td style='padding:8px'>Alaska and Siberia</td><td style='padding:8px'>80 km</td><td style='padding:8px'><strong>[38]</strong></td><td style='padding:8px'>construction time limited</td></tr>
-<tr><td style='padding:8px'>Europe and Africa</td><td style='padding:8px'>28 km</td><td style='padding:8px'><strong>[39]</strong></td><td style='padding:8px'>new type of bridge structure required</td></tr>
-<tr><td style='padding:8px'>Sicily and mainland Italy</td><td style='padding:8px'><strong>[40]</strong> km</td><td style='padding:8px'>funding</td><td style='padding:8px'></td></tr>
+<tr><td>Alaska and Siberia</td><td>80 km</td><td><strong>[38]</strong></td><td>construction time limited</td></tr>
+<tr><td>Europe and Africa</td><td>28 km</td><td><strong>[39]</strong></td><td>new type of bridge structure required</td></tr>
+<tr><td>Sicily and mainland Italy</td><td><strong>[40]</strong> km</td><td>funding</td><td></td></tr>
 </tbody></table>`
         },
         { blockType: "question" as const, questionNumber: 38, questionType: "table-completion" as const, questionText: "~Alaska\u2013Siberia main difficulty: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },

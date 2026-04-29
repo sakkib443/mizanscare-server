@@ -67,23 +67,18 @@ const listeningTestData = {
 
         {
           blockType: "instruction" as const,
-          content: "<strong>Five-Star Caterers Customer &nbsp;&nbsp;&nbsp; Booking Form</strong>"
-        },
-
-        {
-          blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
-<tbody>
-<tr style='background:#f3f4f6'><td style='padding:8px;width:45%'>Example Event:</td><td style='padding:8px'><u>party</u></td></tr>
-<tr><td style='padding:8px'>Customer name:</td><td style='padding:8px'>Mr <strong>[1]</strong></td></tr>
-<tr><td style='padding:8px'>Daytime telephone number:</td><td style='padding:8px'><strong>[2]</strong></td></tr>
-<tr><td style='padding:8px'>Telephone number after 5 pm:</td><td style='padding:8px'>As above (If no one answers, <strong>[3]</strong>)</td></tr>
-<tr><td style='padding:8px'>Number of guests:</td><td style='padding:8px'><strong>[4]</strong></td></tr>
-<tr><td style='padding:8px'>Date:</td><td style='padding:8px'><strong>[5]</strong></td></tr>
-<tr><td style='padding:8px'>Seating Shape:</td><td style='padding:8px'><strong>[6]</strong></td></tr>
-<tr><td style='padding:8px'>Size:</td><td style='padding:8px'><strong>[7]</strong></td></tr>
-<tr><td style='padding:8px'>Number of tables:</td><td style='padding:8px'><strong>[8]</strong></td></tr>
-</tbody></table>`
+          content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>Five-Star Caterers Customer Booking Form</div>
+<div class='ielts-form-row' style='opacity:0.75;font-style:italic'>Example Event: <u>party</u></div>
+<div class='ielts-form-row'>Customer name: Mr <strong>[1]</strong></div>
+<div class='ielts-form-row'>Daytime telephone number: <strong>[2]</strong></div>
+<div class='ielts-form-row'>Telephone number after 5 pm: As above (If no one answers, <strong>[3]</strong>)</div>
+<div class='ielts-form-row'>Number of guests: <strong>[4]</strong></div>
+<div class='ielts-form-row'>Date: <strong>[5]</strong></div>
+<div class='ielts-form-row'>Seating Shape: <strong>[6]</strong></div>
+<div class='ielts-form-row'>Size: <strong>[7]</strong></div>
+<div class='ielts-form-row'>Number of tables: <strong>[8]</strong></div>
+</div>`
         },
 
         {

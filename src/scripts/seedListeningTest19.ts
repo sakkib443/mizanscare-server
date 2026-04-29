@@ -20,19 +20,32 @@ const data = {
   sections: [
     // PART 1 — DVD Customer (Q1-10)
     { sectionNumber: 1, title: "Part 1", context: "A customer buying a DVD player.", instructions: "Questions 1\u201310", audioUrl: "", questions: [
-      { blockType: "instruction" as const, content: "<strong>Questions 1\u20134</strong><br/>Complete the form below.<br/>Write <strong>NO MORE THAN TWO WORDS OR A NUMBER</strong> for each answer.<br/><strong>DVD Customer Profile</strong>" },
+      { blockType: "instruction" as const, content: "<strong>Questions 1\u20134</strong><br/>Complete the form below.<br/>Write <strong>NO MORE THAN TWO WORDS OR A NUMBER</strong> for each answer." },
+      { blockType: "instruction" as const, content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>DVD Customer Profile</div>
+<div class='ielts-form-row' style='opacity:0.75;font-style:italic'>Occupation: student <em>(For example)</em></div>
+<div class='ielts-form-row'>Have you owned a DVD player before? &nbsp; No</div>
+<div class='ielts-form-row'>What is the maximum you want to spend on a DVD player? &nbsp; \u00a3<strong>[1]</strong></div>
+<div class='ielts-form-row'>How many DVDs does the customer watch a month? &nbsp; <strong>[2]</strong></div>
+<div class='ielts-form-row'>What type of films do you enjoy? &nbsp; <strong>[3]</strong></div>
+<div class='ielts-form-row'>What other DVDs (non-film) do you watch? &nbsp; <strong>[4]</strong></div>
+</div>` },
       { blockType: "question" as const, questionNumber: 1, questionType: "form-completion" as const, questionText: "~Maximum to spend on a DVD player: \u00a3________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 2, questionType: "form-completion" as const, questionText: "~DVDs watched per month: ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 3, questionType: "form-completion" as const, questionText: "~Type of films enjoyed: ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 4, questionType: "form-completion" as const, questionText: "~Other DVDs (non-film) watched: ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "instruction" as const, content: "<strong>Questions 5\u201310</strong><br/>Complete the table below.<br/>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer." },
-      { blockType: "instruction" as const, content: `<table border='1' style='border-collapse:collapse;width:100%'>
-<thead><tr><th style='padding:8px;background:#f3f4f6'>Player</th><th style='padding:8px;background:#f3f4f6'>Features</th><th style='padding:8px;background:#f3f4f6'>Cost</th><th style='padding:8px;background:#f3f4f6'>After-sales service</th></tr></thead>
+      { blockType: "instruction" as const, content: `<div class='ct-wide'>
+<style>.ct-wide table{table-layout:fixed;width:100%;border-collapse:collapse}.ct-wide td,.ct-wide th{padding:8px;vertical-align:top;word-wrap:break-word;border:1px solid #d1d5db}.ct-wide th{background:#f3f4f6}</style>
+<table>
+<colgroup><col style='width:18%'/><col style='width:32%'/><col style='width:22%'/><col style='width:28%'/></colgroup>
+<thead><tr><th>Player</th><th>Features</th><th>Cost</th><th>After-sales service</th></tr></thead>
 <tbody>
-<tr><td style='padding:8px'>DB 30</td><td style='padding:8px'>basic</td><td style='padding:8px'>\u00a369</td><td style='padding:8px'><strong>[5]</strong> only</td></tr>
-<tr><td style='padding:8px'>XL 643</td><td style='padding:8px'>Can also <strong>[6]</strong></td><td style='padding:8px'>\u00a3<strong>[7]</strong></td><td style='padding:8px'><strong>[8]</strong> at reduced cost</td></tr>
-<tr><td style='padding:8px'>TriX 24</td><td style='padding:8px'>Will also play <strong>[9]</strong></td><td style='padding:8px'>\u00a394 including <strong>[10]</strong></td><td style='padding:8px'>Guaranteed for 3 years</td></tr>
-</tbody></table>` },
+<tr><td>DB 30</td><td>basic</td><td>\u00a369</td><td><strong>[5]</strong> only</td></tr>
+<tr><td>XL 643</td><td>Can also <strong>[6]</strong></td><td>\u00a3<strong>[7]</strong></td><td><strong>[8]</strong> at reduced cost</td></tr>
+<tr><td>TriX 24</td><td>Will also play <strong>[9]</strong></td><td>\u00a394 including <strong>[10]</strong></td><td>Guaranteed for 3 years</td></tr>
+</tbody></table>
+</div>` },
       { blockType: "question" as const, questionNumber: 5, questionType: "table-completion" as const, questionText: "~DB 30 after-sales: ________ only", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 6, questionType: "table-completion" as const, questionText: "~XL 643 features: Can also ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 7, questionType: "table-completion" as const, questionText: "~XL 643 cost: \u00a3________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
@@ -46,7 +59,7 @@ const data = {
       { blockType: "instruction" as const, content: "<strong>Your home:</strong>" },
       { blockType: "question" as const, questionNumber: 11, questionType: "sentence-completion" as const, questionText: "A quarter of break-ins are through the ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 12, questionType: "sentence-completion" as const, questionText: "The ________ of the house should also be protected", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-      { blockType: "question" as const, questionNumber: 13, questionType: "sentence-completion" as const, questionText: "You should warn burglars by putting a ________ in the window", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 13, questionType: "sentence-completion" as const, questionText: "You should warn burglars your house is alarmed by putting a ________ in the window", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "instruction" as const, content: "<strong>The alarms:</strong>" },
       { blockType: "question" as const, questionNumber: 14, questionType: "sentence-completion" as const, questionText: "The alarms show a constant ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 15, questionType: "sentence-completion" as const, questionText: "The alarms can be set off by a ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
@@ -84,7 +97,7 @@ const data = {
 <div style='text-align:center;font-size:20px;margin:4px 0'>\u2193</div>
 <div style='border:1px solid #374151;padding:10px;text-align:center'>look at other student\u2019s notes on their countries</div>
 <div style='text-align:center;font-size:20px;margin:4px 0'>\u2193</div>
-<div style='border:1px solid #374151;padding:10px;text-align:center'>decide what your exchange \u2018rate\u2019 is going to be</div>
+<div style='border:1px solid #374151;padding:10px;text-align:center'>decide what your exchange \u2018rate\u2019 is going to be against each currency</div>
 <div style='text-align:center;font-size:20px;margin:4px 0'>\u2193</div>
 <div style='border:1px solid #374151;padding:10px;text-align:center'>try to <strong>[34]</strong> your currency</div>
 <div style='text-align:center;font-size:20px;margin:4px 0'>\u2193</div>

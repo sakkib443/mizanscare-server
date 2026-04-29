@@ -67,26 +67,20 @@ const listeningTestData = {
 
         {
           blockType: "instruction" as const,
-          content: "<strong>ORDER FORM</strong>"
-        },
-
-        {
-          blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
-<tbody>
-<tr style='background:#f3f4f6'><td style='padding:8px;width:40%'>Example:</td><td style='padding:8px'>Answer</td></tr>
-<tr style='background:#f3f4f6'><td style='padding:8px'>Reason for call:</td><td style='padding:8px'>problems with <strong>WEBSITE</strong></td></tr>
-<tr><td style='padding:8px'>Name:</td><td style='padding:8px'><strong>[1]</strong> .........Freeman</td></tr>
-<tr><td style='padding:8px'>Title of book:</td><td style='padding:8px'><strong>[2]</strong></td></tr>
-<tr><td style='padding:8px'>Author:</td><td style='padding:8px'>Richard <strong>[3]</strong></td></tr>
-<tr><td style='padding:8px'>Type of book:</td><td style='padding:8px'><strong>[4]</strong></td></tr>
-<tr><td style='padding:8px'>Price:</td><td style='padding:8px'>\u00A3<strong>[5]</strong></td></tr>
-<tr><td style='padding:8px'>Payment method:</td><td style='padding:8px'><strong>[6]</strong></td></tr>
-<tr><td style='padding:8px'>Delivery address:</td><td style='padding:8px'><strong>[7]</strong>, London N22</td></tr>
-<tr><td style='padding:8px'>Delivery type:</td><td style='padding:8px'><strong>[8]</strong></td></tr>
-<tr><td style='padding:8px'>Delivery date:</td><td style='padding:8px'><strong>[9]</strong></td></tr>
-<tr><td style='padding:8px'>Delivery instructions:</td><td style='padding:8px'>If out leave with a <strong>[10]</strong></td></tr>
-</tbody></table>`
+          content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>ORDER FORM</div>
+<div class='ielts-form-row' style='opacity:0.75;font-style:italic'>Example &mdash; Reason for call: problems with <strong>WEBSITE</strong></div>
+<div class='ielts-form-row'>Name: <strong>[1]</strong> Freeman</div>
+<div class='ielts-form-row'>Title of book: <strong>[2]</strong></div>
+<div class='ielts-form-row'>Author: Richard <strong>[3]</strong></div>
+<div class='ielts-form-row'>Type of book: <strong>[4]</strong></div>
+<div class='ielts-form-row'>Price: \u00A3<strong>[5]</strong></div>
+<div class='ielts-form-row'>Payment method: <strong>[6]</strong></div>
+<div class='ielts-form-row'>Delivery address: <strong>[7]</strong>, London N22</div>
+<div class='ielts-form-row'>Delivery type: <strong>[8]</strong></div>
+<div class='ielts-form-row'>Delivery date: <strong>[9]</strong></div>
+<div class='ielts-form-row'>Delivery instructions: If out leave with a <strong>[10]</strong></div>
+</div>`
         },
 
         {

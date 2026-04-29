@@ -1,5 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
+import path from "path";
 import router from "./app/routes";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import { ensureDbConnection } from "./app/config/db";
@@ -15,6 +16,11 @@ app.use(cors({
   ],
   credentials: true,
 }));
+
+// Serve locally uploaded files (e.g. videos uploaded via Design > Videos > Local)
+// NOTE: On read-only / serverless platforms (e.g. Vercel) local writes won't persist,
+// in which case admins should use Cloudinary or YouTube source instead.
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // Ensure DB connection before processing requests (for Vercel serverless)
 app.use(async (req: Request, res: Response, next: NextFunction) => {

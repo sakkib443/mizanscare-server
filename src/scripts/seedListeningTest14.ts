@@ -90,12 +90,19 @@ const data = {
       { blockType: "question" as const, questionNumber: 25, questionType: "multiple-choice" as const, questionText: "The best aspect of the job is it", options: ["A. Gives more responsibility.","B. Comes with a private office.","C. Is a step to higher positions"], correctAnswer: "TBD", marks: 1 },
       // Q26-30: Table completion
       { blockType: "instruction" as const, content: "<strong>Questions 26\u201330</strong><br/>Complete the table.<br/>Write <strong>NO MORE THAN TWO WORDS OR A NUMBER</strong> for each answer." },
-      { blockType: "instruction" as const, content: `<table border='1' style='border-collapse:collapse;width:100%'>
-<thead><tr><th style='padding:8px;background:#f3f4f6'>Candidates</th><th style='padding:8px;background:#f3f4f6'>Steven</th><th style='padding:8px;background:#f3f4f6'>Abdul</th><th style='padding:8px;background:#f3f4f6'>Lek</th><th style='padding:8px;background:#f3f4f6'>Oscar</th></tr></thead>
+      { blockType: "instruction" as const, content: `<style>
+.ct-wide{table-layout:fixed!important;font-size:13px!important}
+.ct-wide th,.ct-wide td{padding:6px!important;word-break:break-word;overflow-wrap:break-word;vertical-align:top}
+.ct-wide .embedded-q-input{min-width:40px!important;max-width:100%;width:90%}
+.ct-wide .embedded-q-wrapper{white-space:normal!important;display:inline-flex;margin:0 2px}
+</style>
+<table border='1' class='ct-wide' style='border-collapse:collapse;width:100%'>
+<colgroup><col style='width:24%'/><col style='width:19%'/><col style='width:19%'/><col style='width:19%'/><col style='width:19%'/></colgroup>
+<thead><tr><th style='background:#f3f4f6'>Candidates</th><th style='background:#f3f4f6'>Steven</th><th style='background:#f3f4f6'>Abdul</th><th style='background:#f3f4f6'>Lek</th><th style='background:#f3f4f6'>Oscar</th></tr></thead>
 <tbody>
-<tr><td style='padding:8px;font-weight:bold'>Years of Experience</td><td style='padding:8px'><strong>[26]</strong></td><td style='padding:8px'>7</td><td style='padding:8px'>8</td><td style='padding:8px'>12</td></tr>
-<tr><td style='padding:8px;font-weight:bold'>Qualification</td><td style='padding:8px'>MBA</td><td style='padding:8px'><strong>[27]</strong></td><td style='padding:8px'>degree</td><td style='padding:8px'>Certificates</td></tr>
-<tr><td style='padding:8px;font-weight:bold'>Possible Concerns</td><td style='padding:8px'><strong>[28]</strong></td><td style='padding:8px'>limited English</td><td style='padding:8px'><strong>[29]</strong></td><td style='padding:8px'><strong>[30]</strong></td></tr>
+<tr><td style='font-weight:bold'>Years of Experience</td><td><strong>[26]</strong></td><td>7</td><td>8</td><td>12</td></tr>
+<tr><td style='font-weight:bold'>Qualification</td><td>MBA</td><td><strong>[27]</strong></td><td>degree</td><td>Certificates</td></tr>
+<tr><td style='font-weight:bold'>Possible Concerns</td><td><strong>[28]</strong></td><td>limited English</td><td><strong>[29]</strong></td><td><strong>[30]</strong></td></tr>
 </tbody></table>` },
       { blockType: "question" as const, questionNumber: 26, questionType: "table-completion" as const, questionText: "~Steven \u2013 Years of Experience: ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 27, questionType: "table-completion" as const, questionText: "~Abdul \u2013 Qualification: ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
@@ -113,15 +120,22 @@ const data = {
       // Q34-40: Note completion
       { blockType: "instruction" as const, content: "<strong>Questions 34\u201340</strong><br/>Complete the table and notes.<br/>Write <strong>NO MORE THAN TWO WORDS OR A NUMBER</strong> for each answer." },
       { blockType: "instruction" as const, content: "<strong>Three Main Reasons for Cave Formation</strong>" },
-      { blockType: "instruction" as const, content: `<table border='1' style='border-collapse:collapse;width:100%'>
-<thead><tr><th style='padding:8px;background:#f3f4f6'>Dissolution</th><th style='padding:8px;background:#f3f4f6'>Volcanic Lava Tubes</th><th style='padding:8px;background:#f3f4f6'>Action of Waves</th></tr></thead>
+      { blockType: "instruction" as const, content: `<style>
+.ct-wide{table-layout:fixed!important;font-size:13px!important}
+.ct-wide th,.ct-wide td{padding:6px!important;word-break:break-word;overflow-wrap:break-word;vertical-align:top}
+.ct-wide .embedded-q-input{min-width:40px!important;max-width:100%;width:90%}
+.ct-wide .embedded-q-wrapper{white-space:normal!important;display:inline-flex;margin:0 2px}
+</style>
+<table border='1' class='ct-wide' style='border-collapse:collapse;width:100%'>
+<colgroup><col style='width:33%'/><col style='width:34%'/><col style='width:33%'/></colgroup>
+<thead><tr><th style='background:#f3f4f6'>Dissolution</th><th style='background:#f3f4f6'>Volcanic Lava Tubes</th><th style='background:#f3f4f6'>Action of Waves</th></tr></thead>
 <tbody><tr>
-<td style='padding:8px'>mainly involves <strong>[34]</strong></td>
-<td style='padding:8px'>topmost surface cools down and <strong>[35]</strong> hotter lava continue to flow beneath</td>
-<td style='padding:8px'>waves pound into cliffs then erode into <strong>[36]</strong> or less rigid rocks</td>
+<td>mainly involves <strong>[34]</strong></td>
+<td>topmost surface cools down and <strong>[35]</strong> hotter lava continues to flow beneath</td>
+<td>waves pound into cliffs then erode into <strong>[36]</strong> or less rigid rocks</td>
 </tr></tbody></table>` },
       { blockType: "question" as const, questionNumber: 34, questionType: "note-completion" as const, questionText: "~Dissolution mainly involves ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-      { blockType: "question" as const, questionNumber: 35, questionType: "note-completion" as const, questionText: "~topmost surface cools down and ________ hotter lava continue to flow beneath", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+      { blockType: "question" as const, questionNumber: 35, questionType: "note-completion" as const, questionText: "~topmost surface cools down and ________ hotter lava continues to flow beneath", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 36, questionType: "note-completion" as const, questionText: "~waves pound into cliffs then erode into ________ or less rigid rocks", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "instruction" as const, content: "<strong>Limestone caves</strong>" },
       { blockType: "question" as const, questionNumber: 37, questionType: "note-completion" as const, questionText: "often have formations made of ________ carbonate", correctAnswer: "TBD", marks: 1, wordLimit: 2 },

@@ -67,26 +67,21 @@ const listeningTestData = {
 
         {
           blockType: "instruction" as const,
-          content: "<strong style='text-align:center;display:block'>PHONE INTERVIEW</strong>"
-        },
-
-        {
-          blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
-<tbody>
-<tr><td style='padding:8px;width:45%'>Name</td><td style='padding:8px'>John Murphy</td></tr>
-<tr style='background:#f3f4f6'><td style='padding:8px'>Example: Position applying for</td><td style='padding:8px'><u>Lifeguard</u></td></tr>
-<tr><td style='padding:8px'>Street address:</td><td style='padding:8px'>45 <strong>[1]</strong> ......... Court</td></tr>
-<tr><td style='padding:8px'>Contact phone number:</td><td style='padding:8px'><strong>[2]</strong></td></tr>
-<tr><td style='padding:8px'>Current part-time job:</td><td style='padding:8px'><strong>[3]</strong></td></tr>
-<tr><td style='padding:8px'>Previous job at Ridgemont High School</td><td style='padding:8px'><strong>[4]</strong></td></tr>
-<tr><td style='padding:8px'>Additional relevant work experience:</td><td style='padding:8px'><strong>[5]</strong></td></tr>
-<tr><td style='padding:8px'>Relevant skills/qualifications:</td><td style='padding:8px'>CPR certification & <strong>[6]</strong></td></tr>
-<tr><td style='padding:8px'>CPR certification expiration date:</td><td style='padding:8px'><strong>[7]</strong></td></tr>
-<tr><td style='padding:8px'>Preferred weekly shift:</td><td style='padding:8px'><strong>[8]</strong></td></tr>
-<tr><td style='padding:8px'>Time available to start work:</td><td style='padding:8px'><strong>[9]</strong></td></tr>
-<tr><td style='padding:8px'>Advertisement source:</td><td style='padding:8px'><strong>[10]</strong></td></tr>
-</tbody></table>`
+          content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>PHONE INTERVIEW</div>
+<div class='ielts-form-row'>Name: John Murphy</div>
+<div class='ielts-form-row' style='opacity:0.75;font-style:italic'>Example: Position applying for &mdash; <u>Lifeguard</u></div>
+<div class='ielts-form-row'>Street address: 45 <strong>[1]</strong> Court</div>
+<div class='ielts-form-row'>Contact phone number: <strong>[2]</strong></div>
+<div class='ielts-form-row'>Current part-time job: <strong>[3]</strong></div>
+<div class='ielts-form-row'>Previous job at Ridgemont High School: <strong>[4]</strong></div>
+<div class='ielts-form-row'>Additional relevant work experience: <strong>[5]</strong></div>
+<div class='ielts-form-row'>Relevant skills/qualifications: CPR certification &amp; <strong>[6]</strong></div>
+<div class='ielts-form-row'>CPR certification expiration date: <strong>[7]</strong></div>
+<div class='ielts-form-row'>Preferred weekly shift: <strong>[8]</strong></div>
+<div class='ielts-form-row'>Time available to start work: <strong>[9]</strong></div>
+<div class='ielts-form-row'>Advertisement source: <strong>[10]</strong></div>
+</div>`
         },
 
         {

@@ -62,39 +62,35 @@ const listeningTestData = {
         },
         {
           blockType: "instruction" as const,
-          content: "<strong>PATIENT RECORD</strong>"
+          content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>PATIENT RECORD</div>
+<div class='ielts-form-row'>Time of appointment: <strong>10:00 am</strong></div>
+<div class='ielts-form-row'>Given names: Simon <strong>[1]</strong></div>
+<div class='ielts-form-row'>Family name: Lee</div>
+<div class='ielts-form-row'>Date of birth: <strong>[2]</strong> 1989</div>
+<div class='ielts-form-row'>Address: <strong>[3]</strong> Adams Terrace, Wellington</div>
+<div class='ielts-form-row'>Phone number: 0211558809</div>
+<div class='ielts-form-row'>Name of insurance company: <strong>[4]</strong></div>
+<div class='ielts-form-row'>Date of last eye test: <strong>[5]</strong></div>
+<div class='ielts-form-row'>Patient\u2019s observations: Problems seeing <strong>[6]</strong></div>
+</div>`
         },
-        {
-          blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'>
-<tbody>
-<tr><td style='padding:8px;width:45%'>Time of appointment:</td><td style='padding:8px'>10:00 am</td></tr>
-<tr><td style='padding:8px'>Given names:</td><td style='padding:8px'>Simon <strong>[1]</strong></td></tr>
-<tr><td style='padding:8px'>Family name:</td><td style='padding:8px'>Lee</td></tr>
-<tr><td style='padding:8px'>Date of birth:</td><td style='padding:8px'><strong>[2]</strong> 1989</td></tr>
-<tr><td style='padding:8px'>Address:</td><td style='padding:8px'><strong>[3]</strong> Adams Terrace, Wellington</td></tr>
-<tr><td style='padding:8px'>Phone number:</td><td style='padding:8px'>0211558809</td></tr>
-<tr><td style='padding:8px'>Name of insurance company:</td><td style='padding:8px'><strong>[4]</strong></td></tr>
-<tr><td style='padding:8px'>Date of last eye test:</td><td style='padding:8px'><strong>[5]</strong></td></tr>
-<tr><td style='padding:8px'>Patient\u2019s observations:</td><td style='padding:8px'>Problems seeing <strong>[6]</strong></td></tr>
-</tbody></table>`
-        },
-        { blockType: "question" as const, questionNumber: 1, questionType: "form-completion" as const, questionText: "~Given names: Simon ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 2, questionType: "form-completion" as const, questionText: "~Date of birth: ________ 1989", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 3, questionType: "form-completion" as const, questionText: "~Address: ________ Adams Terrace, Wellington", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 4, questionType: "form-completion" as const, questionText: "~Name of insurance company: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 5, questionType: "form-completion" as const, questionText: "~Date of last eye test: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 6, questionType: "form-completion" as const, questionText: "~Patient\u2019s observations: Problems seeing ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 1, questionType: "form-completion" as const, questionText: "Given names: Simon ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 2, questionType: "form-completion" as const, questionText: "Date of birth: ________ 1989", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 3, questionType: "form-completion" as const, questionText: "Address: ________ Adams Terrace, Wellington", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 4, questionType: "form-completion" as const, questionText: "Name of insurance company: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 5, questionType: "form-completion" as const, questionText: "Date of last eye test: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 6, questionType: "form-completion" as const, questionText: "Patient\u2019s observations: Problems seeing ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
 
         // Q7-10: Short answer
         {
           blockType: "instruction" as const,
           content: "<strong>Questions 7\u201310</strong><br/>Answer the questions below.<br/>Write <strong>NO MORE THAN THREE WORDS</strong> for each answer."
         },
-        { blockType: "question" as const, questionNumber: 7, questionType: "short-answer" as const, questionText: "~When must Simon wear his glasses?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 8, questionType: "short-answer" as const, questionText: "~What type of glasses are the least expensive?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 9, questionType: "short-answer" as const, questionText: "~What is good about the glasses Simon chooses?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 10, questionType: "short-answer" as const, questionText: "~How does Simon decide to pay?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 7, questionType: "short-answer" as const, questionText: "When must Simon wear his glasses?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 8, questionType: "short-answer" as const, questionText: "What type of glasses are the least expensive?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 9, questionType: "short-answer" as const, questionText: "What is good about the glasses Simon chooses?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 10, questionType: "short-answer" as const, questionText: "How does Simon decide to pay?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       ]
     },
 
@@ -129,14 +125,10 @@ const listeningTestData = {
           blockType: "instruction" as const,
           content: "<strong>Questions 13\u201316</strong><br/>Label the plan below.<br/>Write <strong>NO MORE THAN THREE WORDS</strong> for each answer."
         },
-        {
-          blockType: "instruction" as const,
-          content: "<div style='text-align:center;margin:10px 0'><img src='/images/listening/test11-part2-plan.png' alt='Plan of the Taj Mahal complex' style='max-width:100%;max-height:350px;border:1px solid #d1d5db;border-radius:4px' /></div>"
-        },
-        { blockType: "question" as const, questionNumber: 13, questionType: "plan-labeling" as const, questionText: "~13: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 14, questionType: "plan-labeling" as const, questionText: "~14: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 15, questionType: "plan-labeling" as const, questionText: "~15: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-        { blockType: "question" as const, questionNumber: 16, questionType: "plan-labeling" as const, questionText: "~16: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 13, questionType: "plan-labeling" as const, imageUrl: "/images/listening/test11-part2-plan.png", questionText: "", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 14, questionType: "plan-labeling" as const, questionText: "", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 15, questionType: "plan-labeling" as const, questionText: "", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 16, questionType: "plan-labeling" as const, questionText: "", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
 
         // Q17: MCQ
         {
@@ -157,21 +149,18 @@ const listeningTestData = {
         },
         {
           blockType: "instruction" as const,
-          content: "<strong>How running water is provided</strong>"
-        },
-        {
-          blockType: "instruction" as const,
-          content: `<div style='max-width:400px'>
-<div style='border:1px solid #374151;padding:10px;text-align:center'>Water taken from the <strong>[18]</strong> by bullocks.</div>
-<div style='text-align:center;font-size:20px;margin:4px 0'>\u2193</div>
-<div style='border:1px solid #374151;padding:10px;text-align:center'>Water <u>channelled</u> into the <strong>[19]</strong></div>
-<div style='text-align:center;font-size:20px;margin:4px 0'>\u2193</div>
-<div style='border:1px solid #374151;padding:10px;text-align:center'>Water piped to the <strong>[20]</strong></div>
+          content: `<div class='ielts-form-box' style='max-width:480px'>
+<div class='ielts-form-title'>How running water is provided</div>
+<div style='text-align:center;margin:8px 0'>Water taken from the <strong>[18]</strong> by bullocks.</div>
+<div style='text-align:center;font-size:22px;line-height:1;margin:2px 0'>\u2193</div>
+<div style='text-align:center;margin:8px 0'>Water <u>channelled</u> into the <strong>[19]</strong></div>
+<div style='text-align:center;font-size:22px;line-height:1;margin:2px 0'>\u2193</div>
+<div style='text-align:center;margin:8px 0'>Water piped to the <strong>[20]</strong></div>
 </div>`
         },
-        { blockType: "question" as const, questionNumber: 18, questionType: "flow-chart-completion" as const, questionText: "~Water taken from the ________ by bullocks", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 19, questionType: "flow-chart-completion" as const, questionText: "~Water channelled into the ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 20, questionType: "flow-chart-completion" as const, questionText: "~Water piped to the ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+        { blockType: "question" as const, questionNumber: 18, questionType: "flow-chart-completion" as const, questionText: "Water taken from the ________ by bullocks", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+        { blockType: "question" as const, questionNumber: 19, questionType: "flow-chart-completion" as const, questionText: "Water channelled into the ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+        { blockType: "question" as const, questionNumber: 20, questionType: "flow-chart-completion" as const, questionText: "Water piped to the ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       ]
     },
 
@@ -244,23 +233,46 @@ const listeningTestData = {
           content: `<div style='border:1px solid #374151;padding:12px'><strong>RADIO WRITING</strong><br/><br/>
 You may have to ignore some of the ordinary <strong>[31]</strong> of writing.<br/><br/>
 Written words do not indicate things like emphasis, the <strong>[32]</strong> of reading or where to pause.<br/><br/>
-You need to write in a more <strong>[33]</strong> style than for print.</div>`
+A script needs to sound like a <strong>[33]</strong>.</div>`
         },
-        { blockType: "question" as const, questionNumber: 31, questionType: "sentence-completion" as const, questionText: "~You may have to ignore some of the ordinary ________ of writing", correctAnswer: "TBD", marks: 1, wordLimit: 1 },
-        { blockType: "question" as const, questionNumber: 32, questionType: "sentence-completion" as const, questionText: "~Written words do not indicate things like emphasis, the ________ of reading or where to pause", correctAnswer: "TBD", marks: 1, wordLimit: 1 },
-        { blockType: "question" as const, questionNumber: 33, questionType: "sentence-completion" as const, questionText: "~You need to write in a more ________ style than for print", correctAnswer: "TBD", marks: 1, wordLimit: 1 },
+        { blockType: "question" as const, questionNumber: 31, questionType: "sentence-completion" as const, questionText: "You may have to ignore some of the ordinary ________ of writing", correctAnswer: "TBD", marks: 1, wordLimit: 1 },
+        { blockType: "question" as const, questionNumber: 32, questionType: "sentence-completion" as const, questionText: "Written words do not indicate things like emphasis, the ________ of reading or where to pause", correctAnswer: "TBD", marks: 1, wordLimit: 1 },
+        { blockType: "question" as const, questionNumber: 33, questionType: "sentence-completion" as const, questionText: "A script needs to sound like a ________", correctAnswer: "TBD", marks: 1, wordLimit: 1 },
 
         {
           blockType: "instruction" as const,
-          content: "<strong>Questions 34\u201340</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN TWO WORDS</strong> for each answer."
+          content: "<strong>Questions 34\u201340</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS</strong> for each answer."
         },
-        { blockType: "question" as const, questionNumber: 34, questionType: "note-completion" as const, questionText: "~Use short sentences and ________ words", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 35, questionType: "note-completion" as const, questionText: "~Write for the ________ not for the eye", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 36, questionType: "note-completion" as const, questionText: "~Use the ________ tense and active voice", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 37, questionType: "note-completion" as const, questionText: "~Avoid too many ________ in one sentence", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 38, questionType: "note-completion" as const, questionText: "~Always read your script ________ before recording", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 39, questionType: "note-completion" as const, questionText: "~Make sure difficult names are spelled ________", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-        { blockType: "question" as const, questionNumber: 40, questionType: "note-completion" as const, questionText: "~Keep the listener\u2019s ________ at all times", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+        {
+          blockType: "instruction" as const,
+          content: `<div style='border:1px solid #374151;padding:12px'>
+<div style='margin-bottom:12px'><strong>Know who you are talking to</strong></div>
+<div style='margin-left:16px;margin-bottom:8px'>Imagine a typical listener:</div>
+<div style='margin-left:32px;margin-bottom:12px'>e.g. imagine telling your <strong>[34]</strong> about a film.</div>
+<div style='margin-left:16px;margin-bottom:8px'>Create an informal tone:</div>
+<div style='margin-left:32px;margin-bottom:16px'>e.g. use words like <strong>[35]</strong></div>
+
+<div style='margin-bottom:12px'><strong>Work out what you are going to say</strong></div>
+<div style='margin-left:16px;margin-bottom:8px'>Remember:</div>
+<div style='margin-left:32px'>- listeners cannot ask questions</div>
+<div style='margin-left:32px;margin-bottom:12px'>- you cannot <strong>[36]</strong> ideas</div>
+<div style='margin-left:16px;margin-bottom:8px'>Make your script logical:</div>
+<div style='margin-left:32px;margin-bottom:16px'><strong>[37]</strong> the information.</div>
+
+<div style='margin-bottom:12px'><strong>Use concrete images</strong></div>
+<div style='margin-left:32px;margin-bottom:16px'>e.g. compare the size of a field to a <strong>[38]</strong></div>
+
+<div style='margin-bottom:12px'>Use the <strong>[39]</strong> to get attention.</div>
+<div>Check the script by <strong>[40]</strong></div>
+</div>`
+        },
+        { blockType: "question" as const, questionNumber: 34, questionType: "note-completion" as const, questionText: "imagine telling your ________ about a film", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 35, questionType: "note-completion" as const, questionText: "use words like ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 36, questionType: "note-completion" as const, questionText: "you cannot ________ ideas", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 37, questionType: "note-completion" as const, questionText: "________ the information", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 38, questionType: "note-completion" as const, questionText: "compare the size of a field to a ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 39, questionType: "note-completion" as const, questionText: "Use the ________ to get attention", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+        { blockType: "question" as const, questionNumber: 40, questionType: "note-completion" as const, questionText: "Check the script by ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       ]
     },
   ]

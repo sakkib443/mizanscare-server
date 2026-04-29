@@ -67,18 +67,18 @@ const listeningTestData = {
 
         {
           blockType: "instruction" as const,
-          content: "<strong>Ascot Child Care Centre Enrolment Form</strong>"
-        },
-
-        // Personal details section
-        {
-          blockType: "instruction" as const,
-          content: "<strong>Personal details</strong>"
-        },
-
-        {
-          blockType: "instruction" as const,
-          content: `<table border='1' style='border-collapse:collapse;width:100%'><tbody><tr><td style='padding:8px;width:40%'>Family name:</td><td style='padding:8px'>Cullen</td></tr><tr><td style='padding:8px'>Child\u2019s first name:</td><td style='padding:8px'><strong>[1]</strong></td></tr><tr><td style='padding:8px'>Age:</td><td style='padding:8px'><strong>[2]</strong></td></tr><tr><td style='padding:8px'>Birthday:</td><td style='padding:8px'><strong>[3]</strong></td></tr><tr><td style='padding:8px'>Other children in the family:</td><td style='padding:8px'>a brother aged <strong>[4]</strong></td></tr><tr><td style='padding:8px'>Address:</td><td style='padding:8px'><strong>[5]</strong>, Brisbane</td></tr><tr><td style='padding:8px'>Emergency contact number:</td><td style='padding:8px'>3467 8890</td></tr><tr><td style='padding:8px'>Relationship to child:</td><td style='padding:8px'><strong>[6]</strong></td></tr></tbody></table>`
+          content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>Ascot Child Care Centre Enrolment Form</div>
+<div style='font-weight:700;margin:8px 0 6px'>Personal details</div>
+<div class='ielts-form-row'>Family name: Cullen</div>
+<div class='ielts-form-row'>Child\u2019s first name: <strong>[1]</strong></div>
+<div class='ielts-form-row'>Age: <strong>[2]</strong></div>
+<div class='ielts-form-row'>Birthday: <strong>[3]</strong></div>
+<div class='ielts-form-row'>Other children in the family: a brother aged <strong>[4]</strong></div>
+<div class='ielts-form-row'>Address: <strong>[5]</strong>, Brisbane</div>
+<div class='ielts-form-row'>Emergency contact number: 3467 8890</div>
+<div class='ielts-form-row'>Relationship to child: <strong>[6]</strong></div>
+</div>`
         },
 
         {

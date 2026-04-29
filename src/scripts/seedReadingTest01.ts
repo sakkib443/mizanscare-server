@@ -1,518 +1,531 @@
+/**
+ * Seed Script: Academic Reading Test 01
+ * Source: public/mock/mock-01/AC.docx
+ * Run: npx ts-node-dev --transpile-only src/scripts/seedReadingTest01.ts
+ */
+
 import mongoose from "mongoose";
 import { ReadingTest } from "../app/modules/reading/reading.model";
 import { User } from "../app/modules/user/user.model";
 import config from "../app/config";
 
-const readingTest = {
-    testId: "READING_TEST_01",
+// ═══════════════════════════════════════════════════════════════
+// PASSAGE 1: Hello Happiness!
+// ═══════════════════════════════════════════════════════════════
+
+const passage1Text = `Ask 100 people what would make them happy, and a sizable majority would say \u201cwinning the lottery.\u201d Yet, if they won a vast fortune, within a year they would be back to their previous level of happiness. The fact is that money has many uses, but more money does not mean more happiness. Surveys carried out in recent years by leading psychologists and sociologists all confirm that while individuals may increase their material wealth during the course of their lifetime, this has no bearing on their well-being. And what is true for individuals can be applied on a larger scale to the world population. Statistically, wealthier nations do not achieve higher scores on the happiness-ometer than developing or underdeveloped nations. Once the basic criteria of adequate shelter and nutrition are satisfied, increased wealth plays no significant role. So why the obsession with getting rich? The answer, say researchers, is simple. Call it jealousy, competitiveness, or just keeping up with the Joneses, however well we are doing, there is always someone else who is doing better. Just as we acquire a new $25,000 car, our neighbour parks his brand spanking new $40,000 set of wheels in his drive, causing us much consternation, but fueling us with new aspirations in the process. And so, the cycle continues. Money, or material wealth, may be a prime mover, but it is not the foundation of our well-being.
+
+If money isn\u2019t the key to happiness, then what is? In all 44 countries surveyed by a prominent research centre, family life provided the greatest source of satisfaction. Married people live on average three years longer and enjoy greater physical and psychological health than the unmarried and, surprisingly, couples in a cohabitational relationship. Having a family enhances well-being, and spending more time with one\u2019s family helps even more. Social interaction among families, neighbourhoods, workplaces, communities and religious groups correlates strongly with subjective well-being. In fact, the degree of individuals\u2019 social connections is the best benchmark of their happiness.
+
+Friendship is another major factor. Indeed, to return to the dollar-equals-happiness equation, in one survey, having a friend converted into $50,000 worth of happiness, confirms the well-known phenomenon that loneliness can lead to depression. Work is another area central to well-being, and certain features correlate highly with happiness. These include autonomy over how, where, and at what pace work is done, trust between employer and employee, fair treatment, and active participation in the making of decisions. Occupationally, happiness tends to be more common among professionals and managers, that is, people who are in control of the work they do, rather than subservient to their bosses, inequality implies less control for those who are in the weaker position, although there are more risks of losing their privileges for those in the stronger position.
+
+Control of one\u2019s life in general is also key. Happiness is clearly correlated with the presence of favourable events such as promotion or marriage, and the absence of troubles or bad luck such as accidents, being laid off or conflicts. These events on their own signal the success or failure to reach one\u2019s goals, and therefore the control one has. On a national level, the more that governments recognise individual preferences, the happier their citizens will be. Choice, and citizens\u2019 belief that they can affect the political process, increase subjective well-being. Furthermore, evidence exists for an association between unhappiness and poor health: people from underdeveloped countries are among the unhappiest in the world, and their life expectancy has been falling steadily. People are more satisfied in societies which minimally restrict their freedom of action, in other words, where they are in control rather than being controlled. Happy people are characterised by the belief that they are able to control their situation, whereas unhappy people tend to believe that they are a victim of fate. Happy people are also more psychologically resilient, assertive and open to experience.
+
+But how good is the evidence for this alternative viewpoint then \u2013 that happiness, and not financial status, contributes to good health, and long life? A study of nuns, spanning seven decades, supports this theory. Autobiographies written by the nuns in their early 1920s were scored for positive and negative emotions. Nuns expressing the most positive emotions lived on average ten years longer than those expressing the least positive emotions. Happy people, it seems, are much less likely to fall ill and die than unhappy people.
+
+But what must we do to be happy? Experts cite the old maxim \u201cbe happy with what you\u2019ve got.\u201d Look around you, they say, and identify the positive factors in your life. Concentrating on the negative aspects of one\u2019s life is a no-no, and so is worrying. Worrying is a negative thinking habit that is nearly always about something that lies in the future. It stems, apparently, from our cave dwelling days, when we had to think on a day-to-day basis about how and where to find food and warmth, for example. But in the modern world, worrying simply undermines our ability to enjoy life in the present. More often than not, the things we worry about never come to pass anyway. Just as important is not to dwell on the past \u2013 past mistakes, bad experiences, missed opportunities and so on.
+
+What else can we do? Well, engage in a loving relationship with another adult, and work hard to sustain it. Try to plan frequent interactions with your family, friends and neighbours (in that order). Make sure you\u2019re not working so hard that you\u2019ve no time left for personal relationships and leisure. If you are, leave your job voluntarily to become self-employed, but don\u2019t get sacked \u2014 that\u2019s more damaging to well-being than the loss of a spouse, and its effects last longer. In your spare time, join a club, volunteer for community service, or take up religion.
+
+If none of the above works, then vote for a political party with the same agenda as the King of Bhutan, who announced that his nation\u2019s objective is national happiness.`;
+
+// ═══════════════════════════════════════════════════════════════
+// PASSAGE 2: One Who Hopes
+// ═══════════════════════════════════════════════════════════════
+
+const passage2ParaA = `Language lovers, just like music lovers, enjoy variety. For the latter there\u2019s Mozart, The Rolling Stones and Beyonce. For the former there\u2019s English, French, Swahili, Urdu... the list is endless. But what about those poor overworked students who find learning difficult, confusing languages a drudge? Wouldn\u2019t it put a smile on their faces if there were just one simple, easy-to-learn tongue that would cut their study time by years? Well, of course, it exists. It\u2019s called Esperanto, and it\u2019s been around for more than 120 years. Esperanto is the most widely spoken artificially constructed international language. The name derives from Doktoro Esperanto, the pseudonym under which L. L. Zamenhof first published his Unua Libro in 1887. The phrase itself means \u2018one who hopes\u2019. Zamenhof\u2019s goal was to create an easy and flexible language as a universal second language to promote peace and international understanding.`;
+
+const passage2ParaB = `Zamenhof, after ten years of developing his brainchild from the late 1870s to the early 1880s, had the first Esperanto grammar published in Warsaw in July 1887. The number of speakers grew rapidly over the next few decades, at first primarily in the Russian empire and Eastern Europe, then in Western Europe and the Americas, China, and Japan. In the early years, speakers of Esperanto kept in contact primarily through correspondence and periodicals, but since 1905 world congresses have been held on five continents every year except during the two World Wars. Latest estimates for the numbers of Esperanto speakers are around 2 million. Put in percentage terms, that\u2019s about 0.03% of the world\u2019s population \u2013 no staggering figure, comparatively speaking. One reason is that Esperanto has no official status in any country, but it is an optional subject on the curriculum of several state education systems. It is widely estimated that it can be learned in anywhere between a quarter to a twentieth of the time required for other languages.`;
+
+const passage2ParaC = `As a constructed language, Esperanto is not genealogically related to any ethnic language. Whilst it is described as \u2018a language lexically predominantly Romanic\u2019, the phonology, grammar, vocabulary, and semantics are based on the western Indo-European languages. For those of us who are not naturally predisposed to tucking languages under our belts, it is an easy language to learn. It has 5 vowels and 23 consonants. It has one simple way of conjugating all of its verbs. Words are often made from many other roots, making the number of words which one must memorise much smaller. The language is phonetic, and the rules of pronunciation are very simple, so that everyone knows how to pronounce a written word and vice-versa, and word order follows a standard, logical pattern. Through prefixing and suffixing, Esperanto makes it easy to identify words as nouns, verbs, adjectives, adverbs, direct objects and so on, by means of easy-to-spot endings. All this makes for easy language learning. What\u2019s more, several research studies demonstrate that studying Esperanto before another foreign language speeds up and improves the learning of the other language. This is presumably because learning subsequent foreign languages is easier than learning one\u2019s first, while the use of a grammatically simple and culturally flexible language like Esperanto softens the blow of learning one\u2019s first foreign language. In one study, a group of European high school students studied Esperanto for one year, then French for three years, and ended up with a significantly better command of French than a control group who had studied French for all four years.`;
+
+const passage2ParaD = `Needless to say, the language has its critics. Some point to the Eastern European features of the language as being harsh and difficult to pronounce, and argue that Esperanto has an artificial feel to it, without the flow of a natural tongue, and that by nature of its artificiality, it is impossible to become emotionally involved with the language. Others cite its lack of cultural history, indigenous literature \u2013 \u201cno one has ever written a novel straight into Esperanto\u201d \u2013 together with its minimal vocabulary and its inability to express all the necessary philosophical, emotional and psychological concepts.`;
+
+const passage2ParaE = `The champions of Esperanto \u2013 Esperantists \u2013 disagree. They claim that it is a language in which a great body of world literature has appeared in translation: in poetry, novels, literary journals, and, to rebut the accusation that it is not a \u2018real\u2019 language, point out that it is frequently used at international meetings which draw hundreds and thousands of participants. Moreover, on an international scale, it is most useful \u2013 and fair \u2013 for neutral communication. That means that communication through Esperanto does not give advantages to the members of any particular people or culture, but provides an ethos of equality of rights, tolerance and true internationalism.`;
+
+const passage2ParaF = `Esperantists further claim that Esperanto has the potential \u2013 were it universally taught for a year or two throughout the world \u2013 to empower ordinary people to communicate effectively worldwide on a scale that far exceeds that which is attainable today by only the most linguistically brilliant among us. It offers the opportunity to improve communication in business, diplomacy, scholarship and other fields so that those who speak many different native languages will be able to participate fluently in international conferences and chat comfortably with each other after the formal presentations are made. Nowadays that privilege is often restricted to native speakers of English and those who have special talents and opportunities for learning English as a foreign language.`;
+
+const passage2ParaG = `What Esperanto does offer in concrete terms is the potential of saving billions of dollars which are now being spent on translators and interpreters, billions which would be freed up to serve the purposes of governments and organisations that spend so much of their resources to change words from one language into the words of others. Take, for example, the enormously costly conferences, meetings and documentation involved in the European Union parliamentary and administrative procedures \u2013 all funded, essentially, by tax payers. And instead of the World Health Organisation, and all NGOs for that matter, devoting enormous sums to provide interpreters and translations, they would be able to devote those huge amounts of money to improving the health of stricken populations throughout the world.`;
+
+const passage2Text = `A  ${passage2ParaA}
+
+B  ${passage2ParaB}
+
+C  ${passage2ParaC}
+
+D  ${passage2ParaD}
+
+E  ${passage2ParaE}
+
+F  ${passage2ParaF}
+
+G  ${passage2ParaG}`;
+
+// ═══════════════════════════════════════════════════════════════
+// PASSAGE 3: LONG-TERM FORECAST: HOT AND DRY
+// ═══════════════════════════════════════════════════════════════
+
+const passage3ParaA = `Melting land ice in the Arctic is set to cause a global rise in sea levels, leading to disastrous effects for both man and wildlife. Many species worldwide are threatened with extinction, and low-lying islands and land masses will disappear entirely. But the havoc wreaked by the effect of greenhouse gases won\u2019t be confined to just too much water, but the absence of it, as well. In other words, desertification. A decrease in the total amount of rainfall in arid and semi-arid areas could increase the total area of drylands worldwide, and thus the total amount of land potentially at risk from desertification.`;
+
+const passage3ParaB = `Desertification is officially recognised as land degradation in arid, semi-arid and dry sub-humid areas resulting from various factors including climatic variations and human activities. This degradation of formerly productive land is a complex process. It involves multiple causes, and it proceeds at varying rates in different climates. Desertification may intensify a general climatic trend, or initiate a change in local climate, both leading towards greater aridity. The more arid conditions associated with desertification accelerate the depletion of vegetation and soils. Land degradation occurs all over the world, but it is only referred to as desertification when it takes place in drylands. This is because these areas are especially prone to more permanent damage as different areas of degraded land spread and merge together to form desert-like conditions.`;
+
+const passage3ParaC = `Global warming brought about by increasing greenhouse gas levels in the atmosphere is expected to increase the variability of weather conditions and extreme events. Many dryland areas face increasingly low and erratic rainfalls, coupled with soil erosion by wind and the drying-up of water resources through increased regional temperatures. Deforestation can also reduce rainfall in certain areas, increasing the threat of desertification. It is not yet possible, despite sophisticated technology, to identify with an acceptable degree of reliability those parts of the Earth where desertification will occur. Existing drylands, which cover over 40% of the total land area of the world, most significantly in Africa and Asia, will probably be most at risk from climate change. These areas already experience low rainfall, and any that falls is usually in the form of short, erratic, high-intensity storms. In addition, such areas also suffer from land degradation due to over-cultivation, overgrazing, deforestation and poor irrigation practices.`;
+
+const passage3ParaD = `It is a misconception that droughts cause desertification. Droughts are common in arid and semi-arid lands. Well-managed lands can recover from drought when the rains return. Continued land abuse during droughts, however, increases land degradation. Nor does desertification occur in linear, easily definable patterns. Deserts advance erratically, forming patches on their borders. Areas far from natural deserts can degrade quickly to barren soil, rock, or sand through poor land management. The presence of a nearby desert has no direct relationship to desertification. Unfortunately, an area undergoing desertification is brought to public attention only after the process is well underway. Often little or no data are available to indicate the previous state of the ecosystem or the rate of degradation. Scientists still question whether desertification, as a process of global change, is permanent or how and when it can be halted or reversed.`;
+
+const passage3ParaE = `But desertification will not be limited to the drylands of Africa and Asia. According to the environmental organisation Greenpeace, the Mediterranean will suffer substantially, too. If current trends in emissions of greenhouse gases continue, global temperatures are expected to rise faster over the next century than over any time during the last 10,000 years. Significant uncertainties surround predictions of regional climate changes, but it is likely that the Mediterranean region will also warm significantly, increasing the frequency and severity of droughts across the region. As the world warms, global sea levels will rise as oceans expand and glaciers melt. Around much of the Mediterranean basin, sea levels could rise by close to 1m by 2100. As a result, some low-lying coastal areas would be lost through flooding or erosion, while rivers and coastal aquifers would become more salty. The worst affected areas will be the Nile Delta, Venice in Italy and Thessaloniki in Greece, two major cities where local subsidence means that sea levels could rise by at least one-and-a-half times as much as elsewhere.`;
+
+const passage3ParaF = `The consequences of all this, says Greenpeace, are far-reaching, and the picture is a gloomy one. Livestock production would suffer due to a deterioration in the quality of rangeland. Yields of grains and other crops could decrease substantially across the Mediterranean region due to increased frequency of drought. Crop production would be further threatened by increases in competition for water and the prevalence of pests and diseases and land loss through desertification and sea-level rise. The combination of heat and pollution would lead to an upsurge in respiratory illness among urban populations, while extreme weather events could increase death and injury rates. Water shortages and damaged infrastructure would increase the risk of cholera and dysentery, while higher temperatures would increase the incidence of infectious diseases, such as malaria and dengue fever. Serious social disruption could occur as millions are forced from their homelands as a result of desertification, poor harvests and sea-level rise, while international disputes over shared water resources could turn into conflict.`;
+
+const passage3ParaG = `Future climate change could critically undermine efforts for sustainable development in the Mediterranean region through its impacts on the environment and social and economic well-being. While in many respects climate change exacerbates existing problems instead of creating new ones, the sheer magnitude of the potential problem means it cannot be ignored. There is some scope for adaptation, but the fact that many measures would be beneficial irrespective of climate change suggests that radical changes in our policies and practices will be needed. It is also vital that developed countries meet their obligations to assist adaptation in developing countries through access to know-how and financial assistance. Ultimately, however, the long-term sustainability of the Mediterranean region requires keeping climate change within tolerable bounds. Current understanding of safe limits points to the need for prompt international agreement \u2013 and action \u2013 to make the drastic cuts in emissions of greenhouse gases required to stabilise atmospheric concentrations of these gases.`;
+
+const passage3Text = `A  ${passage3ParaA}
+
+B  ${passage3ParaB}
+
+C  ${passage3ParaC}
+
+D  ${passage3ParaD}
+
+E  ${passage3ParaE}
+
+F  ${passage3ParaF}
+
+G  ${passage3ParaG}`;
+
+// ═══════════════════════════════════════════════════════════════
+// FULL TEST DATA
+// ═══════════════════════════════════════════════════════════════
+
+const readingTest01 = {
+    testId: "READING_AC_01_376",
     testNumber: 1,
-    title: "Reading Test 01",
-    description: "IELTS Academic Reading Test featuring passages on Nutmeg – a valuable spice",
-    source: "IELTS Practice Test",
+    title: "Academic Reading Mock Test 01",
+    description: "Academic Reading Test with 3 passages and 40 questions",
+    source: "Academic Reading Practice",
+    testType: "academic" as const,
     difficulty: "medium" as const,
     isActive: true,
     duration: 60,
     totalQuestions: 40,
     totalMarks: 40,
     sections: [
-        // ═══════════════════════════════════════════
-        // SECTION 1: Nutmeg – a valuable spice
-        // ═══════════════════════════════════════════
+        // ╔═══════════════════════════════════════════════════════════╗
+        // ║  SECTION 1: Hello Happiness! (Questions 1-13)           ║
+        // ╚═══════════════════════════════════════════════════════════╝
         {
             sectionNumber: 1,
-            title: "Nutmeg – a valuable spice",
-            passage: `The nutmeg tree, Myristica fragrans, is a large evergreen tree native to Southeast Asia. Until the late 18th century, it only grew in one place in the world: a small group of islands in the Banda Sea, part of the Moluccas – or Spice Islands – in northeastern Indonesia. The tree is thickly branched with dense foliage of tough, dark green oval leaves, and produces small, yellow, bell-shaped flowers and pale yellow pear-shaped fruits. The fruit is encased in a flesh husk. When the fruit is ripe, this husk splits into two halves along a ridge running the length of the fruit. Inside is a purple-brown shiny seed, 2-3 cm long by about 2 cm across, surrounded by a lacy red or crimson covering called an 'aril'. These are the sources of the two spices nutmeg and mace, the former being produced from the dried seed and the latter from the aril.
-
-Nutmeg was a highly prized and costly ingredient in European cuisine in the Middle Ages, and was used as a flavouring, medicinal, and preservative agent. Throughout this period, the Arabs were the exclusive importers of the spice to Europe. They sold nutmeg for high prices to merchants based in Venice, but they never revealed the exact location of the source of this extremely valuable commodity. The Arab-Venetian dominance of the trade finally ended in 1512, when the Portuguese reached the Banda Islands and began exploiting its precious resources.
-
-Always in danger of competition from neighbouring Spain, the Portuguese began subcontracting their spice distribution to Dutch traders. Profits began to flow into the Netherlands, and the Dutch commercial fleet swiftly grew into one of the largest in the world. The Dutch quietly gained control of most of the shipping and trading of spices in Northern Europe. Then, in 1580, Portugal fell under Spanish rule, and by the end of the 16th century the Dutch found themselves locked out of the market. As prices for pepper, nutmeg, and other spices soared across Europe, they decided to fight back.
-
-In 1602, Dutch merchants founded the VOC, a trading corporation better known as the Dutch East India Company. By 1617, the VOC was the richest commercial operation in the world. The company had 50,000 employees worldwide, with a private army of 30,000 men and a fleet of 200 ships. At the same time, thousands of people across Europe were dying of the plague, a highly contagious and deadly disease. Doctors were desperate for a way to stop the spread of this disease, and they decided nutmeg held the cure. Everybody wanted nutmeg, and many were willing to spare no expense to have it. Nutmeg bought for a few pennies in Indonesia could be sold for 68,000 times its original cost on the streets of London. The only problem was the short supply. And that's where the Dutch found their opportunity.
-
-The Banda Islands were ruled by local sultans who insisted on maintaining a neutral trading policy towards foreign powers. This allowed them to avoid the presence of Portuguese or Spanish troops on their soil, but it also left them unprotected from other invaders. In 1621, the Dutch arrived and took over. Once securely in control of the Bandas, the Dutch went to work protecting their new investment. They concentrated all nutmeg production into a few easily guarded areas, uprooting and destroying any trees outside the plantation zones. Anyone caught growing a nutmeg seedling or carrying seeds without the proper authority was severely punished. In addition, all exported nutmeg was covered with lime to make sure there was no chance a fertile seed which could be grown elsewhere would leave the islands. There was only one obstacle to Dutch domination. One of the Banda Islands, a sliver of land called Run, only 3 km long by less than 1 km wide, was under the control of the British. After decades of fighting for control of this tiny island, the Dutch and British arrived at a compromise settlement, the Treaty of Breda, in 1667. Intent on securing their hold over every nutmeg-producing island, the Dutch offered a trade: if the British would give them the island of Run, they would in turn give Britain a distant and much less valuable island in North America. The British agreed. That other island was Manhattan, which is how New Amsterdam became New York. The Dutch now had a monopoly over the nutmeg trade which would last for another century.
-
-Then, in 1770, a Frenchman named Pierre Poivre successfully smuggled nutmeg plants to safety in Mauritius, an island off the coast of Africa. Some of these were later exported to the Caribbean where they thrived, especially on the island of Grenada. Next, in 1778, a volcanic eruption in the Banda region caused a tsunami that wiped out half the nutmeg groves. Finally, in 1809, the British returned to Indonesia and seized the Banda Islands by force. They returned the islands to the Dutch in 1817, but not before transplanting hundreds of nutmeg seedlings to plantations in several locations across southern Asia. The Dutch nutmeg monopoly was over.
-
-Today, nutmeg is grown in Indonesia, the Caribbean, India, Malaysia, Papua New Guinea and Sri Lanka, and world nutmeg production is estimated to average between 10,000 and 12,000 tonnes per year.`,
-            passageSource: "IELTS Practice Test",
-            instructions: "Questions 1-13",
+            title: "Hello Happiness!",
+            instructions: "You should spend about 20 minutes on Questions 1-13 which are based on Reading Passage 1 below.",
+            passage: passage1Text,
             questionGroups: [
-                // Questions 1-4: Note Completion
+                // ── Q1-3: CHOOSE THREE LETTERS A-H ──
                 {
-                    groupType: "note-completion",
+                    groupType: "choose-two-letters",
                     startQuestion: 1,
-                    endQuestion: 4,
-                    mainInstruction: "Complete the notes below.",
-                    subInstruction: "Choose ONE WORD ONLY from the passage for each answer.",
-                    mainHeading: "The nutmeg tree and fruit",
-                    passage: `• the leaves of the tree are 1 __________ in shape
-• the 2 __________ surrounds the fruit and breaks open when the fruit is ripe
-• the 3 __________ is used to produce the spice nutmeg
-• the covering known as the aril is used to produce 4 __________
-• the tree has yellow flowers and fruit`,
-                    notesSections: [
+                    endQuestion: 3,
+                    mainInstruction: "Choose THREE letters A-H. Circle the correct letters, A-H, below.",
+                    subInstruction: "NB: Your answers may be given in any order.",
+                    questionSets: [
                         {
-                            subHeading: "",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 1, textBefore: "the leaves of the tree are", textAfter: "in shape", correctAnswer: "oval" },
-                                { type: "question" as const, questionNumber: 2, textBefore: "the", textAfter: "surrounds the fruit and breaks open when the fruit is ripe", correctAnswer: "husk" },
-                                { type: "question" as const, questionNumber: 3, textBefore: "the", textAfter: "is used to produce the spice nutmeg", correctAnswer: "seed" },
-                                { type: "question" as const, questionNumber: 4, textBefore: "the covering known as the aril is used to produce", textAfter: "", correctAnswer: "mace" },
-                                { type: "context" as const, text: "the tree has yellow flowers and fruit" },
+                            questionNumbers: [1, 2, 3],
+                            questionText: "Which THREE of the following statements are true, according to the text?",
+                            options: [
+                                { letter: "A", text: "Money can bring misery." },
+                                { letter: "B", text: "Wealthier nations place more emphasis on happiness than poorer ones." },
+                                { letter: "C", text: "Securing a place to live is a basic human need." },
+                                { letter: "D", text: "The desire for social status is a global phenomenon." },
+                                { letter: "E", text: "An unmarried couple living together is less likely to be happy than a married couple." },
+                                { letter: "F", text: "The less responsibility one has, the happier one is." },
+                                { letter: "G", text: "Involvement in policy-making can increase well-being." },
+                                { letter: "H", text: "Our prehistoric ancestors were happier than we are." }
                             ],
-                        },
-                    ],
+                            correctAnswers: ["C", "E", "G"]
+                        }
+                    ]
                 },
-                // Questions 5-7: True/False/Not Given
+
+                // ── Q4-7: SUMMARY WITH OPTIONS ──
+                {
+                    groupType: "summary-with-options",
+                    startQuestion: 4,
+                    endQuestion: 7,
+                    mainInstruction: "Complete the summary using the list of words, A-I, below.",
+                    subInstruction: "Write the correct letter, A-I, for the questions 4-7 on your answer sheet.",
+                    phraseList: [
+                        { letter: "A", text: "episode" },
+                        { letter: "B", text: "interaction" },
+                        { letter: "C", text: "cooperation" },
+                        { letter: "D", text: "control" },
+                        { letter: "E", text: "number" },
+                        { letter: "F", text: "level" },
+                        { letter: "G", text: "course" },
+                        { letter: "H", text: "conflict" },
+                        { letter: "I", text: "limit" }
+                    ],
+                    summarySegments: [
+                        { type: "text", content: "Money can buy you just about anything, but not, it seems happiness. Whether on a personal or national " },
+                        { type: "blank", questionNumber: 4, correctAnswer: "F" },
+                        { type: "text", content: ", your bank balance won\u2019t make you happier. Once the basic criteria of a roof over your head and food on the table have been met, money ceases to play a part. One of the most important factors in achieving happiness is the extent of our social " },
+                        { type: "blank", questionNumber: 5, correctAnswer: "B" },
+                        { type: "text", content: " \u2013 our relationships with family, friends, colleagues, and so on. Equally important is the amount of " },
+                        { type: "blank", questionNumber: 6, correctAnswer: "D" },
+                        { type: "text", content: " we have, either in our personal life, working life, or even in our ability to influence the political " },
+                        { type: "blank", questionNumber: 7, correctAnswer: "G" },
+                        { type: "text", content: " that our country embarks on." }
+                    ]
+                },
+
+                // ── Q8-13: TRUE / FALSE / NOT GIVEN ──
                 {
                     groupType: "true-false-not-given",
-                    startQuestion: 5,
-                    endQuestion: 7,
-                    mainInstruction: "Do the following statements agree with the information given in the Reading Passage?",
-                    subInstruction: "Write TRUE if the statement agrees with the information, FALSE if the statement contradicts the information, NOT GIVEN if there is no information on this.",
-                    optionsExplanation: [
-                        { label: "TRUE", description: "if the statement agrees with the information" },
-                        { label: "FALSE", description: "if the statement contradicts the information" },
-                        { label: "NOT GIVEN", description: "if there is no information on this" },
-                    ],
-                    statements: [
-                        { questionNumber: 5, text: "In the Middle Ages, most Europeans knew where nutmeg was grown.", correctAnswer: "FALSE" },
-                        { questionNumber: 6, text: "The VOC was the world's first major trading company.", correctAnswer: "NOT GIVEN" },
-                        { questionNumber: 7, text: "Following the Treaty of Breda, the Dutch had control of all the islands where nutmeg grew.", correctAnswer: "TRUE" },
-                    ],
-                },
-                // Questions 8-13: Note Completion (Table format)
-                {
-                    groupType: "note-completion",
                     startQuestion: 8,
                     endQuestion: 13,
-                    mainInstruction: "Complete the table below.",
-                    subInstruction: "Choose ONE WORD ONLY from the passage for each answer.",
-                    mainHeading: "Timeline of nutmeg trade",
-                    passage: `Middle Ages
-• Nutmeg was brought to Europe by the 8 __________
-
-16th century
-• European nations took control of the nutmeg trade
-
-17th century
-• Demand for nutmeg grew, as it was believed to be effective against the disease known as the 9 __________
-• The Dutch
-– took control of the Banda Islands
-– restricted nutmeg production to a few areas
-– put 10 __________ on nutmeg to avoid it being cultivated outside the islands
-– finally obtained the island of 11 __________ from the British
-
-Late 18th century
-• 1770 – nutmeg plants were secretly taken to 12 __________
-• 1778 – half the Banda Islands' nutmeg plantations were destroyed by a 13 __________`,
-                    notesSections: [
-                        {
-                            subHeading: "Middle Ages",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 8, textBefore: "Nutmeg was brought to Europe by the", textAfter: "", correctAnswer: "Arabs" },
-                            ],
-                        },
-                        {
-                            subHeading: "16th century",
-                            bullets: [
-                                { type: "context" as const, text: "European nations took control of the nutmeg trade" },
-                            ],
-                        },
-                        {
-                            subHeading: "17th century",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 9, textBefore: "Demand for nutmeg grew, as it was believed to be effective against the disease known as the", textAfter: "", correctAnswer: "plague" },
-                                { type: "context" as const, text: "The Dutch" },
-                                { type: "context" as const, text: "– took control of the Banda Islands" },
-                                { type: "context" as const, text: "– restricted nutmeg production to a few areas" },
-                                { type: "question" as const, questionNumber: 10, textBefore: "– put", textAfter: "on nutmeg to avoid it being cultivated outside the islands", correctAnswer: "lime" },
-                                { type: "question" as const, questionNumber: 11, textBefore: "– finally obtained the island of", textAfter: "from the British", correctAnswer: "Run" },
-                            ],
-                        },
-                        {
-                            subHeading: "Late 18th century",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 12, textBefore: "1770 – nutmeg plants were secretly taken to", textAfter: "", correctAnswer: "Mauritius" },
-                                { type: "question" as const, questionNumber: 13, textBefore: "1778 – half the Banda Islands' nutmeg plantations were destroyed by a", textAfter: "", correctAnswer: "tsunami" },
-                            ],
-                        },
-                    ],
-                },
+                    mainInstruction: "Do the following statements agree with the information given in the Reading Passage?",
+                    subInstruction: "For the questions (8-13) on your answer sheet, write TRUE if the statement agrees with the information, FALSE if the statement contradicts the information, NOT GIVEN if there is no information on this.",
+                    statements: [
+                        { questionNumber: 8, text: "People from underdeveloped nations try to attain the same standard of living as those from developed nations.", correctAnswer: "NOT GIVEN" },
+                        { questionNumber: 9, text: "Seeing what others have makes people want to have it too.", correctAnswer: "TRUE" },
+                        { questionNumber: 10, text: "The larger the family is, the happier the parents will probably be.", correctAnswer: "NOT GIVEN" },
+                        { questionNumber: 11, text: "One\u2019s attitude to life has no influence on one\u2019s health.", correctAnswer: "FALSE" },
+                        { questionNumber: 12, text: "Instinct can be a barrier to happiness.", correctAnswer: "TRUE" },
+                        { questionNumber: 13, text: "Family and friends rank equally as sources of happiness.", correctAnswer: "FALSE" }
+                    ]
+                }
             ],
             questions: [
-                // Q1-4: Note completion
-                { questionNumber: 1, questionType: "note-completion", questionText: "the leaves of the tree are __________ in shape", correctAnswer: "oval", acceptableAnswers: ["oval"], marks: 1, wordLimit: 1 },
-                { questionNumber: 2, questionType: "note-completion", questionText: "the __________ surrounds the fruit and breaks open when the fruit is ripe", correctAnswer: "husk", acceptableAnswers: ["husk"], marks: 1, wordLimit: 1 },
-                { questionNumber: 3, questionType: "note-completion", questionText: "the __________ is used to produce the spice nutmeg", correctAnswer: "seed", acceptableAnswers: ["seed"], marks: 1, wordLimit: 1 },
-                { questionNumber: 4, questionType: "note-completion", questionText: "the covering known as the aril is used to produce __________", correctAnswer: "mace", acceptableAnswers: ["mace"], marks: 1, wordLimit: 1 },
-                // Q5-7: True/False/Not Given
-                { questionNumber: 5, questionType: "true-false-not-given", questionText: "In the Middle Ages, most Europeans knew where nutmeg was grown.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "FALSE", marks: 1 },
-                { questionNumber: 6, questionType: "true-false-not-given", questionText: "The VOC was the world's first major trading company.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
-                { questionNumber: 7, questionType: "true-false-not-given", questionText: "Following the Treaty of Breda, the Dutch had control of all the islands where nutmeg grew.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "TRUE", marks: 1 },
-                // Q8-13: Note completion (table)
-                { questionNumber: 8, questionType: "note-completion", questionText: "Nutmeg was brought to Europe by the __________", correctAnswer: "Arabs", acceptableAnswers: ["Arabs", "arabs"], marks: 1, wordLimit: 1 },
-                { questionNumber: 9, questionType: "note-completion", questionText: "Demand for nutmeg grew, as it was believed to be effective against the disease known as the __________", correctAnswer: "plague", acceptableAnswers: ["plague"], marks: 1, wordLimit: 1 },
-                { questionNumber: 10, questionType: "note-completion", questionText: "put __________ on nutmeg to avoid it being cultivated outside the islands", correctAnswer: "lime", acceptableAnswers: ["lime"], marks: 1, wordLimit: 1 },
-                { questionNumber: 11, questionType: "note-completion", questionText: "finally obtained the island of __________ from the British", correctAnswer: "Run", acceptableAnswers: ["Run", "run"], marks: 1, wordLimit: 1 },
-                { questionNumber: 12, questionType: "note-completion", questionText: "nutmeg plants were secretly taken to __________", correctAnswer: "Mauritius", acceptableAnswers: ["Mauritius", "mauritius"], marks: 1, wordLimit: 1 },
-                { questionNumber: 13, questionType: "note-completion", questionText: "half the Banda Islands' nutmeg plantations were destroyed by a __________", correctAnswer: "tsunami", acceptableAnswers: ["tsunami"], marks: 1, wordLimit: 1 },
-            ],
+                { questionNumber: 1, questionType: "choose-two-letters", questionText: "Which THREE statements are true? (Answer 1 of 3)", options: ["A", "B", "C", "D", "E", "F", "G", "H"], correctAnswer: "C", marks: 1 },
+                { questionNumber: 2, questionType: "choose-two-letters", questionText: "Which THREE statements are true? (Answer 2 of 3)", options: ["A", "B", "C", "D", "E", "F", "G", "H"], correctAnswer: "E", marks: 1 },
+                { questionNumber: 3, questionType: "choose-two-letters", questionText: "Which THREE statements are true? (Answer 3 of 3)", options: ["A", "B", "C", "D", "E", "F", "G", "H"], correctAnswer: "G", marks: 1 },
+                { questionNumber: 4, questionType: "summary-with-options", questionText: "on a personal or national __________", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "F", marks: 1 },
+                { questionNumber: 5, questionType: "summary-with-options", questionText: "the extent of our social __________", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "B", marks: 1 },
+                { questionNumber: 6, questionType: "summary-with-options", questionText: "the amount of __________ we have", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "D", marks: 1 },
+                { questionNumber: 7, questionType: "summary-with-options", questionText: "the political __________ our country embarks on", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "G", marks: 1 },
+                { questionNumber: 8, questionType: "true-false-not-given", questionText: "People from underdeveloped nations try to attain the same standard of living as those from developed nations.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
+                { questionNumber: 9, questionType: "true-false-not-given", questionText: "Seeing what others have makes people want to have it too.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "TRUE", marks: 1 },
+                { questionNumber: 10, questionType: "true-false-not-given", questionText: "The larger the family is, the happier the parents will probably be.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
+                { questionNumber: 11, questionType: "true-false-not-given", questionText: "One\u2019s attitude to life has no influence on one\u2019s health.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "FALSE", marks: 1 },
+                { questionNumber: 12, questionType: "true-false-not-given", questionText: "Instinct can be a barrier to happiness.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "TRUE", marks: 1 },
+                { questionNumber: 13, questionType: "true-false-not-given", questionText: "Family and friends rank equally as sources of happiness.", options: ["TRUE", "FALSE", "NOT GIVEN"], correctAnswer: "FALSE", marks: 1 }
+            ]
         },
-        // ═══════════════════════════════════════════
-        // SECTION 2: Driverless cars
-        // ═══════════════════════════════════════════
+
+        // ╔═══════════════════════════════════════════════════════════╗
+        // ║  SECTION 2: One Who Hopes (Questions 14-26)             ║
+        // ╚═══════════════════════════════════════════════════════════╝
         {
             sectionNumber: 2,
-            title: "Driverless cars",
-            passage: `A
-
-The automotive sector is well used to adapting to automation in manufacturing. The implementation of robotic car manufacture from the 1970s onwards led to significant cost savings and improvements in the reliability and flexibility of vehicle mass production. A new challenge to vehicle production is now on the horizon and, again, it comes from automation. However, this time it is not to do with the manufacturing process, but with the vehicles themselves.
-
-Research projects on vehicle automation are not new. Vehicles with limited self-driving capabilities have been around for more than 50 years, resulting in significant contributions towards driver assistance systems. But since Google announced in 2010 that it had been trialling self-driving cars on the streets of California, progress in this field has quickly gathered pace.
-
-B
-
-There are many reasons why technology is advancing so fast. One frequently cited motive is safety; indeed, research at the UK's Transport Research Laboratory has demonstrated that more than 90 percent of road collisions involve human error as a contributory factor, and it is the primary cause in the vast majority. Automation may help to reduce the incidence of this.
-
-Another aim is to free the time people spend driving for other purposes. If the vehicle can do some or all of the driving, it may be possible to be productive, to socialise or simply to relax while automation systems have responsibility for safe control of the vehicle. If the vehicle can do the driving, those who are challenged by existing mobility models – such as older or disabled travellers – may be able to enjoy significantly greater travel autonomy.
-
-C
-
-Beyond these direct benefits, we can consider the wider implications for transport and society, and how manufacturing processes might need to respond as a result. At present, the average car spends more than 90 percent of its life parked. Automation means that initiatives for car-sharing become much more viable, particularly in urban areas with significant travel demand. If a significant proportion of the population choose to use shared automated vehicles, mobility demand can be met by far fewer vehicles.
-
-D
-
-The Massachusetts Institute of Technology investigated automated mobility in Singapore, finding that fewer than 30 percent of the vehicles currently used would be required if fully automated car sharing could be implemented. If this is the case, it might mean that we need to manufacture far fewer vehicles to meet demand. However, the number of trips being taken would probably increase, partly because empty vehicles would have to be moved from one customer to the next.
-
-Modelling work by the University of Michigan Transportation Research Institute suggests automated vehicles might reduce vehicle ownership by 43 percent, but that vehicles' average annual mileage double as a result. As a consequence, each vehicle would be used more intensively, and might need replacing sooner. This faster rate of turnover may mean that vehicle production will not necessarily decrease.
-
-E
-
-Automation may prompt other changes in vehicle manufacture. If we move to a model where consumers are tending not to own a single vehicle but to purchase access to a range of vehicle through a mobility provider, drivers will have the freedom to select one that best suits their needs for a particular journey, rather than making a compromise across all their requirements.
-
-Since, for most of the time, most of the seats in most cars are unoccupied, this may boost production of a smaller, more efficient range of vehicles that suit the needs of individuals. Specialised vehicles may then be available for exceptional journeys, such as going on a family camping trip or helping a son or daughter move to university.
-
-F
-
-There are a number of hurdles to overcome in delivering automated vehicles to our roads. These include the technical difficulties in ensuring that the vehicle works reliably in the infinite range of traffic, weather and road situations it might encounter; the regulatory challenges in understanding how liability and enforcement might change when drivers are no longer essential for vehicle operation; and the societal changes that may be required for communities to trust and accept automated vehicles as being a valuable part of the mobility landscape.
-
-G
-
-It's clear that there are many challenges that need to be addressed but, through robust and targeted research, these can most probably be conquered within the next 10 years. Mobility will change in such potentially significant ways and in association with so many other technological developments, such as telepresence and virtual reality, that it is hard to make concrete predictions about the future. However, one thing is certain: change is coming, and the need to be flexible in response to this will be vital for those involved in manufacturing the vehicles that will deliver future mobility.`,
-            passageSource: "IELTS Practice Test",
+            title: "One Who Hopes",
+            instructions: "You should spend about 20 minutes on Questions 14-26 which are based on Reading Passage 2 below.",
+            passage: passage2Text,
             paragraphs: [
-                { label: "A", text: "The automotive sector is well used to adapting to automation in manufacturing. The implementation of robotic car manufacture from the 1970s onwards led to significant cost savings and improvements in the reliability and flexibility of vehicle mass production. A new challenge to vehicle production is now on the horizon and, again, it comes from automation. However, this time it is not to do with the manufacturing process, but with the vehicles themselves. Research projects on vehicle automation are not new. Vehicles with limited self-driving capabilities have been around for more than 50 years, resulting in significant contributions towards driver assistance systems. But since Google announced in 2010 that it had been trialling self-driving cars on the streets of California, progress in this field has quickly gathered pace." },
-                { label: "B", text: "There are many reasons why technology is advancing so fast. One frequently cited motive is safety; indeed, research at the UK's Transport Research Laboratory has demonstrated that more than 90 percent of road collisions involve human error as a contributory factor, and it is the primary cause in the vast majority. Automation may help to reduce the incidence of this. Another aim is to free the time people spend driving for other purposes. If the vehicle can do some or all of the driving, it may be possible to be productive, to socialise or simply to relax while automation systems have responsibility for safe control of the vehicle. If the vehicle can do the driving, those who are challenged by existing mobility models – such as older or disabled travellers – may be able to enjoy significantly greater travel autonomy." },
-                { label: "C", text: "Beyond these direct benefits, we can consider the wider implications for transport and society, and how manufacturing processes might need to respond as a result. At present, the average car spends more than 90 percent of its life parked. Automation means that initiatives for car-sharing become much more viable, particularly in urban areas with significant travel demand. If a significant proportion of the population choose to use shared automated vehicles, mobility demand can be met by far fewer vehicles." },
-                { label: "D", text: "The Massachusetts Institute of Technology investigated automated mobility in Singapore, finding that fewer than 30 percent of the vehicles currently used would be required if fully automated car sharing could be implemented. If this is the case, it might mean that we need to manufacture far fewer vehicles to meet demand. However, the number of trips being taken would probably increase, partly because empty vehicles would have to be moved from one customer to the next. Modelling work by the University of Michigan Transportation Research Institute suggests automated vehicles might reduce vehicle ownership by 43 percent, but that vehicles' average annual mileage double as a result. As a consequence, each vehicle would be used more intensively, and might need replacing sooner. This faster rate of turnover may mean that vehicle production will not necessarily decrease." },
-                { label: "E", text: "Automation may prompt other changes in vehicle manufacture. If we move to a model where consumers are tending not to own a single vehicle but to purchase access to a range of vehicle through a mobility provider, drivers will have the freedom to select one that best suits their needs for a particular journey, rather than making a compromise across all their requirements. Since, for most of the time, most of the seats in most cars are unoccupied, this may boost production of a smaller, more efficient range of vehicles that suit the needs of individuals. Specialised vehicles may then be available for exceptional journeys, such as going on a family camping trip or helping a son or daughter move to university." },
-                { label: "F", text: "There are a number of hurdles to overcome in delivering automated vehicles to our roads. These include the technical difficulties in ensuring that the vehicle works reliably in the infinite range of traffic, weather and road situations it might encounter; the regulatory challenges in understanding how liability and enforcement might change when drivers are no longer essential for vehicle operation; and the societal changes that may be required for communities to trust and accept automated vehicles as being a valuable part of the mobility landscape." },
-                { label: "G", text: "It's clear that there are many challenges that need to be addressed but, through robust and targeted research, these can most probably be conquered within the next 10 years. Mobility will change in such potentially significant ways and in association with so many other technological developments, such as telepresence and virtual reality, that it is hard to make concrete predictions about the future. However, one thing is certain: change is coming, and the need to be flexible in response to this will be vital for those involved in manufacturing the vehicles that will deliver future mobility." },
+                { label: "A", text: passage2ParaA },
+                { label: "B", text: passage2ParaB },
+                { label: "C", text: passage2ParaC },
+                { label: "D", text: passage2ParaD },
+                { label: "E", text: passage2ParaE },
+                { label: "F", text: passage2ParaF },
+                { label: "G", text: passage2ParaG }
             ],
-            instructions: "Questions 14-26",
             questionGroups: [
-                // Questions 14-18: Matching Information
+                // ── Q14-19: MATCHING HEADINGS ──
                 {
-                    groupType: "matching-information",
+                    groupType: "matching-headings",
                     startQuestion: 14,
-                    endQuestion: 18,
-                    mainInstruction: "The Reading Passage has seven paragraphs, A-G. Which section contains the following information?",
-                    subInstruction: "Write the correct letter, A-G, in boxes on your answer sheet.",
-                    paragraphOptions: ["A", "B", "C", "D", "E", "F", "G"],
+                    endQuestion: 19,
+                    mainInstruction: "Reading Passage 2 has seven paragraphs, A - G.",
+                    subInstruction: "Choose the correct heading for paragraphs B - G from the list of headings below. Write the correct number i - ix in spaces 14-19 below.",
+                    featureListTitle: "List of Headings",
+                    headingsList: [
+                        { numeral: "i", text: "A non-exclusive language" },
+                        { numeral: "ii", text: "A cost-effective solution" },
+                        { numeral: "iii", text: "Language is personal" },
+                        { numeral: "iv", text: "What\u2019s fashionable in language" },
+                        { numeral: "v", text: "From the written word to the spoken word" },
+                        { numeral: "vi", text: "A real language" },
+                        { numeral: "vii", text: "Harmony through language" },
+                        { numeral: "viii", text: "The mechanics of a language" },
+                        { numeral: "ix", text: "Lost in translation" }
+                    ],
+                    paragraphOptions: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"],
+                    exampleItems: [
+                        { text: "Paragraph A", answer: "vii" }
+                    ],
                     matchingItems: [
-                        { questionNumber: 14, text: "a reference to the amount of time when a car is not in use", correctAnswer: "C" },
-                        { questionNumber: 15, text: "mention of several advantages of driverless vehicles for individual road-users", correctAnswer: "B" },
-                        { questionNumber: 16, text: "reference to the opportunity of choosing the most appropriate vehicle for each trip", correctAnswer: "E" },
-                        { questionNumber: 17, text: "an estimate of how long it will take to overcome a number of problems", correctAnswer: "G" },
-                        { questionNumber: 18, text: "a suggestion that the use of driverless cars may have no effect on the number of vehicles manufactured", correctAnswer: "D" },
-                    ],
+                        { questionNumber: 14, text: "Paragraph B", correctAnswer: "v" },
+                        { questionNumber: 15, text: "Paragraph C", correctAnswer: "viii" },
+                        { questionNumber: 16, text: "Paragraph D", correctAnswer: "iii" },
+                        { questionNumber: 17, text: "Paragraph E", correctAnswer: "vi" },
+                        { questionNumber: 18, text: "Paragraph F", correctAnswer: "i" },
+                        { questionNumber: 19, text: "Paragraph G", correctAnswer: "ii" }
+                    ]
                 },
-                // Questions 19-22: Note Completion (Summary)
-                {
-                    groupType: "note-completion",
-                    startQuestion: 19,
-                    endQuestion: 22,
-                    mainInstruction: "Complete the summary below.",
-                    subInstruction: "Choose NO MORE THAN TWO WORDS from the passage for each answer.",
-                    mainHeading: "The impact of driverless cars",
-                    passage: `Figures from the Transport Research Laboratory indicate that most motor accidents are partly due to 19 __________, so the introduction of driverless vehicles will result in greater safety. In addition to the direct benefits of automation, it may bring other advantages. For example, schemes for 20 __________ will be more workable, especially in towns and cities, resulting in fewer cars on the road.
 
-According to the University of Michigan Transportation Research Institute, there could be a 43 percent drop in 21 __________ of cars. However, this would mean that the yearly 22 __________ of each car would, on average, be twice as high as it currently is. This would lead to a higher turnover of vehicles, and therefore no reduction in automotive manufacturing.`,
-                    notesSections: [
-                        {
-                            subHeading: "",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 19, textBefore: "Figures from the Transport Research Laboratory indicate that most motor accidents are partly due to", textAfter: ", so the introduction of driverless vehicles will result in greater safety.", correctAnswer: "human error" },
-                                { type: "question" as const, questionNumber: 20, textBefore: "For example, schemes for", textAfter: "will be more workable, especially in towns and cities, resulting in fewer cars on the road.", correctAnswer: "car-sharing" },
-                                { type: "question" as const, questionNumber: 21, textBefore: "According to the University of Michigan Transportation Research Institute, there could be a 43 percent drop in", textAfter: "of cars.", correctAnswer: "ownership" },
-                                { type: "question" as const, questionNumber: 22, textBefore: "However, this would mean that the yearly", textAfter: "of each car would, on average, be twice as high as it currently is.", correctAnswer: "mileage" },
-                            ],
-                        },
-                    ],
-                },
-                // Questions 23-24: Choose TWO letters (benefits)
-                {
-                    groupType: "choose-two-letters",
-                    startQuestion: 23,
-                    endQuestion: 24,
-                    mainInstruction: "Choose TWO letters, A-E.",
-                    subInstruction: "Write the correct letters in boxes on your answer sheet.",
-                    questionSets: [
-                        {
-                            questionNumbers: [23, 24],
-                            questionText: "Which TWO benefits of automated vehicles does the writer mention?",
-                            options: [
-                                { letter: "A", text: "Car travellers could enjoy considerable cost savings." },
-                                { letter: "B", text: "It would be easier to find parking spaces in urban areas." },
-                                { letter: "C", text: "Travellers could spend journeys doing something other than driving." },
-                                { letter: "D", text: "People who find driving physically difficult could travel independently." },
-                                { letter: "E", text: "A reduction in the number of cars would mean a reduction in pollution." },
-                            ],
-                            correctAnswers: ["C", "D"],
-                        },
-                    ],
-                },
-                // Questions 25-26: Choose TWO letters (challenges)
-                {
-                    groupType: "choose-two-letters",
-                    startQuestion: 25,
-                    endQuestion: 26,
-                    mainInstruction: "Choose TWO letters, A-E.",
-                    subInstruction: "Write the correct letters in boxes on your answer sheet.",
-                    questionSets: [
-                        {
-                            questionNumbers: [25, 26],
-                            questionText: "Which TWO challenges to automated vehicle development does the writer mention?",
-                            options: [
-                                { letter: "A", text: "making sure the general public has confidence in automated vehicles" },
-                                { letter: "B", text: "managing the pace of transition from conventional to automated vehicles" },
-                                { letter: "C", text: "deciding how to compensate professional drivers who become redundant" },
-                                { letter: "D", text: "setting up the infrastructure to make roads suitable for automated vehicles" },
-                                { letter: "E", text: "getting automated vehicles to adapt to various different driving conditions" },
-                            ],
-                            correctAnswers: ["A", "E"],
-                        },
-                    ],
-                },
-            ],
-            questions: [
-                // Q14-18: Matching Information
-                { questionNumber: 14, questionType: "matching-information", questionText: "a reference to the amount of time when a car is not in use", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "C", marks: 1 },
-                { questionNumber: 15, questionType: "matching-information", questionText: "mention of several advantages of driverless vehicles for individual road-users", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "B", marks: 1 },
-                { questionNumber: 16, questionType: "matching-information", questionText: "reference to the opportunity of choosing the most appropriate vehicle for each trip", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "E", marks: 1 },
-                { questionNumber: 17, questionType: "matching-information", questionText: "an estimate of how long it will take to overcome a number of problems", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "G", marks: 1 },
-                { questionNumber: 18, questionType: "matching-information", questionText: "a suggestion that the use of driverless cars may have no effect on the number of vehicles manufactured", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "D", marks: 1 },
-                // Q19-22: Note completion (summary)
-                { questionNumber: 19, questionType: "note-completion", questionText: "most motor accidents are partly due to __________", correctAnswer: "human error", acceptableAnswers: ["human error"], marks: 1, wordLimit: 2 },
-                { questionNumber: 20, questionType: "note-completion", questionText: "schemes for __________ will be more workable", correctAnswer: "car-sharing", acceptableAnswers: ["car-sharing", "car sharing"], marks: 1, wordLimit: 2 },
-                { questionNumber: 21, questionType: "note-completion", questionText: "a 43 percent drop in __________ of cars", correctAnswer: "ownership", acceptableAnswers: ["ownership", "vehicle ownership"], marks: 1, wordLimit: 2 },
-                { questionNumber: 22, questionType: "note-completion", questionText: "the yearly __________ of each car would be twice as high", correctAnswer: "mileage", acceptableAnswers: ["mileage", "annual mileage"], marks: 1, wordLimit: 2 },
-                // Q23-24: Choose two letters (benefits)
-                { questionNumber: 23, questionType: "choose-two-letters", questionText: "Which TWO benefits of automated vehicles does the writer mention?", options: ["A", "B", "C", "D", "E"], correctAnswer: "C", marks: 1 },
-                { questionNumber: 24, questionType: "choose-two-letters", questionText: "Which TWO benefits of automated vehicles does the writer mention?", options: ["A", "B", "C", "D", "E"], correctAnswer: "D", marks: 1 },
-                // Q25-26: Choose two letters (challenges)
-                { questionNumber: 25, questionType: "choose-two-letters", questionText: "Which TWO challenges to automated vehicle development does the writer mention?", options: ["A", "B", "C", "D", "E"], correctAnswer: "A", marks: 1 },
-                { questionNumber: 26, questionType: "choose-two-letters", questionText: "Which TWO challenges to automated vehicle development does the writer mention?", options: ["A", "B", "C", "D", "E"], correctAnswer: "E", marks: 1 },
-            ],
-        },
-        // ═══════════════════════════════════════════
-        // SECTION 3: What is exploration?
-        // ═══════════════════════════════════════════
-        {
-            sectionNumber: 3,
-            title: "What is exploration?",
-            passage: `We are all explorers. Our desire to discover, and then share that new-found knowledge, is part of what makes us human – indeed, this has played an important part in our success as a species. Long before the first caveman slumped down beside the fire and grunted news that there were plenty of wildebeest over yonder, our ancestors had learnt the value of sending out scouts to investigate the unknown. This questing nature of ours undoubtedly helped our species spread around the globe, just as it nowadays no doubt helps the last nomadic Penan maintain their existence in the depleted forests of Borneo, and a visitor negotiate the subways of New York.
-
-Over the years, we've come to think of explorers as a peculiar breed – different from the rest of us, different from those of us who are merely 'well travelled', even; and perhaps there is a type of person more suited to seeking out the new, a type of caveman more inclined to risk venturing out. That, however, doesn't take away from the fact that we all have this enquiring instinct, even today; and that in all sorts of professions – whether artist, marine biologist or astronomer – borders of the unknown are being tested each day.
-
-Thomas Hardy set some of his novels in Egdon Heath, a fictional area of uncultivated land, and used the landscape to suggest the desires and fears of his characters. He is delving into matters we all recognise because they are common to humanity. This is surely an act of exploration, and into a world as remote as the author chooses. Explorer and travel writer Peter Fleming talks of the moment when the explorer returns to the existence he has left behind with his loved ones. The traveller 'who has for weeks or months seen himself only as a puny and irrelevant alien crawling laboriously over a country in which he has no roots and no background, suddenly encounters his other self, a relatively solid figure, with a place in the minds of certain people'.
-
-In this book about the exploration of the earth's surface, I have confined myself to those whose travels were real and who also aimed at more than personal discovery. But that still left me with another problem: the word 'explorer' has become associated with a past era. We think back to a golden age, as if exploration peaked somehow in the 19th century – as if the process of discovery is now on the decline, though the truth is that we have named only one and a half million of this planet's species, and there may be more than 10 million – and that's not including bacteria. We have studied only 5 per cent of the species we know. We have scarcely mapped the ocean floors, and know even less about ourselves; we fully understand the workings of only 10 per cent of our brains.
-
-Here is how some of today's 'explorers' define the word. Ran Fiennes, dubbed the 'greatest living explorer', said, 'An explorer is someone who has done something that no human has done before – and also done something scientifically useful.' Chris Bonington, a leading mountaineer, felt exploration was to be found in the act of physically touching the unknown: 'You have to have gone somewhere new.' Then Robin Hanbury-Tenison, a campaigner on behalf of remote so-called 'tribal' peoples, said, 'A traveller simply records information about some far-off world, and reports back; but an explorer changes the world.' Wilfred Thesiger, who crossed Arabia's Empty Quarter in 1946, and belongs to an era of unmechanised travel now lost to the rest of us, told me, 'If I'd gone across by camel when I could have gone by car, it would have been a stunt.' To him, exploration meant bringing back information from a remote place regardless of any great self-discovery.
-
-Each definition is slightly different – and tends to reflect the field of endeavour of each pioneer. It was the same whoever I asked: the prominent historian would say exploration was a thing of the past, the cutting-edge scientist would say it was of the present. And so on. They each set their own particular criteria; the common factor in their approach being that they all had, unlike many of us who simply enjoy travel or discovering new things, both a very definite objective from the outset and also a desire to record their findings.
-
-I'd best declare my own bias. As a writer, I'm interested in the exploration of ideas. I've done a great many expeditions and each one was unique. I've lived for months alone with isolated groups of people all around the world, even two 'uncontacted tribes'. But none of these things is of the slightest interest to anyone unless, through my books, I've found a new slant, explored a new idea. Why? Because the world has moved on. The time has long passed for the great continental voyages – another walk to the poles, another crossing of the Empty Quarter. We know how the land surface of our planet lies; exploration of it is now down to the details – the habits of microbes, say, or the grazing behaviour of buffalo. Aside from the deep sea and deep underground, it's the era of specialists. However, this is to disregard the role the human mind has in conveying remote places; and this is what interests me: how a fresh interpretation, even of a well-travelled route, can give its readers new insights.`,
-            passageSource: "IELTS Practice Test",
-            instructions: "Questions 27-40",
-            questionGroups: [
-                // Questions 27-32: Multiple Choice Full
+                // ── Q20-22: MULTIPLE CHOICE FULL ──
                 {
                     groupType: "multiple-choice-full",
-                    startQuestion: 27,
-                    endQuestion: 32,
-                    mainInstruction: "Choose the correct letter, A, B, C or D.",
-                    subInstruction: "Write the correct letter in boxes on your answer sheet.",
+                    startQuestion: 20,
+                    endQuestion: 22,
+                    mainInstruction: "Choose the correct letter A, B, C or D.",
                     mcQuestions: [
                         {
-                            questionNumber: 27,
-                            questionText: "The writer refers to visitors to New York to illustrate the point that",
+                            questionNumber: 20,
+                            questionText: "What advantage is there to learning Esperanto as one\u2019s first foreign language?",
                             options: [
-                                { letter: "A", text: "exploration is an intrinsic element of being human." },
-                                { letter: "B", text: "most people are enthusiastic about exploring." },
-                                { letter: "C", text: "exploration can lead to surprising results." },
-                                { letter: "D", text: "most people find exploration daunting." },
+                                { letter: "A", text: "Its pronunciation rules follow those of most European languages." },
+                                { letter: "B", text: "There are no grammar rules to learn." },
+                                { letter: "C", text: "It can make the learning of other foreign languages less complicated." },
+                                { letter: "D", text: "Its verbs are not conjugated." }
                             ],
-                            correctAnswer: "A",
+                            correctAnswer: "C"
                         },
                         {
-                            questionNumber: 28,
-                            questionText: "According to the second paragraph, what is the writer's view of explorers?",
+                            questionNumber: 21,
+                            questionText: "What do its critics say of Esperanto?",
                             options: [
-                                { letter: "A", text: "Their discoveries have brought both benefits and disadvantages." },
-                                { letter: "B", text: "Their main value is in teaching others." },
-                                { letter: "C", text: "They act on an urge that is common to everyone." },
-                                { letter: "D", text: "They tend to be more attracted to certain professions than to others." },
+                                { letter: "A", text: "It is only used in artificial situations." },
+                                { letter: "B", text: "It requires emotional involvement." },
+                                { letter: "C", text: "It cannot translate works of literature." },
+                                { letter: "D", text: "It lacks depth of expression." }
                             ],
-                            correctAnswer: "C",
+                            correctAnswer: "D"
                         },
                         {
-                            questionNumber: 29,
-                            questionText: "The writer refers to a description of Egdon Heath to suggest that",
+                            questionNumber: 22,
+                            questionText: "How could Esperanto help on a global level?",
                             options: [
-                                { letter: "A", text: "Hardy was writing about his own experience of exploration." },
-                                { letter: "B", text: "Hardy was mistaken about the nature of exploration." },
-                                { letter: "C", text: "Hardy's aim was to investigate people's emotional states." },
-                                { letter: "D", text: "Hardy's aim was to show the attraction of isolation." },
+                                { letter: "A", text: "It would eliminate the need for conferences." },
+                                { letter: "B", text: "More aid money would reach those who need it." },
+                                { letter: "C", text: "The world population would be speaking only one language." },
+                                { letter: "D", text: "More funds could be made available for learning foreign languages." }
                             ],
-                            correctAnswer: "C",
-                        },
-                        {
-                            questionNumber: 30,
-                            questionText: "In the fourth paragraph, the writer refers to 'a golden age' to suggest that",
-                            options: [
-                                { letter: "A", text: "the amount of useful information produced by exploration has decreased." },
-                                { letter: "B", text: "fewer people are interested in exploring than in the 19th century." },
-                                { letter: "C", text: "recent developments have made exploration less exciting." },
-                                { letter: "D", text: "we are wrong to think that exploration is no longer necessary." },
-                            ],
-                            correctAnswer: "D",
-                        },
-                        {
-                            questionNumber: 31,
-                            questionText: "In the sixth paragraph, when discussing the definition of exploration, the writer argues that",
-                            options: [
-                                { letter: "A", text: "people tend to relate exploration to their own professional interests." },
-                                { letter: "B", text: "certain people are likely to misunderstand the nature of exploration." },
-                                { letter: "C", text: "the generally accepted definition has changed over time." },
-                                { letter: "D", text: "historians and scientists have more valid definitions than the general public." },
-                            ],
-                            correctAnswer: "A",
-                        },
-                        {
-                            questionNumber: 32,
-                            questionText: "In the last paragraph, the writer explains that he is interested in",
-                            options: [
-                                { letter: "A", text: "how someone's personality is reflected in their choice of places to visit." },
-                                { letter: "B", text: "the human ability to cast new light on places that may be familiar." },
-                                { letter: "C", text: "how travel writing has evolved to meet changing demands." },
-                                { letter: "D", text: "the feelings that writers develop about the places that they explore." },
-                            ],
-                            correctAnswer: "B",
-                        },
-                    ],
+                            correctAnswer: "B"
+                        }
+                    ]
                 },
-                // Questions 33-37: Matching Features
+
+                // ── Q23-26: YES / NO / NOT GIVEN ──
                 {
-                    groupType: "matching-features",
-                    startQuestion: 33,
-                    endQuestion: 37,
-                    mainInstruction: "Look at the following statements and the list of explorers below. Match each statement with the correct explorer, A-E.",
-                    subInstruction: "Write the correct letter, A-E, in boxes on your answer sheet.",
-                    note: "NB You may use any letter more than once.",
-                    featureListTitle: "List of Explorers",
-                    featureOptions: [
-                        { letter: "A", text: "Peter Fleming" },
-                        { letter: "B", text: "Ran Fiennes" },
-                        { letter: "C", text: "Chris Bonington" },
-                        { letter: "D", text: "Robin Hanbury-Tenison" },
-                        { letter: "E", text: "Wilfred Thesiger" },
-                    ],
-                    paragraphOptions: ["A", "B", "C", "D", "E"],
-                    matchingItems: [
-                        { questionNumber: 33, text: "He referred to the relevance of the form of transport used.", correctAnswer: "E" },
-                        { questionNumber: 34, text: "He described feelings on coming back home after a long journey.", correctAnswer: "A" },
-                        { questionNumber: 35, text: "He worked for the benefit of specific groups of people.", correctAnswer: "D" },
-                        { questionNumber: 36, text: "He did not consider learning about oneself an essential part of exploration.", correctAnswer: "E" },
-                        { questionNumber: 37, text: "He defined exploration as being both unique and of value to others.", correctAnswer: "B" },
-                    ],
-                },
-                // Questions 38-40: Note Completion (Summary)
-                {
-                    groupType: "note-completion",
-                    startQuestion: 38,
-                    endQuestion: 40,
-                    mainInstruction: "Complete the summary below.",
-                    subInstruction: "Choose NO MORE THAN TWO WORDS from the passage for each answer.",
-                    mainHeading: "The writer's own bias",
-                    passage: `The writer has experience of a large number of 38 __________, and was the first stranger that certain previously 39 __________ people had encountered. He believes there is no need for further exploration of Earth's 40 __________, except to answer specific questions such as how buffalo eat.`,
-                    notesSections: [
-                        {
-                            subHeading: "",
-                            bullets: [
-                                { type: "question" as const, questionNumber: 38, textBefore: "The writer has experience of a large number of", textAfter: ", and was the first stranger that certain previously", correctAnswer: "expeditions" },
-                                { type: "question" as const, questionNumber: 39, textBefore: "certain previously", textAfter: "people had encountered.", correctAnswer: "uncontacted" },
-                                { type: "question" as const, questionNumber: 40, textBefore: "He believes there is no need for further exploration of Earth's", textAfter: ", except to answer specific questions such as how buffalo eat.", correctAnswer: "land surface" },
-                            ],
-                        },
-                    ],
-                },
+                    groupType: "yes-no-not-given",
+                    startQuestion: 23,
+                    endQuestion: 26,
+                    mainInstruction: "Do the following statements agree with the information given in Reading Passage 2?",
+                    subInstruction: "In spaces 23-26 below, write YES if the statement agrees with the views of the writer, NO if the statement contradicts the views of the writer, NOT GIVEN if it is impossible to say what the writer thinks about this.",
+                    statements: [
+                        { questionNumber: 23, text: "Supporters of Esperanto say it gives everyone an equal voice.", correctAnswer: "YES" },
+                        { questionNumber: 24, text: "Esperanto is the only artificially-constructed language.", correctAnswer: "NO" },
+                        { questionNumber: 25, text: "Esperanto can be learned as part of a self-study course.", correctAnswer: "NOT GIVEN" },
+                        { questionNumber: 26, text: "Esperanto can be used equally in formal and casual situations.", correctAnswer: "YES" }
+                    ]
+                }
             ],
             questions: [
-                // Q27-32: Multiple choice full
-                { questionNumber: 27, questionType: "multiple-choice-full", questionText: "The writer refers to visitors to New York to illustrate the point that", options: ["A", "B", "C", "D"], correctAnswer: "A", marks: 1 },
-                { questionNumber: 28, questionType: "multiple-choice-full", questionText: "According to the second paragraph, what is the writer's view of explorers?", options: ["A", "B", "C", "D"], correctAnswer: "C", marks: 1 },
-                { questionNumber: 29, questionType: "multiple-choice-full", questionText: "The writer refers to a description of Egdon Heath to suggest that", options: ["A", "B", "C", "D"], correctAnswer: "C", marks: 1 },
-                { questionNumber: 30, questionType: "multiple-choice-full", questionText: "In the fourth paragraph, the writer refers to 'a golden age' to suggest that", options: ["A", "B", "C", "D"], correctAnswer: "D", marks: 1 },
-                { questionNumber: 31, questionType: "multiple-choice-full", questionText: "In the sixth paragraph, when discussing the definition of exploration, the writer argues that", options: ["A", "B", "C", "D"], correctAnswer: "A", marks: 1 },
-                { questionNumber: 32, questionType: "multiple-choice-full", questionText: "In the last paragraph, the writer explains that he is interested in", options: ["A", "B", "C", "D"], correctAnswer: "B", marks: 1 },
-                // Q33-37: Matching features
-                { questionNumber: 33, questionType: "matching-features", questionText: "He referred to the relevance of the form of transport used.", options: ["A", "B", "C", "D", "E"], correctAnswer: "E", marks: 1 },
-                { questionNumber: 34, questionType: "matching-features", questionText: "He described feelings on coming back home after a long journey.", options: ["A", "B", "C", "D", "E"], correctAnswer: "A", marks: 1 },
-                { questionNumber: 35, questionType: "matching-features", questionText: "He worked for the benefit of specific groups of people.", options: ["A", "B", "C", "D", "E"], correctAnswer: "D", marks: 1 },
-                { questionNumber: 36, questionType: "matching-features", questionText: "He did not consider learning about oneself an essential part of exploration.", options: ["A", "B", "C", "D", "E"], correctAnswer: "E", marks: 1 },
-                { questionNumber: 37, questionType: "matching-features", questionText: "He defined exploration as being both unique and of value to others.", options: ["A", "B", "C", "D", "E"], correctAnswer: "B", marks: 1 },
-                // Q38-40: Note completion (summary)
-                { questionNumber: 38, questionType: "note-completion", questionText: "The writer has experience of a large number of __________", correctAnswer: "expeditions", acceptableAnswers: ["expeditions"], marks: 1, wordLimit: 2 },
-                { questionNumber: 39, questionType: "note-completion", questionText: "was the first stranger that certain previously __________ people had encountered", correctAnswer: "uncontacted", acceptableAnswers: ["uncontacted"], marks: 1, wordLimit: 2 },
-                { questionNumber: 40, questionType: "note-completion", questionText: "no need for further exploration of Earth's __________", correctAnswer: "land surface", acceptableAnswers: ["land surface"], marks: 1, wordLimit: 2 },
-            ],
+                { questionNumber: 14, questionType: "matching-headings", questionText: "Paragraph B", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"], correctAnswer: "v", marks: 1 },
+                { questionNumber: 15, questionType: "matching-headings", questionText: "Paragraph C", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"], correctAnswer: "viii", marks: 1 },
+                { questionNumber: 16, questionType: "matching-headings", questionText: "Paragraph D", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"], correctAnswer: "iii", marks: 1 },
+                { questionNumber: 17, questionType: "matching-headings", questionText: "Paragraph E", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"], correctAnswer: "vi", marks: 1 },
+                { questionNumber: 18, questionType: "matching-headings", questionText: "Paragraph F", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"], correctAnswer: "i", marks: 1 },
+                { questionNumber: 19, questionType: "matching-headings", questionText: "Paragraph G", options: ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"], correctAnswer: "ii", marks: 1 },
+                { questionNumber: 20, questionType: "multiple-choice-full", questionText: "What advantage is there to learning Esperanto as one\u2019s first foreign language?", correctAnswer: "C", marks: 1 },
+                { questionNumber: 21, questionType: "multiple-choice-full", questionText: "What do its critics say of Esperanto?", correctAnswer: "D", marks: 1 },
+                { questionNumber: 22, questionType: "multiple-choice-full", questionText: "How could Esperanto help on a global level?", correctAnswer: "B", marks: 1 },
+                { questionNumber: 23, questionType: "yes-no-not-given", questionText: "Supporters of Esperanto say it gives everyone an equal voice.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "YES", marks: 1 },
+                { questionNumber: 24, questionType: "yes-no-not-given", questionText: "Esperanto is the only artificially-constructed language.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NO", marks: 1 },
+                { questionNumber: 25, questionType: "yes-no-not-given", questionText: "Esperanto can be learned as part of a self-study course.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "NOT GIVEN", marks: 1 },
+                { questionNumber: 26, questionType: "yes-no-not-given", questionText: "Esperanto can be used equally in formal and casual situations.", options: ["YES", "NO", "NOT GIVEN"], correctAnswer: "YES", marks: 1 }
+            ]
         },
-    ],
+
+        // ╔═══════════════════════════════════════════════════════════╗
+        // ║  SECTION 3: LONG-TERM FORECAST: HOT AND DRY (Q27-40)    ║
+        // ╚═══════════════════════════════════════════════════════════╝
+        {
+            sectionNumber: 3,
+            title: "LONG-TERM FORECAST: HOT AND DRY",
+            instructions: "You should spend about 20 minutes on Questions 27-40 which are based on Reading Passage 3 below.",
+            passage: passage3Text,
+            paragraphs: [
+                { label: "A", text: passage3ParaA },
+                { label: "B", text: passage3ParaB },
+                { label: "C", text: passage3ParaC },
+                { label: "D", text: passage3ParaD },
+                { label: "E", text: passage3ParaE },
+                { label: "F", text: passage3ParaF },
+                { label: "G", text: passage3ParaG }
+            ],
+            questionGroups: [
+                // ── Q27-32: FLOW-CHART COMPLETION ──
+                {
+                    groupType: "flow-chart-completion",
+                    startQuestion: 27,
+                    endQuestion: 32,
+                    mainInstruction: "Complete the flow-chart below.",
+                    subInstruction: "Write NO MORE THAN THREE WORDS for each answer.",
+                    flowchartStages: [
+                        {
+                            label: "productive land",
+                            lines: [
+                                { segments: [{ type: "text", content: "productive land" }] }
+                            ]
+                        },
+                        {
+                            label: "degradation proceeds",
+                            lines: [
+                                {
+                                    segments: [
+                                        { type: "text", content: "degradation proceeds at " },
+                                        { type: "blank", questionNumber: 27, width: 180 },
+                                        { type: "text", content: " \u2014 multiple causes" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            label: "DESERTIFICATION",
+                            lines: [
+                                { segments: [{ type: "text", content: "DESERTIFICATION" }] },
+                                {
+                                    segments: [
+                                        { type: "blank", questionNumber: 28, width: 140 },
+                                        { type: "text", content: " a climate trend" }
+                                    ]
+                                },
+                                {
+                                    segments: [
+                                        { type: "blank", questionNumber: 29, width: 140 },
+                                        { type: "text", content: " a change in climate" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            label: "resulting in greater",
+                            lines: [
+                                {
+                                    segments: [
+                                        { type: "text", content: "resulting in greater " },
+                                        { type: "blank", questionNumber: 30, width: 150 }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            label: "depletion",
+                            lines: [
+                                {
+                                    segments: [
+                                        { type: "text", content: "depletion of " },
+                                        { type: "blank", questionNumber: 31, width: 150 },
+                                        { type: "text", content: " and depletion of " },
+                                        { type: "blank", questionNumber: 32, width: 150 }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+
+                // ── Q33-36: MATCHING INFORMATION ──
+                {
+                    groupType: "matching-information",
+                    startQuestion: 33,
+                    endQuestion: 36,
+                    mainInstruction: "Reading Passage 3 has seven paragraphs, A - G.",
+                    subInstruction: "Which paragraph contains the following information? Write the correct letter A - G in spaces 33 - 36 below.",
+                    paragraphOptions: ["A", "B", "C", "D", "E", "F", "G"],
+                    matchingItems: [
+                        { questionNumber: 33, text: "Human intervention is a potential solution to potential disaster.", correctAnswer: "G" },
+                        { questionNumber: 34, text: "The rate of climate change is set to accelerate dramatically.", correctAnswer: "E" },
+                        { questionNumber: 35, text: "There is seldom enough information available in some areas to track how fast the effects of climate change have happened in the past.", correctAnswer: "D" },
+                        { questionNumber: 36, text: "Desertification is attributable to a number of factors.", correctAnswer: "B" }
+                    ]
+                },
+
+                // ── Q37-40: SUMMARY WITH OPTIONS ──
+                {
+                    groupType: "summary-with-options",
+                    startQuestion: 37,
+                    endQuestion: 40,
+                    mainInstruction: "Complete the summary with the list of words A - I below.",
+                    subInstruction: "Write the correct letter A - I in spaces 37-40 below.",
+                    phraseList: [
+                        { letter: "A", text: "Irrigation" },
+                        { letter: "B", text: "Cooling" },
+                        { letter: "C", text: "Drylands" },
+                        { letter: "D", text: "Cause" },
+                        { letter: "E", text: "Loss" },
+                        { letter: "F", text: "Abuse" },
+                        { letter: "G", text: "Desertification" },
+                        { letter: "H", text: "Deserts" },
+                        { letter: "I", text: "Emission" }
+                    ],
+                    summarySegments: [
+                        { type: "text", content: "Climate change may have catastrophic effects on the human and animal world. As glaciers melt, sea levels will rise, causing extensive flooding and land " },
+                        { type: "blank", questionNumber: 37, correctAnswer: "E" },
+                        { type: "text", content: ". Another consequence of global warming is " },
+                        { type: "blank", questionNumber: 38, correctAnswer: "G" },
+                        { type: "text", content: ", which affects areas known as " },
+                        { type: "blank", questionNumber: 39, correctAnswer: "C" },
+                        { type: "text", content: ". These areas are subject to irregular weather patterns, but also suffer from human intervention or neglect, such as inadequate or inefficient " },
+                        { type: "blank", questionNumber: 40, correctAnswer: "A" },
+                        { type: "text", content: " systems." }
+                    ]
+                }
+            ],
+            questions: [
+                { questionNumber: 27, questionType: "flow-chart-completion", questionText: "degradation proceeds at __________", correctAnswer: "varying rates", acceptableAnswers: ["varying rates"], marks: 1 },
+                { questionNumber: 28, questionType: "flow-chart-completion", questionText: "__________ a climate trend", correctAnswer: "intensify", acceptableAnswers: ["intensify"], marks: 1 },
+                { questionNumber: 29, questionType: "flow-chart-completion", questionText: "__________ a change in climate", correctAnswer: "initiate", acceptableAnswers: ["initiate"], marks: 1 },
+                { questionNumber: 30, questionType: "flow-chart-completion", questionText: "resulting in greater __________", correctAnswer: "aridity", acceptableAnswers: ["aridity"], marks: 1 },
+                { questionNumber: 31, questionType: "flow-chart-completion", questionText: "depletion of __________", correctAnswer: "vegetation", acceptableAnswers: ["vegetation"], marks: 1 },
+                { questionNumber: 32, questionType: "flow-chart-completion", questionText: "depletion of __________", correctAnswer: "soils", acceptableAnswers: ["soils"], marks: 1 },
+                { questionNumber: 33, questionType: "matching-information", questionText: "Human intervention is a potential solution to potential disaster.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "G", marks: 1 },
+                { questionNumber: 34, questionType: "matching-information", questionText: "The rate of climate change is set to accelerate dramatically.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "E", marks: 1 },
+                { questionNumber: 35, questionType: "matching-information", questionText: "There is seldom enough information available in some areas to track how fast the effects of climate change have happened in the past.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "D", marks: 1 },
+                { questionNumber: 36, questionType: "matching-information", questionText: "Desertification is attributable to a number of factors.", options: ["A", "B", "C", "D", "E", "F", "G"], correctAnswer: "B", marks: 1 },
+                { questionNumber: 37, questionType: "summary-with-options", questionText: "flooding and land __________", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "E", marks: 1 },
+                { questionNumber: 38, questionType: "summary-with-options", questionText: "Another consequence of global warming is __________", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "G", marks: 1 },
+                { questionNumber: 39, questionType: "summary-with-options", questionText: "areas known as __________", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "C", marks: 1 },
+                { questionNumber: 40, questionType: "summary-with-options", questionText: "inadequate or inefficient __________ systems", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], correctAnswer: "A", marks: 1 }
+            ]
+        }
+    ]
 };
 
-async function seedTest() {
+// ═══════════════════════════════════════════════════════════════
+// SEED FUNCTION
+// ═══════════════════════════════════════════════════════════════
+
+async function seedReadingTest01() {
     try {
         await mongoose.connect(config.database_url as string);
-        console.log("Connected to database");
+        console.log("Connected to MongoDB");
 
-        const existing = await ReadingTest.findOne({ testId: readingTest.testId });
+        const existing = await ReadingTest.findOne({ testNumber: readingTest01.testNumber });
         if (existing) {
-            await ReadingTest.findByIdAndUpdate(existing._id, readingTest);
-            console.log("✅ Reading Test updated successfully!");
+            await ReadingTest.findByIdAndUpdate(existing._id, readingTest01);
+            console.log("✅ Reading Test 01 UPDATED successfully!");
         } else {
             const admin = await User.findOne({ role: "admin" });
             if (!admin) {
-                console.log("❌ Admin user not found. Please create an admin user first.");
+                console.log("❌ Admin user not found!");
                 process.exit(1);
             }
-            await ReadingTest.create({ ...readingTest, createdBy: admin._id });
-            console.log("✅ Reading Test created successfully!");
+            await ReadingTest.create({ ...readingTest01, createdBy: admin._id });
+            console.log("✅ Reading Test 01 CREATED successfully!");
         }
 
-        console.log(`
-📝 Test Details:
-   Title: ${readingTest.title}
-   Test ID: ${readingTest.testId}
-   Test Number: ${readingTest.testNumber}
-   Total Questions: ${readingTest.totalQuestions}
-   Sections:
-     1. ${readingTest.sections[0].title} (Q1-13)
-     2. ${readingTest.sections[1].title} (Q14-26)
-     3. ${readingTest.sections[2].title} (Q27-40)
-        `);
+        const verify = await ReadingTest.findOne({ testId: readingTest01.testId });
+        if (verify) {
+            const sections = (verify as any).sections || [];
+            console.log("\n📊 Verification:");
+            console.log(`   Title: ${(verify as any).title}`);
+            console.log(`   Test Number: ${(verify as any).testNumber}`);
+            console.log(`   Sections: ${sections.length}`);
+            sections.forEach((s: any, i: number) => {
+                console.log(`   Section ${i + 1}: ${s.title} | Groups: ${s.questionGroups?.length || 0} | Questions: ${s.questions?.length || 0}`);
+            });
+        }
 
         await mongoose.disconnect();
         process.exit(0);
@@ -522,4 +535,4 @@ async function seedTest() {
     }
 }
 
-seedTest();
+seedReadingTest01();

@@ -25,25 +25,37 @@ const data = {
     // ═══ PART 1 — Accommodation Request (Q1–10) ═══
     { sectionNumber: 1, title: "Part 1", context: "A student requesting homestay accommodation.", instructions: "Questions 1\u201310", audioUrl: "", questions: [
       { blockType: "instruction" as const, content: "<strong>Questions 1\u20135</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer." },
-      { blockType: "instruction" as const, content: "<strong>Accommodation Request Form</strong>" },
-      { blockType: "instruction" as const, content: `<table border='1' style='border-collapse:collapse;width:100%'><tbody>
-<tr style='background:#f3f4f6'><td style='padding:8px;width:45%'>Type of accommodation:</td><td style='padding:8px'>Homestay <em>(Example)</em></td></tr>
-<tr><td style='padding:8px'>Full name:</td><td style='padding:8px'><strong>[1]</strong> Lee</td></tr>
-<tr><td style='padding:8px'>Age:</td><td style='padding:8px'><strong>[2]</strong></td></tr>
-<tr><td style='padding:8px'>Present address:</td><td style='padding:8px'>International House</td></tr>
-<tr><td style='padding:8px'>Room:</td><td style='padding:8px'><strong>[3]</strong></td></tr>
-<tr><td style='padding:8px'>Reasons for applying:</td><td style='padding:8px'>to know about local culture<br/>To <strong>[4]</strong></td></tr>
-<tr><td style='padding:8px'>Contact number:</td><td style='padding:8px'>8141 9680 (home)<br/><strong>[5]</strong> (mobile)</td></tr>
-</tbody></table>` },
+      { blockType: "instruction" as const, content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>Accommodation Request Form</div>
+<div class='ielts-form-row' style='opacity:0.75;font-style:italic'>Type of accommodation: Homestay <em>(Example)</em></div>
+<div class='ielts-form-row'>Full name: <strong>[1]</strong> Lee</div>
+<div class='ielts-form-row'>Age: <strong>[2]</strong></div>
+<div class='ielts-form-row'>Present address: International House</div>
+<div class='ielts-form-row'>Room: <strong>[3]</strong></div>
+<div class='ielts-form-row'>Reasons for applying: to know about local culture; To <strong>[4]</strong></div>
+<div class='ielts-form-row'>Contact number: 8141 9680 (home); <strong>[5]</strong> (mobile)</div>
+</div>` },
       { blockType: "question" as const, questionNumber: 1, questionType: "form-completion" as const, questionText: "~Full name: ________ Lee", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 2, questionType: "form-completion" as const, questionText: "~Age: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 3, questionType: "form-completion" as const, questionText: "~Room: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 4, questionType: "form-completion" as const, questionText: "~Reasons: To ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 5, questionType: "form-completion" as const, questionText: "~Contact number (mobile): ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-      { blockType: "instruction" as const, content: "<strong>Questions 6\u201310</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.<br/><strong>Accommodation requirements:</strong>" },
-      { blockType: "question" as const, questionNumber: 6, questionType: "note-completion" as const, questionText: "own ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-      { blockType: "question" as const, questionNumber: 7, questionType: "note-completion" as const, questionText: "near to ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
-      { blockType: "question" as const, questionNumber: 8, questionType: "note-completion" as const, questionText: "The ________ will be \u00a3140, including [9] bill", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<strong>Questions 6\u201310</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer." },
+      { blockType: "instruction" as const, content: `<div style='margin:8px 0;padding:12px;border:1px solid #d1d5db;border-radius:4px'>
+<div style='font-weight:bold;margin-bottom:6px'>Accommodation requirements:</div>
+<ul style='margin:0 0 8px 20px;padding:0;line-height:1.8'>
+<li>a nice landlady</li>
+<li>own <strong>[6]</strong></li>
+<li>no young children</li>
+<li>near to <strong>[7]</strong></li>
+</ul>
+<div style='margin:6px 0'>The <strong>[8]</strong> will be \u00a3140, including <strong>[9]</strong> bill.</div>
+<div style='font-weight:bold;margin-top:8px'>Accommodation required date:</div>
+<div style='margin:4px 0'><strong>[10]</strong></div>
+</div>` },
+      { blockType: "question" as const, questionNumber: 6, questionType: "note-completion" as const, questionText: "~own ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 7, questionType: "note-completion" as const, questionText: "~near to ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 8, questionType: "note-completion" as const, questionText: "~The ________ will be \u00a3140", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 9, questionType: "note-completion" as const, questionText: "~including ________ bill", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 10, questionType: "note-completion" as const, questionText: "~Accommodation required date: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
     ]},
@@ -53,6 +65,7 @@ const data = {
       { blockType: "instruction" as const, content: "<strong>Questions 11\u201315</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS</strong> for each answer." },
       { blockType: "instruction" as const, content: "<strong>Guide for Peak District</strong>" },
       { blockType: "question" as const, questionNumber: 11, questionType: "note-completion" as const, questionText: "Peak District\u2019s location: five miles from Sheffield ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+      { blockType: "instruction" as const, content: "<strong>Main attractions:</strong>" },
       { blockType: "question" as const, questionNumber: 12, questionType: "note-completion" as const, questionText: "Bakewell Town is known for local food: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 13, questionType: "note-completion" as const, questionText: "Chatsworth House has formal gardens and ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 14, questionType: "note-completion" as const, questionText: "The heart of Peak District is the Peak District ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },

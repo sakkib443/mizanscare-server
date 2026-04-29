@@ -25,18 +25,18 @@ const data = {
     // ═══ SECTION 1 — Travel Agency (Q1–10) ═══
     { sectionNumber: 1, title: "Part 1", context: "Enquiry about a day tour at a travel agency.", instructions: "Questions 1\u201310", audioUrl: "", questions: [
       { blockType: "instruction" as const, content: "<strong>Questions 1\u20137</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer." },
-      { blockType: "instruction" as const, content: "<strong>TRAVEL AGENCY</strong>" },
-      { blockType: "instruction" as const, content: `<table border='1' style='border-collapse:collapse;width:100%'><tbody>
-<tr style='background:#f3f4f6'><td style='padding:8px;width:45%'>Name of tour:</td><td style='padding:8px'>Magic One Day <em>(Example)</em></td></tr>
-<tr><td style='padding:8px'>Departure time:</td><td style='padding:8px'><strong>[1]</strong> on Saturdays</td></tr>
-<tr><td style='padding:8px'>Return time:</td><td style='padding:8px'>6:00 p.m.</td></tr>
-<tr><td style='padding:8px'>Transportation:</td><td style='padding:8px'><strong>[2]</strong> or minibus</td></tr>
-<tr><td style='padding:8px'>Group size:</td><td style='padding:8px'>15\u201325 tourists</td></tr>
-<tr><td style='padding:8px'>Cost:</td><td style='padding:8px'><strong>[3]</strong> per person including <strong>[4]</strong></td></tr>
-<tr><td style='padding:8px'>Peak season:</td><td style='padding:8px'>tourists need to <strong>[5]</strong> 2 days ahead</td></tr>
-<tr><td style='padding:8px'>Payment:</td><td style='padding:8px'><strong>[6]</strong></td></tr>
-<tr><td style='padding:8px'>Reference number of tour:</td><td style='padding:8px'><strong>[7]</strong></td></tr>
-</tbody></table>` },
+      { blockType: "instruction" as const, content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>TRAVEL AGENCY</div>
+<div class='ielts-form-row' style='opacity:0.75;font-style:italic'>Name of tour: Magic One Day <em>(Example)</em></div>
+<div class='ielts-form-row'>Departure time: <strong>[1]</strong> on Saturdays</div>
+<div class='ielts-form-row'>Return time: 6:00 p.m.</div>
+<div class='ielts-form-row'>Transportation: <strong>[2]</strong> or minibus</div>
+<div class='ielts-form-row'>Group size: 15\u201325 tourists</div>
+<div class='ielts-form-row'>Cost: <strong>[3]</strong> per person including <strong>[4]</strong></div>
+<div class='ielts-form-row'>Peak season: tourists need to <strong>[5]</strong> 2 days ahead</div>
+<div class='ielts-form-row'>Payment: <strong>[6]</strong></div>
+<div class='ielts-form-row'>Reference number of tour: <strong>[7]</strong></div>
+</div>` },
       { blockType: "question" as const, questionNumber: 1, questionType: "form-completion" as const, questionText: "~Departure time: ________ on Saturdays", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 2, questionType: "form-completion" as const, questionText: "~Transportation: ________ or minibus", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 3, questionType: "form-completion" as const, questionText: "~Cost: ________ per person", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
@@ -53,16 +53,16 @@ const data = {
     // ═══ SECTION 2 — Campus Clinic (Q11–20) ═══
     { sectionNumber: 2, title: "Part 2", context: "A campus clinic visit.", instructions: "Questions 11\u201320", audioUrl: "", questions: [
       { blockType: "instruction" as const, content: "<strong>Questions 11\u201315</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer." },
-      { blockType: "instruction" as const, content: "<strong>CAMPUS CLINIC</strong>" },
-      { blockType: "instruction" as const, content: `<table border='1' style='border-collapse:collapse;width:100%'><tbody>
-<tr><td style='padding:8px;width:40%'>Patient\u2019s name:</td><td style='padding:8px'>Mary Nixon</td></tr>
-<tr><td style='padding:8px'>Faculty</td><td style='padding:8px'><strong>[11]</strong></td></tr>
-<tr><td style='padding:8px'>Registered No.</td><td style='padding:8px'><strong>[12]</strong></td></tr>
-<tr><td style='padding:8px'>Date of birth:</td><td style='padding:8px'>20th November, 1987</td></tr>
-<tr><td style='padding:8px'>Nationality:</td><td style='padding:8px'><strong>[13]</strong></td></tr>
-<tr><td style='padding:8px'>Address:</td><td style='padding:8px'><strong>[14]</strong></td></tr>
-<tr><td style='padding:8px'>Case history:</td><td style='padding:8px'><strong>[15]</strong></td></tr>
-</tbody></table>` },
+      { blockType: "instruction" as const, content: `<div class='ielts-form-box'>
+<div class='ielts-form-title'>CAMPUS CLINIC</div>
+<div class='ielts-form-row'>Patient\u2019s name: Mary Nixon</div>
+<div class='ielts-form-row'>Faculty: <strong>[11]</strong></div>
+<div class='ielts-form-row'>Registered No.: <strong>[12]</strong></div>
+<div class='ielts-form-row'>Date of birth: 20th November, 1987</div>
+<div class='ielts-form-row'>Nationality: <strong>[13]</strong></div>
+<div class='ielts-form-row'>Address: <strong>[14]</strong></div>
+<div class='ielts-form-row'>Case history: <strong>[15]</strong></div>
+</div>` },
       { blockType: "question" as const, questionNumber: 11, questionType: "form-completion" as const, questionText: "~Faculty: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 12, questionType: "form-completion" as const, questionText: "~Registered No.: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 13, questionType: "form-completion" as const, questionText: "~Nationality: ________", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
@@ -86,7 +86,7 @@ const data = {
       { blockType: "question" as const, questionNumber: 24, questionType: "multiple-choice" as const, questionText: "Who will give the group a mark according to its representative\u2019s presentation?", options: ["A. subject advisor","B. tutor","C. dean"], correctAnswer: "TBD", marks: 1 },
       { blockType: "question" as const, questionNumber: 25, questionType: "multiple-choice" as const, questionText: "According to the lecturer, postgraduate course is", options: ["A. relaxed","B. intensive","C. interesting"], correctAnswer: "TBD", marks: 1 },
       { blockType: "instruction" as const, content: "<strong>Questions 26\u201330</strong><br/>Answer the questions below.<br/>Write <strong>NO MORE THAN THREE</strong> words for each answer." },
-      { blockType: "question" as const, questionNumber: 26, questionType: "short-answer" as const, questionText: "~What\u2019s the main assessment of course?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
+      { blockType: "question" as const, questionNumber: 26, questionType: "short-answer" as const, questionText: "~What\u2019s the main assessment of the course?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 27, questionType: "short-answer" as const, questionText: "~Who can choose the topic of the essay?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 28, questionType: "short-answer" as const, questionText: "~Where can students find their tutors\u2019 names?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
       { blockType: "question" as const, questionNumber: 29, questionType: "short-answer" as const, questionText: "~What should students use when they borrow materials from the library?", correctAnswer: "TBD", marks: 1, wordLimit: 3 },
@@ -100,12 +100,15 @@ const data = {
       { blockType: "question" as const, questionNumber: 32, questionType: "multiple-choice" as const, questionText: "What do algae reward sloth?", options: ["A. skin","B. protection","C. nutrition"], correctAnswer: "TBD", marks: 1 },
       { blockType: "instruction" as const, content: "<strong>Questions 33\u201338</strong><br/>Complete the notes below.<br/>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer." },
       { blockType: "instruction" as const, content: "<strong>THE LIVES OF SLOTH</strong>" },
-      { blockType: "question" as const, questionNumber: 33, questionType: "note-completion" as const, questionText: "Sloth has a short snout, big round eyes, a ________ tail, and small ears", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-      { blockType: "question" as const, questionNumber: 34, questionType: "note-completion" as const, questionText: "The favorite activity of sloth is to ________ on trees", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-      { blockType: "question" as const, questionNumber: 35, questionType: "note-completion" as const, questionText: "Sloth is also classified as ________ just like horses and cattle", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-      { blockType: "question" as const, questionNumber: 36, questionType: "note-completion" as const, questionText: "Average body temperature of sloth is ________ Fahrenheit", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-      { blockType: "question" as const, questionNumber: 37, questionType: "note-completion" as const, questionText: "________ will affect sloth\u2019s body temperature", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
-      { blockType: "question" as const, questionNumber: 38, questionType: "note-completion" as const, questionText: "Sloths get everything on tree, even ________ which comes from juicy leaves and morning dew", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+      { blockType: "instruction" as const, content: `<div style='margin:8px 0;padding:12px;border:1px solid #d1d5db;border-radius:4px;line-height:1.8'>
+Sloth has a short snout, big round eyes, a <strong>[33]</strong> tail, and small ears. The favorite activity of sloth is to <strong>[34]</strong> on trees. Sloth is also classified as <strong>[35]</strong> just like horses and cattle. Average body temperature of sloth is <strong>[36]</strong> Fahrenheit. <strong>[37]</strong> will affect sloth\u2019s body temperature. Sloths get everything on tree, even <strong>[38]</strong> which comes from juicy leaves and morning dew.
+</div>` },
+      { blockType: "question" as const, questionNumber: 33, questionType: "note-completion" as const, questionText: "~Sloth has a ________ tail", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+      { blockType: "question" as const, questionNumber: 34, questionType: "note-completion" as const, questionText: "~Favorite activity: to ________ on trees", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+      { blockType: "question" as const, questionNumber: 35, questionType: "note-completion" as const, questionText: "~Classified as ________ like horses and cattle", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+      { blockType: "question" as const, questionNumber: 36, questionType: "note-completion" as const, questionText: "~Average body temperature: ________ Fahrenheit", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+      { blockType: "question" as const, questionNumber: 37, questionType: "note-completion" as const, questionText: "~________ affects sloth\u2019s body temperature", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
+      { blockType: "question" as const, questionNumber: 38, questionType: "note-completion" as const, questionText: "~Sloths get ________ from juicy leaves and morning dew", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "instruction" as const, content: "<strong>Questions 39 and 40</strong><br/>Answer the questions below.<br/>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer." },
       { blockType: "question" as const, questionNumber: 39, questionType: "short-answer" as const, questionText: "~How long does sloth digest its food?", correctAnswer: "TBD", marks: 1, wordLimit: 2 },
       { blockType: "question" as const, questionNumber: 40, questionType: "short-answer" as const, questionText: "~What substance can help to resolve food in sloth\u2019s stomach?", correctAnswer: "TBD", marks: 1, wordLimit: 2 },

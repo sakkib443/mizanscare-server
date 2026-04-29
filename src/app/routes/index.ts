@@ -11,6 +11,7 @@ import { ListeningRoutes } from "../modules/listening/listening.route";
 import { ReadingRoutes } from "../modules/reading/reading.route";
 import { WritingRoutes } from "../modules/writing/writing.route";
 import { SpeakingRoutes } from "../modules/speaking/speaking.route";
+import { SiteContentRoutes } from "../modules/siteContent/siteContent.route";
 
 const router = Router();
 
@@ -55,6 +56,10 @@ const moduleRoutes = [
     {
         path: "/users",
         route: UserRoutes,
+    },
+    {
+        path: "/site-content",
+        route: SiteContentRoutes,
     },
 ];
 
