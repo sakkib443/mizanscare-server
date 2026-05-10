@@ -5,6 +5,7 @@ import {
     IReadingTestFilters,
     getReadingBandScore
 } from "./reading.interface";
+import { getCache, setCache, invalidateCache } from "../../utils/testCache";
 
 // Create new reading test
 const createReadingTest = async (
@@ -134,8 +135,12 @@ const getReadingTestByNumber = async (testNumber: number, includeAnswers: boolea
     return test;
 };
 
-// Get reading test for exam
+// Get reading test for exam — cached
 const getReadingTestForExam = async (testNumber: number) => {
+    // Try cache first
+    const cached = getCache<unknown>("reading", testNumber);
+    if (cached) return cached;
+
     const test = await ReadingTest.findOne({ testNumber, isActive: true })
         .select("-sections.questions.correctAnswer -sections.questions.acceptableAnswers -sections.questions.explanation")
         .lean();
@@ -143,6 +148,9 @@ const getReadingTestForExam = async (testNumber: number) => {
     if (!test) {
         throw new Error(`Reading Test #${testNumber} not found or inactive`);
     }
+
+    // Store in cache
+    setCache("reading", testNumber, test);
 
     return test;
 };
@@ -268,6 +276,10 @@ const updateReadingTest = async (
         { new: true, runValidators: true }
     );
 
+    if (test.testNumber != null) {
+        invalidateCache("reading", test.testNumber);
+    }
+
     return updatedTest;
 };
 
@@ -279,6 +291,10 @@ const deleteReadingTest = async (id: string) => {
     }
 
     await ReadingTest.findByIdAndDelete(id);
+
+    if (test.testNumber != null) {
+        invalidateCache("reading", test.testNumber);
+    }
 
     return { message: "Reading test deleted successfully" };
 };
@@ -292,6 +308,10 @@ const toggleActive = async (id: string) => {
 
     test.isActive = !test.isActive;
     await test.save();
+
+    if (test.testNumber != null) {
+        invalidateCache("reading", test.testNumber);
+    }
 
     return {
         message: `Reading test ${test.isActive ? "activated" : "deactivated"} successfully`,

@@ -6,6 +6,7 @@ import {
     IWritingScoreCriteria,
     calculateWritingBand
 } from "./writing.interface";
+import { getCache, setCache, invalidateCache } from "../../utils/testCache";
 
 // Create new writing test
 const createWritingTest = async (
@@ -126,8 +127,11 @@ const getWritingTestByNumber = async (testNumber: number, includeSamples: boolea
     return test;
 };
 
-// Get writing test for exam
+// Get writing test for exam — cached
 const getWritingTestForExam = async (testNumber: number) => {
+    const cached = getCache<unknown>("writing", testNumber);
+    if (cached) return cached;
+
     const test = await WritingTest.findOne({ testNumber, isActive: true })
         .select("-tasks.sampleAnswer -tasks.keyPoints -tasks.bandDescriptors")
         .lean();
@@ -135,6 +139,8 @@ const getWritingTestForExam = async (testNumber: number) => {
     if (!test) {
         throw new Error(`Writing Test #${testNumber} not found or inactive`);
     }
+
+    setCache("writing", testNumber, test);
 
     return test;
 };
@@ -248,6 +254,10 @@ const updateWritingTest = async (
         { new: true, runValidators: true }
     );
 
+    if (test.testNumber != null) {
+        invalidateCache("writing", test.testNumber);
+    }
+
     return updatedTest;
 };
 
@@ -259,6 +269,10 @@ const deleteWritingTest = async (id: string) => {
     }
 
     await WritingTest.findByIdAndDelete(id);
+
+    if (test.testNumber != null) {
+        invalidateCache("writing", test.testNumber);
+    }
 
     return { message: "Writing test deleted successfully" };
 };
@@ -272,6 +286,10 @@ const toggleActive = async (id: string) => {
 
     test.isActive = !test.isActive;
     await test.save();
+
+    if (test.testNumber != null) {
+        invalidateCache("writing", test.testNumber);
+    }
 
     return {
         message: `Writing test ${test.isActive ? "activated" : "deactivated"} successfully`,

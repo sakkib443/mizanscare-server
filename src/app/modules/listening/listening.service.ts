@@ -5,6 +5,7 @@ import {
     IListeningTestFilters,
     getListeningBandScore
 } from "./listening.interface";
+import { getCache, setCache, invalidateCache } from "../../utils/testCache";
 
 // Create new listening test
 const createListeningTest = async (
@@ -135,8 +136,12 @@ const getListeningTestByNumber = async (testNumber: number, includeAnswers: bool
     return test;
 };
 
-// Get listening test for exam (without answers)
+// Get listening test for exam (without answers) — cached
 const getListeningTestForExam = async (testNumber: number) => {
+    // Try cache first
+    const cached = getCache<unknown>("listening", testNumber);
+    if (cached) return cached;
+
     const test = await ListeningTest.findOne({ testNumber, isActive: true })
         .select("-sections.questions.correctAnswer -sections.questions.acceptableAnswers -sections.questions.explanation")
         .lean();
@@ -144,6 +149,9 @@ const getListeningTestForExam = async (testNumber: number) => {
     if (!test) {
         throw new Error(`Listening Test #${testNumber} not found or inactive`);
     }
+
+    // Store in cache
+    setCache("listening", testNumber, test);
 
     return test;
 };
@@ -271,6 +279,11 @@ const updateListeningTest = async (
         { new: true, runValidators: true }
     );
 
+    // Invalidate cache for this test number
+    if (test.testNumber != null) {
+        invalidateCache("listening", test.testNumber);
+    }
+
     return updatedTest;
 };
 
@@ -282,6 +295,11 @@ const deleteListeningTest = async (id: string) => {
     }
 
     await ListeningTest.findByIdAndDelete(id);
+
+    // Invalidate cache for this test number
+    if (test.testNumber != null) {
+        invalidateCache("listening", test.testNumber);
+    }
 
     return { message: "Listening test deleted successfully" };
 };
@@ -295,6 +313,11 @@ const toggleActive = async (id: string) => {
 
     test.isActive = !test.isActive;
     await test.save();
+
+    // Invalidate cache (active status changed)
+    if (test.testNumber != null) {
+        invalidateCache("listening", test.testNumber);
+    }
 
     return {
         message: `Listening test ${test.isActive ? "activated" : "deactivated"} successfully`,
