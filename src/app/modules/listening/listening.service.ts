@@ -43,7 +43,7 @@ const createListeningTest = async (
 const getAllListeningTests = async (
     filters: IListeningTestFilters,
     page: number = 1,
-    limit: number = 10
+    limit: number = 20
 ) => {
     const query: Record<string, unknown> = {};
 
@@ -69,7 +69,7 @@ const getAllListeningTests = async (
 
     const skip = (page - 1) * limit;
 
-    let sortOptions: Record<string, 1 | -1> = { testNumber: -1 }; // Default: Newest (by number)
+    let sortOptions: Record<string, 1 | -1> = { isActive: -1, title: 1 };
     
     if (filters.sort) {
         if (filters.sort === 'name_asc') sortOptions = { title: 1 };

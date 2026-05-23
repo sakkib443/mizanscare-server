@@ -43,7 +43,7 @@ const createReadingTest = async (
 const getAllReadingTests = async (
     filters: IReadingTestFilters,
     page: number = 1,
-    limit: number = 10
+    limit: number = 20
 ) => {
     const query: Record<string, unknown> = {};
 
