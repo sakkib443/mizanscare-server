@@ -69,8 +69,9 @@ const getAllReadingTests = async (
 
     const skip = (page - 1) * limit;
 
-    let sortOptions: Record<string, 1 | -1> = { testNumber: -1 }; // Default: Newest (by number)
-    
+    // Default: active tests first, then alphabetical by name (A-Z)
+    let sortOptions: Record<string, 1 | -1> = { isActive: -1, title: 1 };
+
     if (filters.sort) {
         if (filters.sort === 'name_asc') sortOptions = { title: 1 };
         else if (filters.sort === 'name_desc') sortOptions = { title: -1 };
