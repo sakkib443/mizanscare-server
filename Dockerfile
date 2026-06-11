@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+# Install ALL dependencies (including devDependencies like typescript)
+# so the build (tsc) works even when NODE_ENV=production
+RUN npm install --include=dev
 
 COPY . .
 
