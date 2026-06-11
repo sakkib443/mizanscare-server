@@ -7,19 +7,21 @@ dotenv.config();
 // For Vercel serverless: export app directly
 export default app;
 
-// For local development
-if (process.env.NODE_ENV !== "production") {
-  const startServer = async () => {
-    try {
-      await connectDB();
-      const PORT = process.env.PORT || 5000;
-      app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-      });
-    } catch (error) {
-      console.error("Failed to start server:", error);
-      process.exit(1);
-    }
-  };
+// Start a long-running server everywhere EXCEPT Vercel serverless.
+// Vercel sets process.env.VERCEL automatically; VPS/local do not.
+const startServer = async () => {
+  try {
+    await connectDB();
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  }
+};
+
+if (!process.env.VERCEL) {
   startServer();
 }
