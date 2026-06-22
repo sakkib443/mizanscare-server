@@ -17,8 +17,11 @@ export const connectDB = async (): Promise<typeof mongoose> => {
 
     // Create new connection
     connectionPromise = mongoose.connect(process.env.DATABASE_URL as string, {
-        maxPoolSize: 10,
-        minPoolSize: 2,
+        // Pool was 10 — too small once 10-15 students each fire several queries
+        // at once. Tunable via env. NOTE under clustering total connections =
+        // workers × maxPoolSize, so keep it modest on free/shared Atlas.
+        maxPoolSize: Number(process.env.DB_MAX_POOL_SIZE) || 50,
+        minPoolSize: 5,
         serverSelectionTimeoutMS: 5000,
         socketTimeoutMS: 45000,
         bufferCommands: false,

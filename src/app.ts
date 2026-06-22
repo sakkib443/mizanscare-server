@@ -1,5 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
+import compression from "compression";
 import path from "path";
 import router from "./app/routes";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
@@ -8,6 +9,10 @@ import { ensureDbConnection } from "./app/config/db";
 const app: Application = express();
 
 // middleware
+// gzip every response. Exam question sets are large, repetitive JSON
+// (passages, options, instructions) and compress ~5-10x, so this is the
+// single biggest win for module-load time and bandwidth under load.
+app.use(compression());
 app.use(express.json());
 app.use(cors({
   origin: [

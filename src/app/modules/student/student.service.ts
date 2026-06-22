@@ -365,12 +365,11 @@ const deleteStudent = async (id: string) => {
     return { message: "Student deleted successfully" };
 };
 
-// Verify exam ID for exam start
-const verifyExamId = async (examId: string) => {
-    const student = await Student.findOne({ examId: examId.toUpperCase() })
-        .select("examId nameEnglish examStatus paymentStatus examDate isActive canRetake examSessionId assignedSets examStartedAt completedModules scores")
-        .lean();
-
+// Evaluate exam eligibility from an ALREADY-fetched student record.
+// Pure (no DB hit) so both verifyExamId (lean read) and startExam (full doc)
+// can share it — this removes the second identical findOne that startExam
+// used to make by calling verifyExamId() again.
+const evaluateExamEligibility = (student: any) => {
     if (!student) {
         return { valid: false, message: "Invalid Exam ID" };
     }
@@ -430,6 +429,15 @@ const verifyExamId = async (examId: string) => {
     };
 };
 
+// Verify exam ID for exam start
+const verifyExamId = async (examId: string) => {
+    const student = await Student.findOne({ examId: examId.toUpperCase() })
+        .select("examId nameEnglish examStatus paymentStatus examDate isActive canRetake examSessionId assignedSets examStartedAt completedModules scores")
+        .lean();
+
+    return evaluateExamEligibility(student);
+};
+
 // Start exam session
 const startExam = async (
     examId: string,
@@ -442,8 +450,9 @@ const startExam = async (
         throw new Error("Student not found");
     }
 
-    // Check verification
-    const verification = await verifyExamId(examId);
+    // Check verification — reuse the student we just fetched instead of a
+    // second identical DB round-trip via verifyExamId().
+    const verification = evaluateExamEligibility(student);
     if (!verification.valid) {
         throw new Error(verification.message);
     }
