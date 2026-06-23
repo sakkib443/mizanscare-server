@@ -8,25 +8,32 @@ import { AutoMarkingService } from "../examSession/autoMarking.service";
 import { EmailService } from "../../utils/email.service";
 // Updated: questionText + isCorrect recalculation on backend v2
 
-// Generate unique exam ID
+// Generate unique exam ID: "MCIM" + 2 random digits (e.g. MCIM07).
+// Picks a random unused suffix so the login ID stays unique.
 const generateExamId = async (): Promise<string> => {
-    const currentYear = new Date().getFullYear().toString().slice(-2);
-    const prefix = `BACIELTS${currentYear}`;
+    const prefix = "MCIM";
 
-    const lastStudent = await Student.findOne({
-        examId: new RegExp(`^${prefix}`),
-    })
-        .sort({ examId: -1 })
-        .limit(1);
+    // Collect already-used MCIM ids
+    const existing = await Student.find({ examId: new RegExp(`^${prefix}\\d{2}$`) })
+        .select("examId")
+        .lean();
+    const used = new Set(existing.map((s) => s.examId));
 
-    let nextNumber = 1;
-    if (lastStudent) {
-        const lastNumber = parseInt(lastStudent.examId.slice(-4), 10);
-        nextNumber = lastNumber + 1;
+    // Build the pool of free MCIM00–MCIM99 ids
+    const available: string[] = [];
+    for (let i = 0; i < 100; i++) {
+        const candidate = `${prefix}${i.toString().padStart(2, "0")}`;
+        if (!used.has(candidate)) available.push(candidate);
     }
 
-    const serialNumber = nextNumber.toString().padStart(4, "0");
-    return `${prefix}${serialNumber}`;
+    if (available.length === 0) {
+        throw new Error(
+            "All exam IDs (MCIM00–MCIM99) are in use. Please contact admin to extend the ID range."
+        );
+    }
+
+    // Pick a random free one
+    return available[Math.floor(Math.random() * available.length)];
 };
 
 // Create new student with auto ID generation

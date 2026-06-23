@@ -88,8 +88,8 @@ const verifyExamIdSchema = z.object({
         examId: z
             .string({ message: "Exam ID is required" })
             .regex(
-                /^BACIELTS\d{6}$/,
-                "Invalid Exam ID format (e.g., BACIELTS260001)"
+                /^(MCIM\d{2}|BACIELTS\d{6})$/i,
+                "Invalid Exam ID format (e.g., MCIM07)"
             ),
     }),
 });
@@ -99,7 +99,7 @@ const startExamSchema = z.object({
     body: z.object({
         examId: z
             .string({ message: "Exam ID is required" })
-            .regex(/^BACIELTS\d{6}$/, "Invalid Exam ID format"),
+            .regex(/^(MCIM\d{2}|BACIELTS\d{6})$/i, "Invalid Exam ID format"),
         ipAddress: z.string().optional(),
         browserFingerprint: z.string().optional(),
     }),

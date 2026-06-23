@@ -78,7 +78,7 @@ export interface IViolation {
 
 // Main Student interface
 export interface IStudent {
-    // Unique exam ID (BACIELTS260001 format)
+    // Unique exam ID (MCIM07 format)
     examId: string;
 
     // Test Type (Academic / General Training)

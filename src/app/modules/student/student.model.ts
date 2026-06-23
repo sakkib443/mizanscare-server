@@ -85,7 +85,7 @@ const violationSchema = new Schema<IViolation>(
 // Main Student Schema
 const studentSchema = new Schema<IStudent>(
     {
-        // Unique exam ID (BACIELTS260001 format)
+        // Unique exam ID (MCIM07 format)
         examId: {
             type: String,
             required: [true, "Exam ID is required"],
@@ -281,27 +281,28 @@ studentSchema.methods.comparePassword = async function (
     return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// Static method to generate exam ID
+// Static method to generate exam ID: "MCIM" + 2 random digits (e.g. MCIM07)
 studentSchema.statics.generateExamId = async function (): Promise<string> {
-    const currentYear = new Date().getFullYear().toString().slice(-2); // "26" for 2026
-    const prefix = `BACIELTS${currentYear}`;
+    const prefix = "MCIM";
 
-    // Find the last student created this year
-    const lastStudent = await this.findOne({
-        examId: new RegExp(`^${prefix}`),
-    })
-        .sort({ examId: -1 })
-        .limit(1);
+    // Collect already-used MCIM ids
+    const existing = await this.find({ examId: new RegExp(`^${prefix}\\d{2}$`) })
+        .select("examId")
+        .lean();
+    const used = new Set(existing.map((s: { examId: string }) => s.examId));
 
-    let nextNumber = 1;
-    if (lastStudent) {
-        const lastNumber = parseInt(lastStudent.examId.slice(-4), 10);
-        nextNumber = lastNumber + 1;
+    // Build the pool of free MCIM00–MCIM99 ids
+    const available: string[] = [];
+    for (let i = 0; i < 100; i++) {
+        const candidate = `${prefix}${i.toString().padStart(2, "0")}`;
+        if (!used.has(candidate)) available.push(candidate);
     }
 
-    // Format with leading zeros (4 digits)
-    const serialNumber = nextNumber.toString().padStart(4, "0");
-    return `${prefix}${serialNumber}`;
+    if (available.length === 0) {
+        throw new Error("All exam IDs (MCIM00–MCIM99) are in use. Contact admin.");
+    }
+
+    return available[Math.floor(Math.random() * available.length)];
 };
 
 // Create the model with static methods
