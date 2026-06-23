@@ -98,11 +98,6 @@ export interface IStudent {
     // Exam assignment
     assignedSets: IAssignedSets;
 
-    // Speaking exam schedule
-    speakingExamDate?: Date;
-    speakingExamTime?: string; // e.g. "10:00 AM"
-    speakingMeetingLink?: string; // Zoom / Google Meet link
-
     // Exam session tracking
     examStatus: ExamStatus;
     examSessionId?: string;
@@ -189,10 +184,6 @@ export interface ICreateStudentInput {
     writingSetNumbers?: number[];
     speakingSetNumber?: number;
     speakingSetNumbers?: number[];
-    // Speaking exam schedule
-    speakingExamDate?: Date;
-    speakingExamTime?: string;
-    speakingMeetingLink?: string;
 }
 
 // Verify exam ID input
