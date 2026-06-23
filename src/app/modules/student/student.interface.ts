@@ -78,7 +78,7 @@ export interface IViolation {
 
 // Main Student interface
 export interface IStudent {
-    // Unique exam ID (MCIM07 format)
+    // Unique exam ID (MC47IM001 format)
     examId: string;
 
     // Test Type (Academic / General Training)

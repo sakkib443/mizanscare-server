@@ -8,32 +8,27 @@ import { AutoMarkingService } from "../examSession/autoMarking.service";
 import { EmailService } from "../../utils/email.service";
 // Updated: questionText + isCorrect recalculation on backend v2
 
-// Generate unique exam ID: "MCIM" + 2 random digits (e.g. MCIM07).
-// Picks a random unused suffix so the login ID stays unique.
+// Generate unique exam ID: "MC" + 2 random digits + "IM" + a running serial
+// (e.g. MC47IM001). The serial keeps incrementing, so there is no limit on
+// how many students can be registered.
 const generateExamId = async (): Promise<string> => {
-    const prefix = "MCIM";
+    const random = Math.floor(Math.random() * 100).toString().padStart(2, "0"); // 00–99
 
-    // Collect already-used MCIM ids
-    const existing = await Student.find({ examId: new RegExp(`^${prefix}\\d{2}$`) })
+    // Next serial = highest existing MC..IM<serial> + 1
+    const existing = await Student.find({ examId: /^MC\d+IM\d+$/i })
         .select("examId")
         .lean();
-    const used = new Set(existing.map((s) => s.examId));
-
-    // Build the pool of free MCIM00–MCIM99 ids
-    const available: string[] = [];
-    for (let i = 0; i < 100; i++) {
-        const candidate = `${prefix}${i.toString().padStart(2, "0")}`;
-        if (!used.has(candidate)) available.push(candidate);
+    let maxSerial = 0;
+    for (const s of existing) {
+        const m = s.examId.match(/IM(\d+)$/i);
+        if (m) {
+            const n = parseInt(m[1], 10);
+            if (n > maxSerial) maxSerial = n;
+        }
     }
+    const serial = (maxSerial + 1).toString().padStart(3, "0"); // 001, 002, … grows past 999
 
-    if (available.length === 0) {
-        throw new Error(
-            "All exam IDs (MCIM00–MCIM99) are in use. Please contact admin to extend the ID range."
-        );
-    }
-
-    // Pick a random free one
-    return available[Math.floor(Math.random() * available.length)];
+    return `MC${random}IM${serial}`;
 };
 
 // Create new student with auto ID generation

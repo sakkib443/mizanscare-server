@@ -85,7 +85,7 @@ const violationSchema = new Schema<IViolation>(
 // Main Student Schema
 const studentSchema = new Schema<IStudent>(
     {
-        // Unique exam ID (MCIM07 format)
+        // Unique exam ID (MC47IM001 format)
         examId: {
             type: String,
             required: [true, "Exam ID is required"],
@@ -281,28 +281,22 @@ studentSchema.methods.comparePassword = async function (
     return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// Static method to generate exam ID: "MCIM" + 2 random digits (e.g. MCIM07)
+// Static method to generate exam ID: "MC" + 2 random digits + "IM" + running serial (e.g. MC47IM001)
 studentSchema.statics.generateExamId = async function (): Promise<string> {
-    const prefix = "MCIM";
+    const random = Math.floor(Math.random() * 100).toString().padStart(2, "0");
 
-    // Collect already-used MCIM ids
-    const existing = await this.find({ examId: new RegExp(`^${prefix}\\d{2}$`) })
-        .select("examId")
-        .lean();
-    const used = new Set(existing.map((s: { examId: string }) => s.examId));
-
-    // Build the pool of free MCIM00–MCIM99 ids
-    const available: string[] = [];
-    for (let i = 0; i < 100; i++) {
-        const candidate = `${prefix}${i.toString().padStart(2, "0")}`;
-        if (!used.has(candidate)) available.push(candidate);
+    const existing = await this.find({ examId: /^MC\d+IM\d+$/i }).select("examId").lean();
+    let maxSerial = 0;
+    for (const s of existing as { examId: string }[]) {
+        const m = s.examId.match(/IM(\d+)$/i);
+        if (m) {
+            const n = parseInt(m[1], 10);
+            if (n > maxSerial) maxSerial = n;
+        }
     }
+    const serial = (maxSerial + 1).toString().padStart(3, "0");
 
-    if (available.length === 0) {
-        throw new Error("All exam IDs (MCIM00–MCIM99) are in use. Contact admin.");
-    }
-
-    return available[Math.floor(Math.random() * available.length)];
+    return `MC${random}IM${serial}`;
 };
 
 // Create the model with static methods
