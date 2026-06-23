@@ -29,3 +29,5 @@ coverage/
 # Misc
 *.txt
 .vercel
+
+# redeploy trigger 2026-06-23 — push from authorized account to unblock Vercel deploy
