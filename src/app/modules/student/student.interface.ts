@@ -8,12 +8,6 @@ export type ExamStatus =
     | "terminated"
     | "expired";
 
-// Payment method types
-export type PaymentMethod = "cash" | "bkash" | "nagad" | "bank" | "other";
-
-// Payment status
-export type PaymentStatus = "pending" | "paid" | "refunded";
-
 // Full Set = Listening + Reading + Writing together
 export interface IFullSet {
     label: string;
@@ -92,7 +86,6 @@ export interface IStudent {
 
     // Personal information
     nameEnglish: string;
-    nameBengali?: string;
     email: string;
     phone: string;
     nidNumber?: string; // Voter ID / NID
@@ -101,15 +94,7 @@ export interface IStudent {
     // Auto-generated account credentials
     password: string; // Auto-generated (same as email or phone)
 
-    // Payment information
-    paymentStatus: PaymentStatus;
-    paymentAmount: number;
-    paymentMethod: PaymentMethod;
-    paymentDate?: Date;
-    paymentReference?: string;
-
     // Exam assignment
-    examDate: Date;
     assignedSets: IAssignedSets;
 
     // Speaking exam schedule
@@ -186,17 +171,10 @@ export interface IStudent {
 export interface ICreateStudentInput {
     testType: "academic" | "general-training";
     nameEnglish: string;
-    nameBengali?: string;
     email: string;
     phone: string;
     nidNumber?: string;
     photo?: string;
-    paymentStatus: PaymentStatus;
-    paymentAmount: number;
-    paymentMethod: PaymentMethod;
-    paymentDate?: Date;
-    paymentReference?: string;
-    examDate: Date;
     // Full Sets (new)
     fullSets?: IFullSet[];
     extraSets?: IExtraSet[];
@@ -224,8 +202,6 @@ export interface IVerifyExamIdInput {
 export interface IStudentFilters {
     searchTerm?: string;
     examStatus?: ExamStatus;
-    paymentStatus?: PaymentStatus;
-    examDate?: string;
     fromDate?: string;
     toDate?: string;
 }

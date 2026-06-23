@@ -7,10 +7,6 @@ const createStudentSchema = z.object({
             .string({ message: "Name in English is required" })
             .min(2, "Name must be at least 2 characters")
             .max(100, "Name must not exceed 100 characters"),
-        nameBengali: z
-            .string()
-            .max(100, "Bengali name must not exceed 100 characters")
-            .optional(),
         email: z
             .string({ message: "Email is required" })
             .email("Invalid email format"),
@@ -22,20 +18,6 @@ const createStudentSchema = z.object({
             .regex(/^\d{10}$|^\d{17}$/, "NID must be 10 or 17 digits")
             .optional(),
         photo: z.string().url("Photo must be a valid URL").optional(),
-        paymentStatus: z.enum(["pending", "paid", "refunded"], {
-            message: "Payment status is required",
-        }),
-        paymentAmount: z
-            .number({ message: "Payment amount is required" })
-            .min(0, "Payment amount must be positive"),
-        paymentMethod: z.enum(["cash", "bkash", "nagad", "bank", "other"], {
-            message: "Payment method is required",
-        }),
-        paymentDate: z.string().datetime().optional(),
-        paymentReference: z.string().optional(),
-        examDate: z
-            .string({ message: "Exam date is required" })
-            .datetime("Invalid date format"),
         // Full Sets (new grouped L+R+W)
         fullSets: z.array(z.object({
             label: z.string().optional(),
@@ -71,10 +53,6 @@ const updateStudentSchema = z.object({
             .min(2, "Name must be at least 2 characters")
             .max(100, "Name must not exceed 100 characters")
             .optional(),
-        nameBengali: z
-            .string()
-            .max(100, "Bengali name must not exceed 100 characters")
-            .optional(),
         phone: z
             .string()
             .regex(/^01[3-9]\d{8}$/, "Invalid Bangladesh phone number")
@@ -84,12 +62,6 @@ const updateStudentSchema = z.object({
             .regex(/^\d{10}$|^\d{17}$/, "NID must be 10 or 17 digits")
             .optional(),
         photo: z.string().url("Photo must be a valid URL").optional(),
-        paymentStatus: z.enum(["pending", "paid", "refunded"]).optional(),
-        paymentAmount: z.number().min(0, "Payment amount must be positive").optional(),
-        paymentMethod: z.enum(["cash", "bkash", "nagad", "bank", "other"]).optional(),
-        paymentDate: z.string().datetime().optional(),
-        paymentReference: z.string().optional(),
-        examDate: z.string().datetime().optional(),
         listeningSetNumber: z.number().int().min(1).max(10000).optional(),
         listeningSetNumbers: z.array(z.number().int().min(1).max(10000)).optional(),
         readingSetNumber: z.number().int().min(1).max(10000).optional(),

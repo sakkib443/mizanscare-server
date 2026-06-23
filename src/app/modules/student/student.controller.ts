@@ -33,10 +33,6 @@ const getAllStudents = async (req: Request, res: Response) => {
         const {
             searchTerm,
             examStatus,
-            paymentStatus,
-            examDate,
-            fromDate,
-            toDate,
             page = "1",
             limit = "10",
         } = req.query;
@@ -44,10 +40,6 @@ const getAllStudents = async (req: Request, res: Response) => {
         const filters = {
             searchTerm: searchTerm as string,
             examStatus: examStatus as any,
-            paymentStatus: paymentStatus as any,
-            examDate: examDate as string,
-            fromDate: fromDate as string,
-            toDate: toDate as string,
         };
 
         const result = await StudentService.getAllStudents(

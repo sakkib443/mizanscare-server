@@ -88,13 +88,25 @@ const createStudent = async (
         speakingSetNumbers: data.speakingSetNumbers || (data.speakingSetNumber ? [data.speakingSetNumber] : []),
     };
 
+    // Defensively drop deprecated fields — the schema uses strict:false, so any
+    // stray nameBengali / examDate / payment* sent by an old client would
+    // otherwise still be persisted.
+    const {
+        nameBengali: _nameBengali,
+        examDate: _examDate,
+        paymentStatus: _paymentStatus,
+        paymentAmount: _paymentAmount,
+        paymentMethod: _paymentMethod,
+        paymentReference: _paymentReference,
+        paymentDate: _paymentDate,
+        ...cleanData
+    } = data as any;
+
     // Create student
     const student = await Student.create({
-        ...data,
+        ...cleanData,
         examId,
         password: autoPassword,
-        examDate: new Date(data.examDate),
-        paymentDate: data.paymentDate ? new Date(data.paymentDate) : undefined,
         assignedSets: assignedSetsData,
         createdBy: new Types.ObjectId(adminId),
     });
@@ -122,7 +134,6 @@ const createStudent = async (
         examId: student.examId,
         email: data.email,
         password: autoPassword,
-        examDate: student.examDate,
         speakingExamDate: data.speakingExamDate ? new Date(data.speakingExamDate as any) : undefined,
         speakingExamTime: data.speakingExamTime,
         speakingMeetingLink: data.speakingMeetingLink,
@@ -135,8 +146,6 @@ const createStudent = async (
             nameEnglish: student.nameEnglish,
             email: student.email,
             phone: student.phone,
-            examDate: student.examDate,
-            paymentStatus: student.paymentStatus,
             examStatus: student.examStatus,
         },
         credentials: {
@@ -159,7 +168,6 @@ const getAllStudents = async (
     if (filters.searchTerm) {
         query.$or = [
             { nameEnglish: { $regex: filters.searchTerm, $options: "i" } },
-            { nameBengali: { $regex: filters.searchTerm, $options: "i" } },
             { email: { $regex: filters.searchTerm, $options: "i" } },
             { phone: { $regex: filters.searchTerm, $options: "i" } },
             { examId: { $regex: filters.searchTerm, $options: "i" } },
@@ -169,30 +177,6 @@ const getAllStudents = async (
     // Filter by exam status
     if (filters.examStatus) {
         query.examStatus = filters.examStatus;
-    }
-
-    // Filter by payment status
-    if (filters.paymentStatus) {
-        query.paymentStatus = filters.paymentStatus;
-    }
-
-    // Filter by specific exam date
-    if (filters.examDate) {
-        const date = new Date(filters.examDate);
-        const nextDate = new Date(date);
-        nextDate.setDate(nextDate.getDate() + 1);
-        query.examDate = { $gte: date, $lt: nextDate };
-    }
-
-    // Filter by date range
-    if (filters.fromDate || filters.toDate) {
-        query.examDate = {};
-        if (filters.fromDate) {
-            (query.examDate as Record<string, Date>).$gte = new Date(filters.fromDate);
-        }
-        if (filters.toDate) {
-            (query.examDate as Record<string, Date>).$lte = new Date(filters.toDate);
-        }
     }
 
     const skip = (page - 1) * limit;
@@ -255,13 +239,14 @@ const updateStudent = async (id: string, updateData: Partial<ICreateStudentInput
     // Build update object
     const updateObj: Record<string, unknown> = { ...updateData };
 
-    // Handle date fields
-    if (updateData.examDate) {
-        updateObj.examDate = new Date(updateData.examDate);
-    }
-    if (updateData.paymentDate) {
-        updateObj.paymentDate = new Date(updateData.paymentDate);
-    }
+    // Defensively drop deprecated fields (schema uses strict:false)
+    delete (updateObj as any).nameBengali;
+    delete (updateObj as any).examDate;
+    delete (updateObj as any).paymentStatus;
+    delete (updateObj as any).paymentAmount;
+    delete (updateObj as any).paymentMethod;
+    delete (updateObj as any).paymentReference;
+    delete (updateObj as any).paymentDate;
 
     // Handle assigned sets — Full Sets (new) or legacy fields
     const inputFullSets = (updateData as any).fullSets;
@@ -379,12 +364,7 @@ const evaluateExamEligibility = (student: any) => {
         return { valid: false, message: "This account has been deactivated" };
     }
 
-    // Check payment status
-    if (student.paymentStatus !== "paid") {
-        return { valid: false, message: "Payment not confirmed. Please contact admin." };
-    }
-
-    // NOTE: Exam date check removed - students can now take exam anytime
+    // NOTE: Payment and exam-date gates removed - students can take the exam anytime
 
     // Check if already completed
     if (student.examStatus === "completed" && !student.canRetake) {
@@ -432,7 +412,7 @@ const evaluateExamEligibility = (student: any) => {
 // Verify exam ID for exam start
 const verifyExamId = async (examId: string) => {
     const student = await Student.findOne({ examId: examId.toUpperCase() })
-        .select("examId nameEnglish examStatus paymentStatus examDate isActive canRetake examSessionId assignedSets examStartedAt completedModules scores")
+        .select("examId nameEnglish examStatus isActive canRetake examSessionId assignedSets examStartedAt completedModules scores")
         .lean();
 
     return evaluateExamEligibility(student);
@@ -1095,16 +1075,12 @@ const getAllResults = async (
 const getStatistics = async () => {
     const [
         totalStudents,
-        pendingPayments,
-        paidPayments,
         notStarted,
         inProgress,
         completed,
         terminated,
     ] = await Promise.all([
         Student.countDocuments({}),
-        Student.countDocuments({ paymentStatus: "pending" }),
-        Student.countDocuments({ paymentStatus: "paid" }),
         Student.countDocuments({ examStatus: "not-started" }),
         Student.countDocuments({ examStatus: "in-progress" }),
         Student.countDocuments({ examStatus: "completed" }),
@@ -1125,22 +1101,8 @@ const getStatistics = async () => {
         },
     ]);
 
-    // Get today's exams
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    const todayExams = await Student.countDocuments({
-        examDate: { $gte: today, $lt: tomorrow },
-    });
-
     return {
         totalStudents,
-        payments: {
-            pending: pendingPayments,
-            paid: paidPayments,
-        },
         examStatus: {
             notStarted,
             inProgress,
@@ -1153,7 +1115,6 @@ const getStatistics = async () => {
             avgReading: 0,
             avgWriting: 0,
         },
-        todayExams,
     };
 };
 
@@ -1631,7 +1592,6 @@ const publishResults = async (studentId: string, publish: boolean = true) => {
             writingBand: scores.writing?.overallBand || 0,
             speakingBand: scores.speaking?.band || 0,
             overallBand: scores.overall || 0,
-            examDate: student.examDate,
         }).catch(err => console.error("Failed to send result email:", err));
     }
 

@@ -17,7 +17,6 @@ const getStudentRegistrationTemplate = (data: {
     examId: string;
     email: string;
     password: string;
-    examDate: string;
     loginUrl: string;
     speakingExamDate?: string;
     speakingExamTime?: string;
@@ -74,10 +73,6 @@ const getStudentRegistrationTemplate = (data: {
                                             <tr>
                                                 <td style="color: #1f2937; font-weight: 600;">Password:</td>
                                                 <td style="color: #0891b2; font-weight: 700; font-family: 'Courier New', monospace; background: #ffffff; padding: 8px 12px; border-radius: 6px;">${data.password}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="color: #1f2937; font-weight: 600;">Exam Date:</td>
-                                                <td style="color: #dc2626; font-weight: 700;">${data.examDate}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -166,7 +161,6 @@ const getResultPublishedTemplate = (data: {
     writingBand: number;
     speakingBand: number;
     overallBand: number;
-    examDate: string;
     resultUrl: string;
 }) => {
     const getBandColor = (band: number) => {
@@ -200,7 +194,7 @@ const getResultPublishedTemplate = (data: {
                     <tr>
                         <td style="padding: 40px 30px 20px 30px; text-align: center;">
                             <h2 style="color: #1f2937; margin: 0 0 10px 0; font-size: 22px;">Congratulations, ${data.studentName}! 🏆</h2>
-                            <p style="color: #6b7280; font-size: 14px; margin: 0;">Exam ID: <strong>${data.examId}</strong> | Exam Date: <strong>${data.examDate}</strong></p>
+                            <p style="color: #6b7280; font-size: 14px; margin: 0;">Exam ID: <strong>${data.examId}</strong></p>
                         </td>
                     </tr>
                     
@@ -301,7 +295,6 @@ export const sendStudentRegistrationEmail = async (data: {
     examId: string;
     email: string;
     password: string;
-    examDate: Date;
     speakingExamDate?: Date;
     speakingExamTime?: string;
     speakingMeetingLink?: string;
@@ -319,11 +312,6 @@ export const sendStudentRegistrationEmail = async (data: {
                 examId: data.examId,
                 email: data.email,
                 password: data.password,
-                examDate: new Date(data.examDate).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                }),
                 loginUrl: `${loginUrl}/login`,
                 speakingExamDate: data.speakingExamDate
                     ? new Date(data.speakingExamDate).toLocaleDateString("en-US", {
@@ -356,7 +344,6 @@ export const sendResultPublishedEmail = async (data: {
     writingBand: number;
     speakingBand: number;
     overallBand: number;
-    examDate: Date;
 }) => {
     try {
         const transporter = createTransporter();
@@ -374,11 +361,6 @@ export const sendResultPublishedEmail = async (data: {
                 writingBand: data.writingBand,
                 speakingBand: data.speakingBand,
                 overallBand: data.overallBand,
-                examDate: new Date(data.examDate).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                }),
                 resultUrl: `${resultUrl}/result/${data.examId}`,
             }),
         };

@@ -22,7 +22,6 @@ router.get("/test-email", async (req, res) => {
             examId: "TEST12345",
             email: testEmail,
             password: "testpass123",
-            examDate: new Date(),
         });
 
         console.log("Email result:", result);

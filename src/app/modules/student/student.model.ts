@@ -108,10 +108,6 @@ const studentSchema = new Schema<IStudent>(
             required: [true, "Name in English is required"],
             trim: true,
         },
-        nameBengali: {
-            type: String,
-            trim: true,
-        },
         email: {
             type: String,
             required: [true, "Email is required"],
@@ -138,33 +134,7 @@ const studentSchema = new Schema<IStudent>(
             select: false,
         },
 
-        // Payment information
-        paymentStatus: {
-            type: String,
-            enum: ["pending", "paid", "refunded"],
-            default: "pending",
-        },
-        paymentAmount: {
-            type: Number,
-            required: [true, "Payment amount is required"],
-        },
-        paymentMethod: {
-            type: String,
-            enum: ["cash", "bkash", "nagad", "bank", "other"],
-            required: [true, "Payment method is required"],
-        },
-        paymentDate: {
-            type: Date,
-        },
-        paymentReference: {
-            type: String,
-        },
-
         // Exam assignment
-        examDate: {
-            type: Date,
-            required: [true, "Exam date is required"],
-        },
         assignedSets: {
             type: assignedSetsSchema,
             default: {},
@@ -295,8 +265,6 @@ studentSchema.index({ examId: 1 });
 studentSchema.index({ email: 1 });
 studentSchema.index({ phone: 1 });
 studentSchema.index({ examStatus: 1 });
-studentSchema.index({ paymentStatus: 1 });
-studentSchema.index({ examDate: 1 });
 studentSchema.index({ createdAt: -1 });
 
 // Hash password before saving
