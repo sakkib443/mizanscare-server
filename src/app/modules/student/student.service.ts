@@ -236,6 +236,13 @@ const updateStudent = async (id: string, updateData: Partial<ICreateStudentInput
         throw new Error("Student not found");
     }
 
+    // Enforce "at least one ID" — NID or Passport must remain after this update
+    const resultingNid = updateData.nidNumber !== undefined ? updateData.nidNumber : student.nidNumber;
+    const resultingPassport = updateData.passportNumber !== undefined ? updateData.passportNumber : student.passportNumber;
+    if (!resultingNid && !resultingPassport) {
+        throw new Error("Provide at least one: NID or Passport number");
+    }
+
     // Build update object
     const updateObj: Record<string, unknown> = { ...updateData };
 

@@ -89,6 +89,7 @@ export interface IStudent {
     email: string;
     phone: string;
     nidNumber?: string; // Voter ID / NID
+    passportNumber?: string; // Passport No. — at least one of nidNumber/passportNumber required
     photo?: string;
 
     // Auto-generated account credentials
@@ -174,6 +175,7 @@ export interface ICreateStudentInput {
     email: string;
     phone: string;
     nidNumber?: string;
+    passportNumber?: string;
     photo?: string;
     // Full Sets (new)
     fullSets?: IFullSet[];

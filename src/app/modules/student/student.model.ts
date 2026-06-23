@@ -123,6 +123,10 @@ const studentSchema = new Schema<IStudent>(
             type: String,
             trim: true,
         },
+        passportNumber: {
+            type: String,
+            trim: true,
+        },
         photo: {
             type: String,
         },

@@ -17,6 +17,10 @@ const createStudentSchema = z.object({
             .string()
             .regex(/^\d{10}$|^\d{17}$/, "NID must be 10 or 17 digits")
             .optional(),
+        passportNumber: z
+            .string()
+            .regex(/^[A-Za-z0-9]{6,12}$/, "Passport must be 6-12 letters/numbers")
+            .optional(),
         photo: z.string().url("Photo must be a valid URL").optional(),
         // Full Sets (new grouped L+R+W)
         fullSets: z.array(z.object({
@@ -42,7 +46,10 @@ const createStudentSchema = z.object({
         speakingExamDate: z.string().datetime().optional(),
         speakingExamTime: z.string().max(20).optional(),
         speakingMeetingLink: z.string().url("Meeting link must be a valid URL").optional(),
-    }),
+    }).refine(
+        (d) => Boolean(d.nidNumber && d.nidNumber.trim()) || Boolean(d.passportNumber && d.passportNumber.trim()),
+        { message: "Provide at least one: NID or Passport number", path: ["nidNumber"] }
+    ),
 });
 
 // Update student validation
@@ -60,6 +67,10 @@ const updateStudentSchema = z.object({
         nidNumber: z
             .string()
             .regex(/^\d{10}$|^\d{17}$/, "NID must be 10 or 17 digits")
+            .optional(),
+        passportNumber: z
+            .string()
+            .regex(/^[A-Za-z0-9]{6,12}$/, "Passport must be 6-12 letters/numbers")
             .optional(),
         photo: z.string().url("Photo must be a valid URL").optional(),
         listeningSetNumber: z.number().int().min(1).max(10000).optional(),
