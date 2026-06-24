@@ -1058,7 +1058,7 @@ const getAllResults = async (
 
     const [results, total] = await Promise.all([
         Student.find(query)
-            .select("examId nameEnglish email examStatus examCompletedAt scores totalViolations completedModules")
+            .select("examId nameEnglish email phone testType examStatus examCompletedAt scores totalViolations completedModules resultsPublished")
             .sort({ examCompletedAt: -1 })
             .skip(skip)
             .limit(limit)
