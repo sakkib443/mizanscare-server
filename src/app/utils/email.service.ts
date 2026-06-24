@@ -10,6 +10,12 @@ const BRAND = {
     soft: "#f8fafc",
 };
 
+// The Mizan's Care logo (same file the website uses). Embedded inline via CID so
+// it always shows in email clients, even when remote images are blocked.
+const LOGO_URL = process.env.EMAIL_LOGO_URL || "https://mizansieltsmock.ftitbd.com/images/IMG_5177.PNG";
+const LOGO_CID = "mizanscarelogo";
+const logoAttachment = { filename: "mizans-care-logo.png", path: LOGO_URL, cid: LOGO_CID };
+
 // Create transporter using Gmail SMTP
 const createTransporter = () => {
     return nodemailer.createTransport({
@@ -242,8 +248,7 @@ export const sendStudentRegistrationEmail = async (data: {
 }) => {
     try {
         const transporter = createTransporter();
-        const baseUrl = process.env.FRONTEND_URL || "https://mizansieltsmock.ftitbd.com";
-        const logoUrl = `${baseUrl}/images/IMG_5177.PNG`;
+        const baseUrl = (process.env.FRONTEND_URL || "https://mizansieltsmock.ftitbd.com").replace(/\/+$/, "");
 
         const mailOptions = {
             from: `"Mizan's Care IELTS" <${process.env.EMAIL_USER}>`,
@@ -255,8 +260,9 @@ export const sendStudentRegistrationEmail = async (data: {
                 email: data.email,
                 password: data.password,
                 loginUrl: `${baseUrl}/login`,
-                logoUrl,
+                logoUrl: `cid:${LOGO_CID}`,
             }),
+            attachments: [logoAttachment],
         };
 
         const result = await transporter.sendMail(mailOptions);
@@ -281,8 +287,7 @@ export const sendResultPublishedEmail = async (data: {
 }) => {
     try {
         const transporter = createTransporter();
-        const baseUrl = process.env.FRONTEND_URL || "https://mizansieltsmock.ftitbd.com";
-        const logoUrl = `${baseUrl}/images/IMG_5177.PNG`;
+        const baseUrl = (process.env.FRONTEND_URL || "https://mizansieltsmock.ftitbd.com").replace(/\/+$/, "");
 
         const mailOptions = {
             from: `"Mizan's Care IELTS" <${process.env.EMAIL_USER}>`,
@@ -297,8 +302,9 @@ export const sendResultPublishedEmail = async (data: {
                 speakingBand: data.speakingBand,
                 overallBand: data.overallBand,
                 resultUrl: `${baseUrl}/result/${data.examId}`,
-                logoUrl,
+                logoUrl: `cid:${LOGO_CID}`,
             }),
+            attachments: [logoAttachment],
         };
 
         const result = await transporter.sendMail(mailOptions);
