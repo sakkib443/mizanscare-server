@@ -12,7 +12,7 @@ const BRAND = {
 
 // The Mizan's Care logo (same file the website uses). Embedded inline via CID so
 // it always shows in email clients, even when remote images are blocked.
-const LOGO_URL = process.env.EMAIL_LOGO_URL || "https://mizansieltsmock.ftitbd.com/images/IMG_5177.PNG";
+const LOGO_URL = process.env.EMAIL_LOGO_URL || "https://i.ibb.co/d4Vvs2Rb/IMG-5177.png";
 const LOGO_CID = "mizanscarelogo";
 const logoAttachment = { filename: "mizans-care-logo.png", path: LOGO_URL, cid: LOGO_CID };
 
