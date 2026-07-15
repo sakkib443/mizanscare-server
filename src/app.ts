@@ -18,7 +18,9 @@ app.use(cors({
   origin: [
     "https://mizansieltsmock.ftitbd.com",
     "http://localhost:3000",
-  ],
+    "http://glws1ui9irabnywfi9r3mndi.169.58.25.54.sslip.io",
+    process.env.FRONTEND_URL,
+  ].filter(Boolean) as string[],
   credentials: true,
 }));
 
