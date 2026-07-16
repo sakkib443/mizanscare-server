@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import path from "path";
 
 const BRAND = {
     primary: "#0e7490",      // brand cyan (dark)
@@ -10,11 +11,14 @@ const BRAND = {
     soft: "#f8fafc",
 };
 
-// The Mizan's Care logo (same file the website uses). Embedded inline via CID so
-// it always shows in email clients, even when remote images are blocked.
-const LOGO_URL = process.env.EMAIL_LOGO_URL || "https://i.ibb.co/d4Vvs2Rb/IMG-5177.png";
+// The Mizan's Care logo, embedded inline via CID so it always shows in email
+// clients, even when they block remote images. The WHITE logo is used because the
+// email header sits on a dark background. It ships with the repo (assets/) rather
+// than being fetched from an image host, so mail never depends on an external site
+// staying up. EMAIL_LOGO_URL can still override it with a URL if ever needed.
+const LOGO_SRC = process.env.EMAIL_LOGO_URL || path.join(process.cwd(), "assets", "logo-white.png");
 const LOGO_CID = "mizanscarelogo";
-const logoAttachment = { filename: "mizans-care-logo.png", path: LOGO_URL, cid: LOGO_CID };
+const logoAttachment = { filename: "mizans-care-logo.png", path: LOGO_SRC, cid: LOGO_CID };
 
 // Create transporter using Gmail SMTP
 const createTransporter = () => {
@@ -28,11 +32,15 @@ const createTransporter = () => {
 };
 
 // ── Shared building blocks (kept email-client safe: tables + inline styles, solid colours) ──
+// The header deliberately uses a solid DARK background with the white logo. Clients
+// that force dark mode (Gmail especially) darken light backgrounds but leave dark ones
+// alone — so white-on-dark renders identically in both light and dark mode, instead of
+// the logo vanishing in one of them.
 const emailHeader = (logoUrl: string, tagline: string) => `
     <tr>
-        <td style="background-color:#ffffff; padding:30px 30px 20px; text-align:center;">
+        <td style="background-color:${BRAND.dark}; padding:30px 30px 20px; text-align:center;">
             <img src="${logoUrl}" alt="Mizan's Care" height="50" style="display:inline-block; height:50px; max-height:58px; width:auto; border:0; outline:none; text-decoration:none;">
-            <div style="margin-top:12px; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:${BRAND.muted}; font-family:Arial,Helvetica,sans-serif;">${tagline}</div>
+            <div style="margin-top:12px; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#94a3b8; font-family:Arial,Helvetica,sans-serif;">${tagline}</div>
         </td>
     </tr>
     <tr><td style="height:4px; line-height:4px; font-size:0; background-color:${BRAND.primary};">&nbsp;</td></tr>`;
