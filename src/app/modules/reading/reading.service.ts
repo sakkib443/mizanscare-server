@@ -203,7 +203,12 @@ const gradeReadingAnswers = async (
         if (!correctData) continue;
 
         const normalizeAnswer = (ans: string) =>
-            ans?.toLowerCase().trim().replace(/[.,!?]/g, "");
+            ans?.toLowerCase()
+                .replace(/(\d),(\d)/g, "$1$2")   // keep thousands separators intact (1,500 -> 1500)
+                .replace(/\s*,\s*/g, " ")         // treat list commas as spaces so "a,b" === "a, b"
+                .replace(/[.!?]/g, "")
+                .replace(/\s+/g, " ")
+                .trim();
 
         const studentNormalized = normalizeAnswer(studentAnswer);
 
