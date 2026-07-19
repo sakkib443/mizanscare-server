@@ -204,7 +204,7 @@ const gradeReadingAnswers = async (
 
         const normalizeAnswer = (ans: string) =>
             ans?.toLowerCase()
-                .replace(/(\d),(\d)/g, "$1$2")   // keep thousands separators intact (1,500 -> 1500)
+                .replace(/(\d),\s*(\d)/g, "$1$2")   // keep thousands separators intact (1,500 -> 1500)
                 .replace(/\s*,\s*/g, " ")         // treat list commas as spaces so "a,b" === "a, b"
                 .replace(/[.!?]/g, "")
                 .replace(/\s+/g, " ")
@@ -214,15 +214,27 @@ const gradeReadingAnswers = async (
 
         let isCorrect = false;
 
-        // Check for comma-separated multi-answer (e.g. "D,E" for choose-two single question)
-        if (typeof correctData.correct === 'string' && correctData.correct.includes(',')) {
-            const correctSet = correctData.correct.split(',').map((a: string) => a.trim().toLowerCase()).sort();
-            const studentSet = studentNormalized.split(',').map((a: string) => a.trim()).sort();
+        // A choose-two/three answer can be submitted as several letters in ONE box ("D,E").
+        // Compare those as an unordered set. Guard to LETTER lists only, so a word answer that
+        // happens to contain a comma (e.g. "crops, livestock") still falls through to equality.
+        const isLetterCommaString =
+            typeof correctData.correct === 'string' &&
+            correctData.correct.includes(',') &&
+            correctData.correct.split(',').every((x: string) => /^[a-h]$/i.test(x.trim()));
+
+        if (isLetterCommaString) {
+            const correctSet = (correctData.correct as string).split(',').map((a: string) => normalizeAnswer(a)).sort();
+            const studentSet = String(studentAnswer).split(',').map((a: string) => normalizeAnswer(a)).filter(Boolean).sort();
             isCorrect = correctSet.length === studentSet.length && correctSet.every((val: string, idx: number) => val === studentSet[idx]);
         } else if (Array.isArray(correctData.correct)) {
-            isCorrect = correctData.correct.some(ca =>
-                normalizeAnswer(ca) === studentNormalized
-            );
+            // separate-letter-per-question (choose-two across two numbers): match any one letter
+            isCorrect = correctData.correct.some(ca => normalizeAnswer(ca) === studentNormalized);
+            // combined choose-N typed in one box ("D,E"): compare as an unordered set
+            if (!isCorrect) {
+                const correctSet = correctData.correct.map((c: string) => normalizeAnswer(c)).sort();
+                const studentSet = String(studentAnswer).split(',').map((s: string) => normalizeAnswer(s)).filter(Boolean).sort();
+                isCorrect = studentSet.length === correctSet.length && correctSet.every((val: string, idx: number) => val === studentSet[idx]);
+            }
         } else {
             isCorrect = normalizeAnswer(correctData.correct) === studentNormalized;
         }

@@ -208,7 +208,7 @@ const gradeListeningAnswers = async (
         // Normalize answers for comparison
         const normalizeAnswer = (ans: string) =>
             ans?.toLowerCase()
-                .replace(/(\d),(\d)/g, "$1$2")   // keep thousands separators intact (1,500 -> 1500)
+                .replace(/(\d),\s*(\d)/g, "$1$2")   // keep thousands separators intact (1,500 -> 1500)
                 .replace(/\s*,\s*/g, " ")         // treat list commas as spaces so "a,b" === "a, b"
                 .replace(/[.!?]/g, "")
                 .replace(/\s+/g, " ")
@@ -220,10 +220,16 @@ const gradeListeningAnswers = async (
         let isCorrect = false;
 
         if (Array.isArray(correctData.correct)) {
-            // For multiple correct answers
+            // separate-letter-per-question: match any one letter
             isCorrect = correctData.correct.some(ca =>
                 normalizeAnswer(ca) === studentNormalized
             );
+            // combined choose-N typed in one box ("D,E"): compare as an unordered set
+            if (!isCorrect) {
+                const correctSet = correctData.correct.map(c => normalizeAnswer(c)).sort();
+                const studentSet = String(studentAnswer).split(",").map(s => normalizeAnswer(s)).filter(Boolean).sort();
+                isCorrect = studentSet.length === correctSet.length && correctSet.every((val, idx) => val === studentSet[idx]);
+            }
         } else {
             isCorrect = normalizeAnswer(correctData.correct) === studentNormalized;
         }
