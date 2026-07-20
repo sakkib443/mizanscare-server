@@ -110,6 +110,19 @@ export interface IStudent {
     // Track completed modules
     completedModules?: ("listening" | "reading" | "writing" | "speaking" | "LISTENING" | "READING" | "WRITING" | "SPEAKING")[];
 
+    // In-progress answers autosaved from the exam page (the safety net that lets a sitting be
+    // recovered when it never submits cleanly). Keyed by module, or "module_setNumber" for a
+    // multi-set booking, e.g. { listening: {...}, reading_12: {...} }.
+    examDrafts?: Record<
+        string,
+        {
+            answers?: Record<string, string>;
+            setNumber?: number | null;
+            timeLeft?: number | null;
+            savedAt?: Date;
+        }
+    >;
+
     // Store student's exam answers for each module
     examAnswers?: {
         listening?: {
