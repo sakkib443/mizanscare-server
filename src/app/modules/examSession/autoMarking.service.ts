@@ -88,9 +88,50 @@ export const convertToBandScore = (
 };
 
 // Normalize answer for comparison (trim, lowercase, handle multiple spaces)
+// This is the normaliser that decides a candidate's real, stored result (saveModuleScore
+// re-grades every submission through it), so it must be exactly as forgiving as the /grade
+// preview endpoints: case-insensitive, punctuation-insensitive, and blind to whether a list
+// comma was typed with a space ("crops,livestock" === "crops, livestock"). A comma between
+// digits is kept as a thousands separator so number answers still match.
 const normalizeAnswer = (answer: string | number | undefined | null): string => {
     if (answer === undefined || answer === null) return "";
-    return answer.toString().trim().toLowerCase().replace(/\s+/g, ' ');
+    return answer.toString().toLowerCase()
+        .replace(/(\d),\s*(\d)/g, "$1$2")
+        .replace(/\s*,\s*/g, " ")
+        .replace(/[.!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+};
+
+// Does a submitted answer match the key? Plain normalised equality against the correct answer
+// and every acceptable variant, PLUS the "choose two/three letters typed into a single box"
+// case ("D,E"), which is compared as an unordered set — otherwise a candidate who picked the
+// right letters is marked wrong purely because both landed in one field.
+const answerMatches = (
+    studentRaw: string | number | undefined | null,
+    correctVal: string | string[] | undefined,
+    acceptable: string[] = []
+): boolean => {
+    const student = normalizeAnswer(studentRaw);
+    if (student === "") return false;
+
+    const correctList = Array.isArray(correctVal) ? correctVal : [correctVal];
+    const all = [...correctList, ...acceptable].filter((v) => v !== undefined && v !== null);
+    if (all.some((c) => normalizeAnswer(c as string) === student)) return true;
+
+    if (Array.isArray(correctVal) && correctVal.length > 1) {
+        const correctSet = correctVal.map((c) => normalizeAnswer(c)).sort();
+        const studentSet = String(studentRaw ?? "")
+            .split(",")
+            .map((s) => normalizeAnswer(s))
+            .filter(Boolean)
+            .sort();
+        return (
+            studentSet.length === correctSet.length &&
+            correctSet.every((v, i) => v === studentSet[i])
+        );
+    }
+    return false;
 };
 
 // Check if user answer matches correct answer
@@ -167,5 +208,6 @@ export const AutoMarkingService = {
     convertToBandScore,
     calculateOverallBand,
     isCorrect,
+    answerMatches,
     normalizeAnswer
 };

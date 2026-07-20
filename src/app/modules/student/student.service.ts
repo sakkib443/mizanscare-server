@@ -732,9 +732,13 @@ const saveModuleScore = async (
                         if (answerEntry) {
                             const correctVal = answerEntry.correct;
                             const acceptable = answerEntry.acceptable || [];
-                            // Combine correct + acceptable for matching
-                            const allCorrect = Array.isArray(correctVal) ? [...correctVal, ...acceptable] : [correctVal, ...acceptable];
-                            isCorrect = studentAns !== "" && allCorrect.some(c => AutoMarkingService.normalizeAnswer(c?.toString() || "") === studentAns);
+                            // Matches the correct answer or any acceptable variant, and also a
+                            // choose-two/three whose letters were typed into one box ("D,E").
+                            isCorrect = studentAns !== "" && AutoMarkingService.answerMatches(
+                                ans.studentAnswer || ans.studentAnswerFull || "",
+                                correctVal,
+                                acceptable
+                            );
                             canonicalCorrect = Array.isArray(correctVal) ? correctVal[0]?.toString() || "" : correctVal?.toString() || "";
                         }
 
