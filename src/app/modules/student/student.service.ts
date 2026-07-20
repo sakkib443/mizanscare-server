@@ -1699,6 +1699,124 @@ const getStudentByEmail = async (email: string) => {
     return student;
 };
 
+// ── In-progress drafts: the safety net ──────────────────────────────────────────────────
+// The exam page posts the candidate's current answers here every few seconds. Nothing is
+// graded and no module is marked complete — this is purely a server-side copy of work in
+// progress, so a closed browser, a crash or a missed auto-submit can no longer destroy it.
+const draftKey = (module: string, setNumber?: number | null) =>
+    setNumber != null ? `${module}_${setNumber}` : module;
+
+const saveExamDraft = async (
+    examId: string,
+    module: "listening" | "reading" | "writing" | "speaking",
+    data: { answers?: any; setNumber?: number | null; timeLeft?: number | null }
+) => {
+    const student = await Student.findOne({ examId: examId.toUpperCase() }).select("_id completedModules");
+    if (!student) throw new Error("Student not found");
+
+    // Once a module is finalised its draft is history — never let a late autosave overwrite it.
+    const completed: string[] = (student.completedModules || []) as string[];
+    const completedKey = data.setNumber != null ? `${module}:${data.setNumber}` : module;
+    if (completed.includes(completedKey) || completed.includes(module)) {
+        return { saved: false, reason: "module already completed" };
+    }
+
+    await Student.updateOne(
+        { _id: student._id },
+        {
+            $set: {
+                [`examDrafts.${draftKey(module, data.setNumber)}`]: {
+                    answers: data.answers || {},
+                    setNumber: data.setNumber ?? null,
+                    timeLeft: data.timeLeft ?? null,
+                    savedAt: new Date(),
+                },
+            },
+        }
+    );
+    return { saved: true };
+};
+
+const getExamDrafts = async (examId: string) => {
+    const student = await Student.findOne({ examId: examId.toUpperCase() })
+        .select("examId nameEnglish completedModules examDrafts")
+        .lean();
+    if (!student) throw new Error("Student not found");
+
+    const drafts = ((student as any).examDrafts || {}) as Record<string, any>;
+    return {
+        examId: student.examId,
+        name: (student as any).nameEnglish,
+        completedModules: student.completedModules || [],
+        drafts: Object.entries(drafts).map(([key, d]: [string, any]) => ({
+            key,
+            setNumber: d?.setNumber ?? null,
+            savedAt: d?.savedAt ?? null,
+            answeredCount: Object.values(d?.answers || {}).filter(
+                (v: any) => String(v ?? "").trim() !== ""
+            ).length,
+            answers: d?.answers || {},
+        })),
+    };
+};
+
+// Grade a saved draft and store it as the candidate's real result. This is the recovery path
+// for a sitting that ended without a clean submit: the work is already on the server, so this
+// simply finalises it. saveModuleScore re-marks every answer and computes the band itself.
+const restoreExamDraft = async (
+    examId: string,
+    module: "listening" | "reading",
+    setNumber?: number | null
+) => {
+    const student = await Student.findOne({ examId: examId.toUpperCase() });
+    if (!student) throw new Error("Student not found");
+
+    const drafts = ((student as any).examDrafts || {}) as Record<string, any>;
+    const draft = drafts[draftKey(module, setNumber)] || drafts[module];
+    if (!draft?.answers || Object.keys(draft.answers).length === 0) {
+        throw new Error(`No saved ${module} draft found for ${examId}`);
+    }
+
+    const assigned = (student.assignedSets || {}) as any;
+    const set =
+        setNumber ?? draft.setNumber ?? assigned[`${module}SetNumber`] ??
+        (assigned[`${module}SetNumbers`] || [])[0];
+    if (!set) throw new Error(`Cannot determine the ${module} set number for ${examId}`);
+
+    const texts = await getQuestionTextsFromSet(
+        module.toUpperCase() as "LISTENING" | "READING",
+        Number(set)
+    );
+    const answers = Object.keys(texts).map((n) => {
+        const qn = Number(n);
+        const raw = draft.answers[qn] ?? draft.answers[String(qn)] ?? "";
+        return {
+            questionNumber: qn,
+            questionText: texts[qn]?.questionText || "",
+            questionType: "restored-from-draft",
+            studentAnswer: String(raw).trim(),
+            studentAnswerFull: String(raw),
+            correctAnswer: texts[qn]?.correctAnswer || "",
+            isCorrect: false,
+        };
+    });
+
+    // The broken sitting may already be flagged complete (an empty auto-submit is exactly the
+    // state we are repairing), so clear the flag before re-submitting the recovered answers.
+    await Student.updateOne(
+        { _id: student._id },
+        { $pull: { completedModules: { $in: [module, `${module}:${set}`] } } } as any
+    );
+
+    return saveModuleScore(examId, module, {
+        score: 0,
+        total: answers.length || 40,
+        band: 0,
+        answers,
+        setNumber: Number(set),
+    });
+};
+
 export const StudentService = {
     createStudent,
     getAllStudents,
@@ -1721,4 +1839,7 @@ export const StudentService = {
     updateAllScores,
     publishResults,
     resetModule,
+    saveExamDraft,
+    getExamDrafts,
+    restoreExamDraft,
 };

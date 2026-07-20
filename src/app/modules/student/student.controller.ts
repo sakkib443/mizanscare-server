@@ -495,6 +495,55 @@ const getMyProfile = async (req: Request, res: Response) => {
     }
 };
 
+// Autosave of in-progress answers. Called every few seconds by the exam page, so it stays
+// quiet: a failure here must never interrupt a candidate mid-exam.
+const saveExamDraft = async (req: Request, res: Response) => {
+    try {
+        const { examId, module, answers, setNumber, timeLeft } = req.body;
+        if (!examId || !module) {
+            return res.status(400).json({ success: false, message: "examId and module are required" });
+        }
+        const result = await StudentService.saveExamDraft(examId, module, { answers, setNumber, timeLeft });
+        res.json({ success: true, data: result });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error instanceof Error ? error.message : "Failed to save draft",
+        });
+    }
+};
+
+const getExamDrafts = async (req: Request, res: Response) => {
+    try {
+        const result = await StudentService.getExamDrafts(req.params.examId);
+        res.json({ success: true, data: result });
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error instanceof Error ? error.message : "Failed to load drafts",
+        });
+    }
+};
+
+// Grade a saved draft and store it as the real result (recovery for a sitting that never
+// submitted cleanly).
+const restoreExamDraft = async (req: Request, res: Response) => {
+    try {
+        const { examId, module } = req.params;
+        if (module !== "listening" && module !== "reading") {
+            return res.status(400).json({ success: false, message: "module must be listening or reading" });
+        }
+        const setNumber = req.body?.setNumber ?? null;
+        const result = await StudentService.restoreExamDraft(examId, module, setNumber);
+        res.json({ success: true, message: `${module} restored from saved draft`, data: result });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error instanceof Error ? error.message : "Failed to restore draft",
+        });
+    }
+};
+
 export const StudentController = {
     createStudent,
     getAllStudents,
@@ -517,4 +566,7 @@ export const StudentController = {
     updateAllScores,
     publishResults,
     resetModule,
+    saveExamDraft,
+    getExamDrafts,
+    restoreExamDraft,
 };

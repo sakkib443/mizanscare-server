@@ -69,7 +69,26 @@ router.post("/complete-exam", StudentController.completeExam);
 // Save individual module score (public - called after each module)
 router.post("/save-module-score", StudentController.saveModuleScore);
 
+// Autosave in-progress answers (public - the exam page posts here every few seconds so a
+// closed browser or a missed auto-submit can never lose the candidate's work)
+router.post("/save-draft", StudentController.saveExamDraft);
+
 // ============ PROTECTED ROUTES (Require Authentication) ============
+
+// Saved drafts for one candidate, and recovering a module from its draft. Declared before the
+// generic "/:id" routes below so the examId is not swallowed by them.
+router.get(
+    "/:examId/drafts",
+    auth,
+    authorize("admin", "mentor"),
+    StudentController.getExamDrafts
+);
+router.post(
+    "/:examId/restore-draft/:module",
+    auth,
+    authorize("admin", "mentor"),
+    StudentController.restoreExamDraft
+);
 
 // Get current student profile
 router.get("/my-profile", auth, StudentController.getMyProfile);

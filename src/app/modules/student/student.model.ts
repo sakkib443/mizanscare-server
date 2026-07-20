@@ -170,6 +170,15 @@ const studentSchema = new Schema<IStudent>(
             default: [],
         },
 
+        // In-progress answers, saved from the exam page every few seconds. This is the safety
+        // net: if the browser closes, crashes or the clock runs out without a clean submit,
+        // the candidate's work still exists here and an admin can restore + grade it.
+        // Shape: { listening: { answers, setNumber, timeLeft, savedAt }, reading: {...}, ... }
+        examDrafts: {
+            type: Schema.Types.Mixed,
+            default: {},
+        },
+
         // Store student's exam answers for each module
         examAnswers: {
             listening: [{
