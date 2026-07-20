@@ -1155,10 +1155,13 @@ const updateScore = async (studentId: string, module: string, score: number) => 
     const reading = student.scores.reading?.band || 0;
     const writing = student.scores.writing?.overallBand || 0;
 
-    const bands = [listening, reading, writing].filter(s => s > 0);
-    if (bands.length > 0) {
-        student.scores.overall = AutoMarkingService.calculateOverallBand(bands);
-    }
+    // Same rule as updateScores: no overall until every module has a band, so a partial
+    // sitting can never be published as though it were a complete result.
+    const speaking = student.scores.speaking?.band || 0;
+    const bands = [listening, reading, writing, speaking];
+    student.scores.overall = bands.every(s => s > 0)
+        ? AutoMarkingService.calculateOverallBand(bands)
+        : 0;
 
     await student.save();
 
@@ -1551,10 +1554,14 @@ const updateAllScores = async (
     const writingBand = Math.max(0, student.scores.writing?.overallBand || 0);
     const speakingBand = Math.max(0, student.scores.speaking?.band || 0);
 
-    const bands = [listeningBand, readingBand, writingBand, speakingBand].filter(b => b > 0);
-    if (bands.length > 0) {
-        student.scores.overall = AutoMarkingService.calculateOverallBand(bands);
-    }
+    // An overall band is only meaningful once EVERY module has a band. Averaging just the
+    // attempted ones published an incomplete sitting as a full result — a lone 6.5 writing
+    // band was being shown as "Overall 6.5". Leave it at 0 (the UI renders "—") until the
+    // candidate has a score for all four modules.
+    const bands = [listeningBand, readingBand, writingBand, speakingBand];
+    student.scores.overall = bands.every(b => b > 0)
+        ? AutoMarkingService.calculateOverallBand(bands)
+        : 0;
 
     await student.save();
 
