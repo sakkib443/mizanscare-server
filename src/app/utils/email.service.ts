@@ -109,11 +109,7 @@ const getStudentRegistrationTemplate = (data: {
                         <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:${BRAND.primary}; font-weight:bold; margin-bottom:14px;">Your Login Details</div>
                         <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                             <tr>
-                                <td style="padding:7px 0; font-size:13px; color:${BRAND.muted}; width:110px; vertical-align:top;">Exam ID</td>
-                                <td style="padding:7px 0; font-size:16px; color:${BRAND.dark}; font-weight:bold; font-family:'Courier New',monospace; letter-spacing:0.5px;">${data.examId}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:7px 0; font-size:13px; color:${BRAND.muted}; vertical-align:top;">Email</td>
+                                <td style="padding:7px 0; font-size:13px; color:${BRAND.muted}; width:110px; vertical-align:top;">Email</td>
                                 <td style="padding:7px 0; font-size:14px; color:${BRAND.dark}; word-break:break-all;">${data.email}</td>
                             </tr>
                             <tr>
@@ -190,7 +186,7 @@ const getResultPublishedTemplate = (data: {
     <tr>
         <td style="padding:34px 36px 4px; text-align:center; font-family:Arial,Helvetica,sans-serif;">
             <h1 style="margin:0 0 8px; font-size:22px; color:${BRAND.dark}; font-weight:bold;">Your Result is Published</h1>
-            <p style="margin:0; font-size:14px; color:${BRAND.muted};">${data.studentName} &nbsp;·&nbsp; Exam ID: <strong style="color:${BRAND.dark};">${data.examId}</strong></p>
+            <p style="margin:0; font-size:14px; color:${BRAND.muted};">${data.studentName}</p>
         </td>
     </tr>
 
@@ -261,7 +257,7 @@ export const sendStudentRegistrationEmail = async (data: {
         const mailOptions = {
             from: `"Mizan's Care IELTS" <${process.env.EMAIL_USER}>`,
             to: data.email,
-            subject: `Your IELTS Mock Exam Access — ${data.examId}`,
+            subject: `Your IELTS Mock Exam Access`,
             html: getStudentRegistrationTemplate({
                 studentName: data.studentName,
                 examId: data.examId,
@@ -309,7 +305,10 @@ export const sendResultPublishedEmail = async (data: {
                 writingBand: data.writingBand,
                 speakingBand: data.speakingBand,
                 overallBand: data.overallBand,
-                resultUrl: `${baseUrl}/result/${data.examId}`,
+                // Send them to their dashboard rather than /result/<examId>: that route does not
+                // exist on the frontend (the link was dead), and the exam ID must not reach the
+                // student — it is given to them in person.
+                resultUrl: `${baseUrl}/dashboard/student/results`,
                 logoUrl: `cid:${LOGO_CID}`,
             }),
             attachments: [logoAttachment],
