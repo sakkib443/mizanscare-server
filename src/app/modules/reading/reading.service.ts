@@ -6,6 +6,7 @@ import {
     getReadingBandScore
 } from "./reading.interface";
 import { getCache, setCache, invalidateCache } from "../../utils/testCache";
+import { stripAnswers } from "../../utils/stripAnswers";
 
 // Create new reading test
 const createReadingTest = async (
@@ -150,10 +151,15 @@ const getReadingTestForExam = async (testNumber: number) => {
         throw new Error(`Reading Test #${testNumber} not found or inactive`);
     }
 
-    // Store in cache
-    setCache("reading", testNumber, test);
+    // The projection above only reaches sections.questions.*; reading keeps answers inside
+    // questionGroups, summarySegments, statements and friends too, so strip the whole document
+    // before it leaves the server — and cache the stripped copy, never the raw one.
+    const safeTest = stripAnswers(test);
 
-    return test;
+    // Store in cache
+    setCache("reading", testNumber, safeTest);
+
+    return safeTest;
 };
 
 // Get answers for grading

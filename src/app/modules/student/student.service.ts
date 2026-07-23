@@ -942,10 +942,14 @@ const saveModuleScore = async (
     const writingBand = updateObj["scores.writing"]?.overallBand || existingScores.writing?.overallBand || 0;
     const speakingBand = updateObj["scores.speaking"]?.band || existingScores.speaking?.band || 0;
 
-    const bands = [listeningBand, readingBand, writingBand, speakingBand].filter(b => b > 0);
-    if (bands.length > 0) {
-        updateObj["scores.overall"] = AutoMarkingService.calculateOverallBand(bands);
-    }
+    // This is the call site that runs when a candidate submits a module, so it is the one that
+    // actually produced "Overall 6.5" for a sitting where only writing had been marked. Same rule
+    // as the other two call sites: an overall is only meaningful once every module has a band —
+    // otherwise leave it at 0, which the UI renders as "—" / Incomplete.
+    const bands = [listeningBand, readingBand, writingBand, speakingBand];
+    updateObj["scores.overall"] = bands.every(b => b > 0)
+        ? AutoMarkingService.calculateOverallBand(bands)
+        : 0;
 
     console.log("[saveModuleScore] Final updateObj:", JSON.stringify(updateObj, null, 2));
 

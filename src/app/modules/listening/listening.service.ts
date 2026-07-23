@@ -6,6 +6,7 @@ import {
     getListeningBandScore
 } from "./listening.interface";
 import { getCache, setCache, invalidateCache } from "../../utils/testCache";
+import { stripAnswers } from "../../utils/stripAnswers";
 
 // Create new listening test
 const createListeningTest = async (
@@ -150,10 +151,14 @@ const getListeningTestForExam = async (testNumber: number) => {
         throw new Error(`Listening Test #${testNumber} not found or inactive`);
     }
 
-    // Store in cache
-    setCache("listening", testNumber, test);
+    // Belt and braces: the projection only reaches sections.questions.*, so strip the whole
+    // document in case a future question shape nests answers where it cannot see them.
+    const safeTest = stripAnswers(test);
 
-    return test;
+    // Store in cache
+    setCache("listening", testNumber, safeTest);
+
+    return safeTest;
 };
 
 // Get answers for grading
