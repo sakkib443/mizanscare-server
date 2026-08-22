@@ -14,12 +14,17 @@ const app: Application = express();
 // single biggest win for module-load time and bandwidth under load.
 app.use(compression());
 app.use(express.json());
+// Allow the browser to call the API from every URL the frontend is served on. The Origin
+// header never has a trailing slash, so these entries must not either. The cors package
+// checks the request origin against this array, and with a global app.use it also answers
+// the OPTIONS preflight automatically — so JWTs in the Authorization header pass through.
 app.use(cors({
   origin: [
-    "https://mizansieltsmock.ftitbd.com",
-    "http://localhost:3000",
-    "https://glws1ui9irabnywfi9r3mndi.169.58.25.54.sslip.io",
-    process.env.FRONTEND_URL,
+    "https://ieltsmock.mizanscare.com",                       // current production frontend
+    "https://mizansieltsmock.ftitbd.com",                     // old domain (kept in case its DNS returns)
+    "https://glws1ui9irabnywfi9r3mndi.169.58.25.54.sslip.io", // direct Coolify URL (fallback)
+    "http://localhost:3000",                                  // local development
+    process.env.FRONTEND_URL,                                 // extra override via env, no code change needed
   ].filter(Boolean) as string[],
   credentials: true,
 }));
