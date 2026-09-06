@@ -1,5 +1,31 @@
 import { Request, Response } from "express";
 import { uploadToCloudinary, deleteFromCloudinary } from "../../config/cloudinary";
+import {
+    saveToLocalDisk,
+    deleteFromLocalDisk,
+    isLocalPublicId,
+    isLocalStorage,
+} from "../../config/localStorage";
+
+/**
+ * Where a NEW upload goes is decided by STORAGE_DRIVER:
+ *   "local"      → the VPS disk under uploads/, served via /uploads (Coolify volume)
+ *   anything else → Cloudinary, exactly as before
+ *
+ * Files already on Cloudinary are untouched either way: their absolute URLs are
+ * stored in the database and nothing here rewrites them. Flipping the env var
+ * back to "cloudinary" restores the old behaviour with no code change.
+ */
+const storeFile = async (
+    file: Express.Multer.File,
+    folder: string,
+    resourceType: "image" | "video" | "raw"
+): Promise<{ url: string; publicId: string; duration?: number }> => {
+    if (isLocalStorage()) {
+        return saveToLocalDisk(file.buffer, folder, file.originalname);
+    }
+    return uploadToCloudinary(file.buffer, folder, resourceType);
+};
 
 // Upload audio file
 const uploadAudio = async (req: Request, res: Response) => {
@@ -11,8 +37,8 @@ const uploadAudio = async (req: Request, res: Response) => {
             });
         }
 
-        const result = await uploadToCloudinary(
-            req.file.buffer,
+        const result = await storeFile(
+            req.file,
             "audio",
             "video" // Cloudinary uses "video" type for audio
         );
@@ -46,8 +72,8 @@ const uploadImage = async (req: Request, res: Response) => {
             });
         }
 
-        const result = await uploadToCloudinary(
-            req.file.buffer,
+        const result = await storeFile(
+            req.file,
             "images",
             "image"
         );
@@ -76,7 +102,13 @@ const deleteFile = async (req: Request, res: Response) => {
         const { publicId } = req.params;
         const resourceType = (req.query.type as "image" | "video") || "video";
 
-        await deleteFromCloudinary(publicId, resourceType);
+        // The id itself says where the file lives, so old Cloudinary ids keep
+        // deleting from Cloudinary even while STORAGE_DRIVER is "local".
+        if (isLocalPublicId(publicId)) {
+            await deleteFromLocalDisk(publicId);
+        } else {
+            await deleteFromCloudinary(publicId, resourceType);
+        }
 
         res.status(200).json({
             success: true,
@@ -98,8 +130,8 @@ const uploadVideo = async (req: Request, res: Response) => {
             });
         }
 
-        const result = await uploadToCloudinary(
-            req.file.buffer,
+        const result = await storeFile(
+            req.file,
             "speaking-recordings",
             "video"
         );
