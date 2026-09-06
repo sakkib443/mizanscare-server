@@ -9,22 +9,41 @@ import {
 
 /**
  * Where a NEW upload goes is decided by STORAGE_DRIVER:
- *   "local"      → the VPS disk under uploads/, served via /uploads (Coolify volume)
- *   anything else → Cloudinary, exactly as before
+ *   unset or "local" → the VPS disk under uploads/, served via /uploads
+ *   "cloudinary"     → Cloudinary, exactly as before
  *
+ * Local is the default so a fresh deploy needs no environment variable at all.
  * Files already on Cloudinary are untouched either way: their absolute URLs are
- * stored in the database and nothing here rewrites them. Flipping the env var
- * back to "cloudinary" restores the old behaviour with no code change.
+ * stored in the database and nothing here rewrites them. Setting the variable to
+ * "cloudinary" restores the old behaviour with no code change.
  */
 const storeFile = async (
+    req: Request,
     file: Express.Multer.File,
     folder: string,
     resourceType: "image" | "video" | "raw"
 ): Promise<{ url: string; publicId: string; duration?: number }> => {
     if (isLocalStorage()) {
-        return saveToLocalDisk(file.buffer, folder, file.originalname);
+        return saveToLocalDisk(file.buffer, folder, file.originalname, requestOrigin(req));
     }
     return uploadToCloudinary(file.buffer, folder, resourceType);
+};
+
+/**
+ * The public origin this request came in on, e.g. "https://api.example.com".
+ * Saved file URLs must be absolute (see localStorage.ts), and the upload
+ * request already arrives at this server's public address — so reading it off
+ * the request saves the operator from configuring PUBLIC_BASE_URL at all.
+ * Behind Coolify's proxy the real scheme and host are in the X-Forwarded-*
+ * headers; req.protocol alone would report plain http.
+ */
+const requestOrigin = (req: Request): string => {
+    const first = (value?: string) => (value || "").split(",")[0].trim();
+
+    const proto = first(req.headers["x-forwarded-proto"] as string) || req.protocol || "https";
+    const host = first(req.headers["x-forwarded-host"] as string) || req.get("host") || "";
+
+    return host ? `${proto}://${host}` : "";
 };
 
 // Upload audio file
@@ -38,6 +57,7 @@ const uploadAudio = async (req: Request, res: Response) => {
         }
 
         const result = await storeFile(
+            req,
             req.file,
             "audio",
             "video" // Cloudinary uses "video" type for audio
@@ -73,6 +93,7 @@ const uploadImage = async (req: Request, res: Response) => {
         }
 
         const result = await storeFile(
+            req,
             req.file,
             "images",
             "image"
@@ -131,6 +152,7 @@ const uploadVideo = async (req: Request, res: Response) => {
         }
 
         const result = await storeFile(
+            req,
             req.file,
             "speaking-recordings",
             "video"

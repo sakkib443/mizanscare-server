@@ -26,23 +26,34 @@ const uploadsRoot = () => path.join(process.cwd(), "uploads");
 export const isLocalPublicId = (publicId: string): boolean =>
     publicId.replace(/^\/+/, "").startsWith("uploads/");
 
-/** "local" routes new uploads to disk; anything else keeps the Cloudinary path. */
+/**
+ * "local" routes new uploads to disk; "cloudinary" keeps the old path.
+ * Local is the default because the Cloudinary account now refuses uploads
+ * ("cloud_name is disabled"), so falling back to it would only fail.
+ */
 export const storageDriver = (): string =>
-    (process.env.STORAGE_DRIVER || "cloudinary").toLowerCase();
+    (process.env.STORAGE_DRIVER || "local").toLowerCase();
 
 export const isLocalStorage = (): boolean => storageDriver() === "local";
 
-const publicBaseUrl = (): string => {
-    const base = (process.env.PUBLIC_BASE_URL || "").trim().replace(/\/+$/, "");
-    if (!base) {
-        // Fail loudly here rather than saving a relative URL that would only
-        // break later, in the exam, with no obvious cause.
-        throw new Error(
-            "PUBLIC_BASE_URL is not set. Local storage needs it to build a full file URL " +
-            "(e.g. https://api.example.com). Set it, or switch STORAGE_DRIVER back to cloudinary."
-        );
-    }
-    return base;
+/**
+ * The origin new file URLs are built from. PUBLIC_BASE_URL wins when it is set;
+ * otherwise the caller passes the origin the upload request itself arrived on,
+ * which IS this server's public address — so the common case needs no config.
+ * Only when both are missing do we refuse, because a relative URL would resolve
+ * against the frontend and 404 in the middle of an exam.
+ */
+const publicBaseUrl = (fallback?: string): string => {
+    const fromEnv = (process.env.PUBLIC_BASE_URL || "").trim().replace(/\/+$/, "");
+    if (fromEnv) return fromEnv;
+
+    const derived = (fallback || "").trim().replace(/\/+$/, "");
+    if (derived) return derived;
+
+    throw new Error(
+        "Cannot determine this server's public URL. Set PUBLIC_BASE_URL " +
+        "(e.g. https://api.example.com) and try again."
+    );
 };
 
 /**
@@ -52,9 +63,10 @@ const publicBaseUrl = (): string => {
 export const saveToLocalDisk = async (
     buffer: Buffer,
     folder: string,
-    originalName: string
+    originalName: string,
+    baseUrlFallback?: string
 ): Promise<{ url: string; publicId: string; duration?: number }> => {
-    const base = publicBaseUrl(); // validated before touching the disk
+    const base = publicBaseUrl(baseUrlFallback); // validated before touching the disk
 
     const safeFolder = folder.replace(/[^a-zA-Z0-9._-]/g, "_");
     const dir = path.join(uploadsRoot(), safeFolder);
