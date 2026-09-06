@@ -6,6 +6,7 @@ import {
     isLocalPublicId,
     isLocalStorage,
 } from "../../config/localStorage";
+import { saveToGridFS, deleteFromGridFS } from "../../config/gridfsStorage";
 
 /**
  * Where a NEW upload goes is decided by STORAGE_DRIVER:
@@ -24,7 +25,12 @@ const storeFile = async (
     resourceType: "image" | "video" | "raw"
 ): Promise<{ url: string; publicId: string; duration?: number }> => {
     if (isLocalStorage()) {
-        return saveToLocalDisk(file.buffer, folder, file.originalname, requestOrigin(req));
+        const saved = await saveToLocalDisk(file.buffer, folder, file.originalname, requestOrigin(req));
+        // Durable copy: the container's disk is wiped by every redeploy, so the
+        // file also goes to MongoDB and /uploads falls back to it on a miss.
+        // Best-effort — the upload has already succeeded on disk by now.
+        await saveToGridFS(saved.publicId, file.buffer, file.mimetype);
+        return saved;
     }
     return uploadToCloudinary(file.buffer, folder, resourceType);
 };
@@ -127,6 +133,8 @@ const deleteFile = async (req: Request, res: Response) => {
         // deleting from Cloudinary even while STORAGE_DRIVER is "local".
         if (isLocalPublicId(publicId)) {
             await deleteFromLocalDisk(publicId);
+            // Otherwise the durable copy would resurrect the file on the next request.
+            await deleteFromGridFS(publicId);
         } else {
             await deleteFromCloudinary(publicId, resourceType);
         }

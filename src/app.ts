@@ -5,6 +5,7 @@ import path from "path";
 import router from "./app/routes";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import { ensureDbConnection } from "./app/config/db";
+import { serveFromGridFS } from "./app/config/gridfsStorage";
 
 const app: Application = express();
 
@@ -43,6 +44,13 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
     res.status(500).json({ success: false, message: "Database connection failed" });
   }
 });
+
+// Anything under /uploads the disk could not answer is looked up in GridFS,
+// where every upload also keeps a durable copy. This is what makes uploaded
+// audio survive a redeploy without a persistent volume — the file is streamed
+// from MongoDB and restored to disk for next time. Mounted after the DB
+// middleware above so the connection is ready; disk hits never get this far.
+app.use("/uploads", serveFromGridFS);
 
 // API routes
 app.use("/api", router);
