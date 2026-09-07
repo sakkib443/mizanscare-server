@@ -14,13 +14,12 @@ import { ListeningTest } from "../app/modules/listening/listening.model";
  * key 31 "12,000" is Q35's student total, key 36 "poor" is Q40's families.
  * Nothing is missing.
  *
- * ONE UNCERTAINTY, at Q22/Q23. The paper reads "'good' weather (weather which
- * is [22] and [23])", i.e. two adjectives, but the key gives 22 as the single
- * string "sunny and warm" and 23 as "change", which does not fit the sentence.
- * The key almost certainly merged both adjectives into entry 22. Both blanks
- * therefore accept "sunny", "warm" and "sunny and warm" in either order, and
- * Q23 also accepts "change" in case the key is right after all — so no student
- * loses a mark to this ambiguity. Worth confirming against the audio.
+ * Q22/Q23 needed a decision. The paper reads "'good' weather (weather which is
+ * [22] and [23])", i.e. two adjectives, but the key gives 22 as the single
+ * string "sunny and warm" and 23 as "change", which does not fit the sentence —
+ * the two adjectives were clearly merged into entry 22. Settled as sunny and
+ * warm, and "change" dropped so a wrong word cannot score. The key gives no
+ * order, so either blank accepts either word and the sequence costs no marks.
  */
 
 const BASE = "https://t1pnvk64oo9dus92mnoew4x2.169.58.25.54.sslip.io";
@@ -326,8 +325,10 @@ const listeningTestData = {
                     marks: 1, wordLimit: 3,
                 },
                 {
-                    // See the file header: the key merged both adjectives into one
-                    // entry, so each blank accepts either, in either order.
+                    // The key merged both adjectives into its entry 22 and left
+                    // "change" at 23, which does not fit the sentence. Settled as
+                    // sunny / warm. The key gives no order, so either blank accepts
+                    // either word and no candidate is marked down for the sequence.
                     blockType: "question" as const, questionNumber: 22,
                     questionType: "sentence-completion" as const,
                     questionText: "They expect to find that ‘good’ weather (weather which is ________ and",
@@ -340,7 +341,7 @@ const listeningTestData = {
                     questionType: "sentence-completion" as const,
                     questionText: "________) has a positive effect on a person’s mood.",
                     correctAnswer: "warm",
-                    acceptableAnswers: ["sunny", "sunny and warm", "warm and sunny", "change"],
+                    acceptableAnswers: ["sunny", "sunny and warm", "warm and sunny"],
                     marks: 1, wordLimit: 3,
                 },
 
