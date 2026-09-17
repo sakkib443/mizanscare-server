@@ -21,8 +21,10 @@ const createListeningTest = async (
 
     if (data.sections && data.sections.length > 0) {
         data.sections.forEach((section) => {
-            totalQuestions += section.questions.length;
             section.questions.forEach((q) => {
+                // "instruction" blocks are layout, not questions — don't count them.
+                if ((q as any).blockType === "instruction") return;
+                totalQuestions += 1;
                 totalMarks += q.marks || 1;
             });
         });
@@ -275,13 +277,16 @@ const updateListeningTest = async (
         throw new Error("Listening test not found");
     }
 
-    // Recalculate totals if sections changed
+    // Recalculate totals if sections changed. Only real question blocks count —
+    // "instruction" blocks (headings, tables, flow-charts holding [N] inputs) are
+    // layout, not questions, so they must be excluded from the 40-question total.
     if (updateData.sections) {
         let totalQuestions = 0;
         let totalMarks = 0;
         updateData.sections.forEach((section) => {
-            totalQuestions += section.questions.length;
             section.questions.forEach((q) => {
+                if ((q as any).blockType === "instruction") return;
+                totalQuestions += 1;
                 totalMarks += q.marks || 1;
             });
         });
